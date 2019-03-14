@@ -1,0 +1,15 @@
+
+spring:
+  application:
+    name: Projekt 2019
+    
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:project;DB_CLOSE_ON_EXIT=FALSE;
+    username: root
+    password: ""
+    
+  security:
+    user:
+      name: test
+      password: test

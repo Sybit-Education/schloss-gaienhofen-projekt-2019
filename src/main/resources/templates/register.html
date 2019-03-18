@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/dependencies :: dependencies">
+  <title>Regrestrieren</title>
+</head>
+
+<body class="bg-light">
+<div th:replace="includes/navigationbarReg :: navigationbarReg"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 order-md-1">
+      <form method="post">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="vorName">Vorname</label>
+            <input type="text" class="form-control" id="vorName" placeholder="" value="" required="">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="nachName">Nachname</label>
+            <input type="text" class="form-control" id="nachName" placeholder="" value="" required="">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Max.Mustermann@example.com">
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="password">Passwort</label>
+            <input type="text" class="form-control" id="password" placeholder="" value="" required="">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label for="passwordB">Passwort bestätigen</label>
+            <input type="text" class="form-control" id="passwordB" placeholder="" value="" required="">
+          </div>
+        </div>
+
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">registrieren</button>
+      </form>
+    </div>
+  </div>
+</div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+</body>
+</html>

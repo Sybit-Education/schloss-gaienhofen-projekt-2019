@@ -1,13 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package de.schlossgaienhofen.project2019.service;
 
-import de.schlossgaienhofen.project2019.controller.HomeController;
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,10 +8,9 @@ import org.springframework.stereotype.Service;
 import org.subethamail.smtp.helper.SimpleMessageListenerAdapter;
 import org.subethamail.smtp.server.SMTPServer;
 
-/**
- *
- * @author ssr
- */
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Service
 public class SMTPServerService {
 
@@ -33,7 +25,7 @@ public class SMTPServerService {
   @Value("${smtpserver.port}")
   String port = "";
 
-  SMTPServer smtpServer;
+  private SMTPServer smtpServer;
 
   public SMTPServerService() {
   }

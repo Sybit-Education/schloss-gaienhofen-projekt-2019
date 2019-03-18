@@ -81,12 +81,12 @@ public class UserService {
    * @return
    */
 
-  public String getSHA(String input) throws NoSuchAlgorithmException {
+  String getSHA(String input) throws NoSuchAlgorithmException {
     LOGGER.debug("--> getSHA");
-    MessageDigest md = MessageDigest.getInstance("SHA-256");
-    byte[] messageDigest = md.digest(input.getBytes());
-    BigInteger no = new BigInteger(1, messageDigest);
-    StringBuilder hashText = new StringBuilder(no.toString(16));
+    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+    byte[] messageDigestByteArray = messageDigest.digest(input.getBytes());
+    BigInteger bigInteger = new BigInteger(1, messageDigestByteArray);
+    StringBuilder hashText = new StringBuilder(bigInteger.toString(16));
     while (hashText.length() < 32) {
       hashText.insert(0, "0");
     }

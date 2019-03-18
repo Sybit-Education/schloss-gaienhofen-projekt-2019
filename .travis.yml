@@ -17,4 +17,5 @@ deploy:
   file_glob: true
   file: "./target/*.jar"
   on:
+    branch: master
     repo: Sybit-Education/schloss-gaienhofen-projekt-2019

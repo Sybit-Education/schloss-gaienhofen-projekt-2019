@@ -19,6 +19,7 @@ public class User implements Serializable {
   private String firstName;
   private String name;
   private String email;
+  private String password;
   private char gender;
 
 
@@ -64,5 +65,13 @@ public class User implements Serializable {
 
   public void setGender(char gender) {
     this.gender = gender;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }

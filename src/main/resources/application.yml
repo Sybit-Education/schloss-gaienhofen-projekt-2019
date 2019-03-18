@@ -10,7 +10,7 @@ spring:
     password: ""
   mail:
     host: localhost
-    port: 25
+    port: 2525
     username:
     password:
     properties:
@@ -34,4 +34,4 @@ spring:
 smtpserver:
   enabled: true
   hostName: localhost
-  port: 25
+  port: 2525

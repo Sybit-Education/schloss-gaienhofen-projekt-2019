@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -26,12 +27,12 @@ public class UserService {
   /**
    * Saves a User to DB
    *
-   * @param firstName, name, email
+   * @param user
    */
 
-  public void addNewUser(String firstName, String name, String email, String plainPassword) {
+  public void addNewUser(User user) {
     LOGGER.debug("--> addNewUser");
-    User newUser = createUserObject(firstName, name, email, plainPassword);
+    User newUser = createUserObject(user);
     userRepository.save(newUser);
     LOGGER.debug("<-- addNewUser");
   }
@@ -39,26 +40,25 @@ public class UserService {
   /**
    * Creates a new UserObject by an given firstName, name and email
    *
-   * @param firstName, name, email
+   * @param user
    * @return user
    */
 
-  private User createUserObject(@NotEmpty String firstName, @NotEmpty String name, @NotEmpty String email,
-                                @NotEmpty String password) {
+  private User createUserObject(@NotNull User user) {
     LOGGER.debug("--> createUserObject");
-    User user = new User();
-    user.setFirstName(firstName);
-    user.setName(name);
+    User newUserObject = new User();
+    newUserObject.setFirstName(user.getFirstName());
+    newUserObject.setName(user.getName());
 
-    user.setEmail(emailValidator(email));
+    newUserObject.setEmail(emailValidator(user.getEmail()));
 
     try {
-      user.setPassword(getSHA(password));
+      newUserObject.setPassword(getSHA(user.getPassword()));
     } catch (NoSuchAlgorithmException e) {
       LOGGER.error("Error getSha" + e);
     }
     LOGGER.debug("<-- createUserObject");
-    return user;
+    return newUserObject;
   }
 
 

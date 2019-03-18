@@ -5,6 +5,13 @@
 
 Projekt mit Schülern der Schule Schloss Gaienhofen
 
+## Releases
+
+Das Projekt wird auf dem Server von [Travis CI](https://travis-ci.org/Sybit-Education/schloss-gaienhofen-projekt-2019) automatisch kompiliert und zusammengestellt. 
+
+Das fertige Projekt steht bei Erfolg in den [Releases](https://github.com/Sybit-Education/schloss-gaienhofen-projekt-2019/releases) 
+zum Download bereit.
+
 # Entwicklung
 
 Maven ist ein Build-Management-Tool der Apache Software Foundation und basiert auf Java. 

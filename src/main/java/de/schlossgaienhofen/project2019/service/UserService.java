@@ -84,7 +84,7 @@ public class UserService {
    * @return
    */
 
-  String getSHA(String input) throws NoSuchAlgorithmException {
+  public String getSHA(String input) throws NoSuchAlgorithmException {
     LOGGER.debug("--> getSHA");
     MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
     byte[] messageDigestByteArray = messageDigest.digest(input.getBytes());

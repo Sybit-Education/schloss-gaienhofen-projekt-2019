@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Create Homecontroller Mapping index.html
+ * Create HomeController Mapping index.html
  */
 @Controller
 public class HomeController {

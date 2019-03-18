@@ -4,7 +4,6 @@ import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
@@ -19,7 +18,6 @@ public class UserService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
-  @Autowired
   public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
@@ -30,9 +28,9 @@ public class UserService {
    * @param firstName, name, email
    */
 
-  public void addNewUser(String firstName, String name, String email, String password) {
+  public void addNewUser(String firstName, String name, String email, String plainPassword) {
     LOGGER.debug("--> addNewUser");
-    User newUser = createUserObject(firstName, name, email, password);
+    User newUser = createUserObject(firstName, name, email, plainPassword);
     userRepository.save(newUser);
     LOGGER.debug("<-- addNewUser");
   }
@@ -83,12 +81,12 @@ public class UserService {
    * @return
    */
 
-  public String getSHA(String input) throws NoSuchAlgorithmException {
+  String getSHA(String input) throws NoSuchAlgorithmException {
     LOGGER.debug("--> getSHA");
-    MessageDigest md = MessageDigest.getInstance("SHA-256");
-    byte[] messageDigest = md.digest(input.getBytes());
-    BigInteger no = new BigInteger(1, messageDigest);
-    StringBuilder hashText = new StringBuilder(no.toString(16));
+    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+    byte[] messageDigestByteArray = messageDigest.digest(input.getBytes());
+    BigInteger bigInteger = new BigInteger(1, messageDigestByteArray);
+    StringBuilder hashText = new StringBuilder(bigInteger.toString(16));
     while (hashText.length() < 32) {
       hashText.insert(0, "0");
     }

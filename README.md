@@ -35,9 +35,9 @@ mit dem Befehl ```java -jar target/project2019-0.0.1-SNAPSHOT.jar``` gestartet w
 
 Man kann das Projekt auch direkt aus der Entwicklungsumgebung starten.
 
-##Entwicklungsumgebungen
+## Entwicklungsumgebungen
 
-###Eclipse:
+### Eclipse:
 
 Um das Projekt optimal in Eclipse nutzen zu können benötigt man das Plugin ```Spring Tools 4```
 

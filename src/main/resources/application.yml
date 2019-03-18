@@ -13,3 +13,7 @@ spring:
     user:
       name: test
       password: test
+smtpserver:
+  enabled: true
+  hostName: localhost
+  port: 25

@@ -13,6 +13,14 @@ spring:
     user:
       name: test
       password: test
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true
+
 smtpserver:
   enabled: true
   hostName: localhost

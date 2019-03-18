@@ -41,10 +41,11 @@ public class LoginController {
   }
 
   @PostMapping(value = "/register")
-  public String register(@RequestParam("vorName") String firstName,
-                         @RequestParam("nachName") String name,
+  public String register(@RequestParam("firstName") String firstName,
+                         @RequestParam("name") String name,
                          @RequestParam("email") String email,
-                         @RequestParam("password") String password) {
+                         @RequestParam("password") String password,
+                         @RequestParam("confirmPassword") String confirmPassword) {
 
     LOGGER.debug("--> register");
 

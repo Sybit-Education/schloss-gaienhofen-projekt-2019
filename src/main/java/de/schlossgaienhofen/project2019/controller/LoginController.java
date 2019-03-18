@@ -10,16 +10,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = "/login")
 public class LoginController {
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
-   /**
-    * Mapping for loginPage
-    * @return
-    */
+  /**
+   * Mapping for loginPage
+   *
+   * @return
+   */
 
-   @GetMapping
-   public String login() {
-      return "login";
-   }
+  @GetMapping
+  public String login() {
+    LOGGER.debug("--> login");
+    LOGGER.debug("<-- login");
+    return "login";
+  }
 
 }

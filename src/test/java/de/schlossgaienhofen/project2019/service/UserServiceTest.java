@@ -52,4 +52,12 @@ public class UserServiceTest {
     Assert.assertEquals(output, userService.getSHA(input));
 
   }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void addNewUser_InvalidEmail() {
+    User user = userObject();
+    user.setEmail("test");
+
+    userService.addNewUser(user);
+  }
 }

@@ -40,7 +40,7 @@
       <appender-ref ref="Console"/>
     </root>
 
-    <logger name="org.springframework" level="debug" additivity="false">
+    <logger name="org.springframework" level="info" additivity="false">
       <appender-ref ref="RollingFile"/>
       <appender-ref ref="Console"/>
     </logger>

@@ -40,7 +40,7 @@ public class UserServiceTest {
   public void addNewUser() {
     userService.addNewUser(userObject());
     User user = userService.findUserByEmail("test@test.com");
-    Assert.assertEquals("nameTest", user.getName());
+    Assert.assertEquals("testName", user.getName());
   }
 
   @Test

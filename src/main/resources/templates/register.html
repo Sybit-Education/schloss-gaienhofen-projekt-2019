@@ -13,29 +13,29 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Vorname</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" th:field="${firstName}" required="">
+            <input type="text" class="form-control" id="firstName" th:field="${user.firstName}">
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="name">Nachname</label>
-            <input type="text" class="form-control" id="name" placeholder="" th:field="${name}"value="" required="">
+            <input type="text" class="form-control" id="name" th:field="${user.name}">
           </div>
         </div>
 
         <div class="mb-3">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" th:field="${email}" placeholder="Max.Mustermann@example.com">
+          <input type="email" class="form-control" id="email" th:field="${user.email}" placeholder="Max.Mustermann@example.com">
         </div>
 
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="password">Passwort</label>
-            <input type="text" class="form-control" id="password" placeholder="" th:field="${password}" value="" required="">
+            <input type="password" class="form-control" id="password" th:field="${user.password}">
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="confirmPassword">Passwort bestätigen</label>
-            <input type="password" class="form-control" id="confirmPassword" placeholder="" value="" required="">
+            <input type="password" class="form-control" id="confirmPassword">
           </div>
         </div>
 

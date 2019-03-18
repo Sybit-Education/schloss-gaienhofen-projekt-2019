@@ -5,6 +5,18 @@
 
 Projekt mit Schülern der Schule Schloss Gaienhofen
 
+# Proxy Einstellungen unter Windows setzen
+
+Begebt euch in das Menü 'Systemumgebungsvariablen bearbeiten' und betätigt nun den Knopf 'Umgebungsvariablen..'.
+Unter Systemvariablen erstellt ihr nun 2 neue Variablen: 
+
+``Name: http_proxy``
+``Wert der Variable: http://<Proxy Server IP>:8080`` 
+
+``Name: https_proxy``
+``Wert der Variable: http://<Proxy Server IP>:8080`` 
+
+
 # Projekt bauen
 
 Maven ist ein Build-Management-Tool der Apache Software Foundation und basiert auf Java. 
@@ -35,9 +47,9 @@ mit dem Befehl ```java -jar target/project2019-0.0.1-SNAPSHOT.jar``` gestartet w
 
 Man kann das Projekt auch direkt aus der Entwicklungsumgebung starten.
 
-## Entwicklungsumgebungen
+# Entwicklungsumgebungen
 
-### Eclipse:
+## Eclipse
 
 Um das Projekt optimal in Eclipse nutzen zu können benötigt man das Plugin ```Spring Tools 4```
 

@@ -2,6 +2,7 @@ package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.UserRepository;
+import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,8 @@ public class UserService {
     User user = new User();
     user.setFirstName(firstName);
     user.setName(name);
-    user.setEmail(email);
+
+    user.setEmail(emailValidator(email));
 
     try {
       user.setPassword(getSHA(password));
@@ -58,6 +60,7 @@ public class UserService {
     LOGGER.debug("<-- createUserObject");
     return user;
   }
+
 
   /**
    * Returns a userObject by given email
@@ -93,5 +96,23 @@ public class UserService {
     LOGGER.debug("<-- getSHA");
     return hashText.toString();
 
+  }
+
+  /**
+   * Validates given Email
+   *
+   * @param email
+   * @return
+   */
+
+  private String emailValidator(String email) {
+    LOGGER.debug("--> emailValidator");
+    boolean valid = EmailValidator.getInstance().isValid(email);
+    if (valid) {
+      LOGGER.debug("<-- emailValidator");
+      return email;
+    } else {
+      throw new IllegalArgumentException("Email is invalid");
+    }
   }
 }

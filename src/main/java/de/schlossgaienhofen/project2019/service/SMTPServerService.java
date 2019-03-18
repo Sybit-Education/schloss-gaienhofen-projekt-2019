@@ -1,4 +1,3 @@
-
 package de.schlossgaienhofen.project2019.service;
 
 import org.slf4j.Logger;

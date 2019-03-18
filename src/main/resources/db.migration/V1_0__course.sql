@@ -3,8 +3,6 @@ CREATE TABLE course (
     course_name varchar(50),
 );
 
-INSERT INTO course (id, course_name) VALUES (1, 'Schwimm-Kurs');
-INSERT INTO course (id, course_name) VALUES (2, 'Lauf-Kurs');
-INSERT INTO course (id, course_name) VALUES (3, 'Mathe Nachhilfe-Kurs');
-INSERT INTO course (id, course_name) VALUES (4, 'Selbstverteidigungs-Kurs');
-INSERT INTO course (id, course_name) VALUES (5, 'Reit-Kurs');
+INSERT INTO course (id, course_name) VALUES (1, 'Schwimmen');
+INSERT INTO course (id, course_name) VALUES (2, 'Laufen');
+INSERT INTO course (id, course_name) VALUES (3, 'Rudern');

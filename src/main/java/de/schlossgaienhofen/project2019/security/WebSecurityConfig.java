@@ -17,6 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       .formLogin()
       .loginPage("/login")
+      .loginPage("/login/register")
       .permitAll()
       .and()
       .csrf().ignoringAntMatchers("/h2/**")

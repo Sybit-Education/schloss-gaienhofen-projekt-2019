@@ -52,6 +52,7 @@ Man kann das Projekt auch direkt aus der Entwicklungsumgebung starten.
 ### Guides
 The following guides illustrate how to use some features concretely:
 
+* [Git Flow](https://danielkummer.github.io/git-flow-cheatsheet/index.de_DE.html)
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Securing a Web Application](https://spring.io/guides/gs/securing-web/)
 * [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)

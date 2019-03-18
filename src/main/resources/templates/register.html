@@ -9,28 +9,28 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 order-md-1">
-      <form th:action="@{/login/register}" method="post">
+      <form th:action="@{/login/register}" method="post" th:object="${user}">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Vorname</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required="">
+            <input type="text" class="form-control" id="firstName" placeholder="" th:field="${firstName}" required="">
           </div>
 
           <div class="col-md-6 mb-3">
             <label for="name">Nachname</label>
-            <input type="text" class="form-control" id="name" placeholder="" value="" required="">
+            <input type="text" class="form-control" id="name" placeholder="" th:field="${name}"value="" required="">
           </div>
         </div>
 
         <div class="mb-3">
           <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" placeholder="Max.Mustermann@example.com">
+          <input type="email" class="form-control" id="email" th:field="${email}" placeholder="Max.Mustermann@example.com">
         </div>
 
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="password">Passwort</label>
-            <input type="password" class="form-control" id="password" placeholder="" value="" required="">
+            <input type="text" class="form-control" id="password" placeholder="" th:field="${password}" value="" required="">
           </div>
 
           <div class="col-md-6 mb-3">

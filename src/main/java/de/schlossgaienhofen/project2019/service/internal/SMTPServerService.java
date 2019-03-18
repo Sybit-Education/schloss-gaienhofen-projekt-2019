@@ -1,5 +1,7 @@
+package de.schlossgaienhofen.project2019.service.internal;
 
-package de.schlossgaienhofen.project2019.service;
+
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,11 @@ import org.subethamail.smtp.server.SMTPServer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
+/**
+ * Internal Service to simulate SMTP-Server for sending E-Mails
+ * 
+ * @author ssr
+ */
 @Service
 public class SMTPServerService {
 

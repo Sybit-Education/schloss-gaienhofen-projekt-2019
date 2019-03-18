@@ -1,8 +1,5 @@
 package de.schlossgaienhofen.project2019.service.internal;
 
-
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,8 +12,6 @@ import javax.annotation.PreDestroy;
 
 /**
  * Internal Service to simulate SMTP-Server for sending E-Mails
- * 
- * @author ssr
  */
 @Service
 public class SMTPServerService {

@@ -1,16 +1,20 @@
 language: java
-
 jdk: oraclejdk8
-
 sudo: required
-
 cache:
   directories:
-  - .autoconf
-  - $HOME/.m2
-
+  - ".autoconf"
+  - "$HOME/.m2"
 before_install:
-  - chmod +x mvnw
-
+- chmod +x mvnw
 script:
-- ./mvnw clean install -B
+- "./mvnw clean install -B"
+deploy:
+  provider: releases
+  api_key:
+    secure: UEDMk99yooRWjcySBcufgRhb1ZfFJH9iZqti7qddDZ88Cfg/fakj4e9UrD4w0DnE3h4Qvo6liwx76Domtw4bLBjr0oAWosnGHNySWxOz05BKE5lIL8zoySLxwxk/GxEhXjD4Bcr+CrOA8C3zMULMBUMQ+Rh7T77QchwHY5yBoOfH5MtyyRHXxbj1bNg9k43oBQcvXNC24FotXzjobmb8T/gKOODQcWTzFFmeHwBgCyjDbv1ufSsLkr/Jhbnm/nyfhsBmbjrOaJeTCcBupCj8QPpAfuDv1/XPysS8xBw9sXsDl04e2S1+JYgUnsHpbya+1rNxcc69zuoTuSB6rZ7MFcMThsl2R9n2eidVq3rvMLLN2VGdxkc603iGRHPynyVpKV5du1W1c/YYhdmlnCls0rClWTOWQuaNyowGiyubXXz2wyBj5WFWMY1cDopDLE3bZZu99cnYXMq3+pddTaUNQ5Zkvk3qvA5uwdbIqKK/ao9Jrn50onUN9HCTWU28IHi7574F9I5tPIQdOechuY0fDrAaMjKENvk5OOxM07HC07CWtBdhBS4u97JjawbKLwZPEprVT7BnfTG6fGK+EeRviwH5IDflq8hWtvW9hj2SXo/WuOPGfQZ3remnUHt8aAHUVf6JXvJDnVcNDlCQajX0NnkgBFCuiTOY4WQCNczTH2g=
+  skip_cleanup: true
+  file_glob: true
+  file: "./target/*.jar"
+  on:
+    repo: Sybit-Education/schloss-gaienhofen-projekt-2019

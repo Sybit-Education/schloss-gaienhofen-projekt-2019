@@ -10,6 +10,8 @@ import java.util.Properties;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.subethamail.smtp.helper.SimpleMessageListener;
 
 /**
@@ -18,6 +20,8 @@ import org.subethamail.smtp.helper.SimpleMessageListener;
  */
 public class SimpleMessageListenerImpl implements SimpleMessageListener {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(SimpleMessageListenerImpl.class);
+  
   public SimpleMessageListenerImpl() {
   }
 
@@ -31,9 +35,11 @@ public class SimpleMessageListenerImpl implements SimpleMessageListener {
     Session session = Session.getDefaultInstance(new Properties());
     try {
       MimeMessage m = new MimeMessage(session, data);
+      LOGGER.info("Mail deliver: " + m.getSubject());
       // ... here we go with email message ...
+      
     } catch (MessagingException ex) {
-      //
+      LOGGER.error(ex.getMessage(), ex);
     }
   }
 }

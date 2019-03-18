@@ -46,16 +46,16 @@ public class SMTPServerService {
       smtpServer.setHostName(this.hostName);
       smtpServer.setPort(Integer.valueOf(port));
       smtpServer.start();
-      LOGGER.info("****** SMTP Server is running for domain " + smtpServer.getHostName() + " on port " + smtpServer.getPort());
+      LOGGER.info("SMTP Server is running for domain " + smtpServer.getHostName() + " on port " + smtpServer.getPort());
     } else {
-      LOGGER.warn("****** SMTP Server NOT ENABLED by settings ");
+      LOGGER.warn("SMTP Server NOT ENABLED by settings ");
     }
   }
 
   @PreDestroy
   public void stop() {
     if (enabled.equalsIgnoreCase("true")) {
-      LOGGER.info("****** Stopping SMTP Server for domain " + smtpServer.getHostName() + " on port " + smtpServer.getPort());
+      LOGGER.info("Stopping SMTP Server for domain " + smtpServer.getHostName() + " on port " + smtpServer.getPort());
       smtpServer.stop();
     }
   }

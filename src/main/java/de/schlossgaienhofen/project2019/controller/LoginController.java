@@ -52,7 +52,7 @@ public class LoginController {
   public ModelAndView registerUser(ModelAndView modelAndView, User user) {
 
     LOGGER.debug("--> register");
-    
+    modelAndView.setViewName("register");
     if(userRepository.findByEmail(user.getEmail()) != null){
         modelAndView.addObject("message","This email already exists!");
         modelAndView.setViewName("error");

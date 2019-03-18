@@ -7,7 +7,7 @@ Projekt mit Schülern der Schule Schloss Gaienhofen
 
 # Proxy Einstellungen unter Windows setzen
 
-Begebt euch in das Menü 'Systemumgebungsvariablen bearbeiten' und betätigt nun den Knopf 'Umgebungsvariablen..'.
+Begebt euch in das Menü 'Systemumgebungsvariablen bearbeiten' und wählt nun 'Umgebungsvariablen..' aus.
 Unter Systemvariablen erstellt ihr nun 2 neue Variablen: 
 
 ``Name: http_proxy``

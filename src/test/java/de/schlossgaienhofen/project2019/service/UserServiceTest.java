@@ -60,6 +60,11 @@ public class UserServiceTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
+  public void getSHA_Null() throws NoSuchAlgorithmException {
+    userService.getSHA(null);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
   public void addNewUser_InvalidEmail() {
     User user = userObject();
     user.setEmail("test");

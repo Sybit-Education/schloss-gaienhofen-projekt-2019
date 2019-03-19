@@ -25,3 +25,4 @@ HELP.md
 /.nb-gradle/
 /build/
 *.log
+bin/

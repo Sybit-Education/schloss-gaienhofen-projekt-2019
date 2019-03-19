@@ -86,6 +86,9 @@ public class UserService {
 
   public String getSHA(String input) throws NoSuchAlgorithmException {
     LOGGER.debug("--> getSHA");
+    if (input == null) {
+      throw new IllegalArgumentException("input cannot be null");
+    }
     MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
     byte[] messageDigestByteArray = messageDigest.digest(input.getBytes());
     BigInteger bigInteger = new BigInteger(1, messageDigestByteArray);

@@ -19,7 +19,7 @@ Dieses Tool setzen wir auch für dieses Projekt ein.
 
 ## Proxy Einstellungen unter Windows setzen
 
-Bei Sybit sind wir hinter einer Entweprise Firewall und benötigen, um ins Internet 
+Bei Sybit sind wir hinter einer Enterprise Firewall und benötigen, um ins Internet 
 zu kommen die Einstellungen für den Proxy.
 
 Begebt euch in das Menü *'Systemumgebungsvariablen bearbeiten'* und wählt nun *'Umgebungsvariablen...'* aus.

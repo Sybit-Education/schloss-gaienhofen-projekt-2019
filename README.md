@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Sybit-Education/schloss-gaienhofen-projekt-2019.svg?branch=master)](https://travis-ci.org/Sybit-Education/schloss-gaienhofen-projekt-2019)
+[![Build Status](https://travis-ci.org/Sybit-Education/schloss-gaienhofen-projekt-2019.svg?branch=master)](https://travis-ci.org/Sybit-Education/schloss-gaienhofen-projekt-2019) [![Join the chat at https://gitter.im/schloss-gaienhofen-projekt-2019/community](https://badges.gitter.im/schloss-gaienhofen-projekt-2019/community.svg)](https://gitter.im/schloss-gaienhofen-projekt-2019/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 # Schloss Gaienhofen - Projekt 2019

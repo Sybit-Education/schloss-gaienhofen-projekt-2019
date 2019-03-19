@@ -18,12 +18,7 @@ spring:
         smtp:
           auth: false
           starttls:
-            enable: true    
-  security:
-    user:
-      name: test
-      password: test
-
+            enable: true
   h2:
     console:
       enabled: true

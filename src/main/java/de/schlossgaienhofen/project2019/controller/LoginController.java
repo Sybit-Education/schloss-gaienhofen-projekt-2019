@@ -56,8 +56,6 @@ public class LoginController {
     }
     userService.addNewUser(user);
 
-    modelAndView.setViewName("login");
-
     LOGGER.debug("<-- register");
     return modelAndView;
   }

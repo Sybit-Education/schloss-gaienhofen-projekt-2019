@@ -25,22 +25,42 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   }
 
   @Override
-  public Authentication authenticate(Authentication authentication)
-    throws AuthenticationException {
+  public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
     String email = authentication.getName();
     String password = authentication.getCredentials().toString();
-    User existingUser = userService.findUserByEmail(email);
-    UsernamePasswordAuthenticationToken result = null;
 
+    User existingUser = getExistingUser(email);
+
+    UsernamePasswordAuthenticationToken result = null;
     try {
-      if (existingUser != null && existingUser.getPassword().equals(userService.getSHA(password))) {
-        result = new UsernamePasswordAuthenticationToken(email, password, new ArrayList<>());
-      }
-    } catch (NoSuchAlgorithmException ex) {
-      LOGGER.error("authenticate error" + ex);
+      result = getUserNamePasswordAuthenticationToken(existingUser, email, password);
+    } catch (NoSuchAlgorithmException e) {
+      LOGGER.error("NoSuchAlgorithmException " + e);
+    }
+
+    return result;
+  }
+
+  private UsernamePasswordAuthenticationToken getUserNamePasswordAuthenticationToken(User existingUser, String email, String password) throws NoSuchAlgorithmException {
+    String encryptedPassword = userService.getSHA(password);
+    UsernamePasswordAuthenticationToken result = null;
+    if (existingUser != null && existingUser.getPassword().equals(encryptedPassword)) {
+      result = new UsernamePasswordAuthenticationToken(email, password, new ArrayList<>());
     }
     return result;
+  }
+
+
+  private User getExistingUser(String email) {
+    User user;
+    try {
+      user = userService.findUserByEmail(email);
+    } catch (IllegalArgumentException iae) {
+      LOGGER.error("getExistingUser: UserReturnValue null: " + iae);
+      user = null;
+    }
+    return user;
   }
 
   @Override

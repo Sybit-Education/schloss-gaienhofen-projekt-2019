@@ -9,7 +9,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 order-md-1">
-      <form th:action="@{/login/register}" method="post" th:object="${user}">
+      <div class="alert alert-danger" id="error" style="display:none;"role="alert">Passwörter stimmen nicht überein.</div>
+      <form th:action="@{/login/register}" method="post" th:object="${user}" id="register_form">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Vorname</label>

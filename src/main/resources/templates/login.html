@@ -4,26 +4,24 @@
   <head th:replace="includes/dependencies :: dependencies">
     <title>Gaienhofen Login</title>
   </head>
-  <body class="bg-light h-100">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand navbar_logo_custom" th:href="@{/}"><img style="width: 150px" src="/images/logo.png"/></a>
-      Projekt X
-    </nav>
+  <body class="bg-light">
 
-    <div class="container h-100">
+    <div class="container">
 
-      <div class="row justify-content-center h-100">
-        <div class="col-md-4  align-self-center">
+      <div class="row justify-content-center  py-3">
+        <div class="col-md-4">
           <div class="card">
             <form th:action="@{/login}" method="post">
+              
+
               <div class="card-body">
-                <img class="card-img-top" src="/images/logo.png"/>
+                <a th:href="@{/}"><img class="card-img-top" src="/images/logo.png"/></a>
                 <h2 class="card-title py-3">Login</h2>
-                <div class="error_message_login" th:if="${param.error}">
+                <div class="text-danger" th:if="${param.error}">
                   Email oder Passwort falsch.
                 </div>
                 <div th:if="${param.logout}">
-                  Du wurdest erfolgreich ausgeloggt.
+                  Du wurdest erfolgreich abgemeldet.
                 </div>
                 <div class="form-group">
                   <label for="username">E-Mail:</label>

@@ -9,7 +9,7 @@ assignees: ''
 
 ---
 name: User Story
-about: A valuable increment of functionality, testable by the users
+about: Eine wertvolle Erweiterung der Funktionalität, die von den Anwendern getestet werden kann.
 
 ---
 
@@ -32,7 +32,7 @@ Verifiziere, dass
 * _Sekretariat & Schulleitung
 * _Systemadministrator_
 
-### Eine gute User Story sollte das  I-N-V-E-S-T Prinzip erfüllen
+### Eine gute User Story sollte das I-N-V-E-S-T Prinzip erfüllen
 
 * _Independent_ (from other user stories, allowing to realize them in any order);
 * _Negotiable_ (omit details that would freeze the story);

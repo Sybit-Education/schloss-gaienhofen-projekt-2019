@@ -10,7 +10,6 @@ assignees: ''
 ---
 name: User Story
 about: Eine wertvolle Erweiterung der Funktionalität, die von den Anwendern getestet werden kann.
-
 ---
 
 Als ‹Persona› möchte ich  ‹Aktion› [ , um ‹Begründung/Mehrwert›. ]

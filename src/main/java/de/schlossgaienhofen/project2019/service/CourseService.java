@@ -42,10 +42,8 @@ public class CourseService {
   public List<Course> getAllCourses() {
     LOGGER.debug("--> getAllCourses");
     List<Course> allCourseList = courseRepository.findAll();
-    if (allCourseList.isEmpty()) {
-//      LOGGER.error("No courses available");
-      allCourseList = demoCourse();
-    }
+    //TODO: Remove following line when Flyway is integrated
+    allCourseList = demoCourse();
     LOGGER.debug("<-- getAllCourses");
     return allCourseList;
   }

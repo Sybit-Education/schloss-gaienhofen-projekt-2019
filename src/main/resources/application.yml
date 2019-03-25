@@ -26,6 +26,12 @@ spring:
       settings:
         web-allow-others: true
 
+  jpa:
+    open-in-view: true
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+
 smtpserver:
   enabled: true
   hostName: localhost

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -21,7 +22,9 @@ public class ActivityGroup implements Serializable{
     private Long id;
     
     private String name;
-    private User agLeader;
+   
+    private String agLeader;
+    
     private String description;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -43,11 +46,11 @@ public class ActivityGroup implements Serializable{
         this.name = name;
     }
 
-    public User getAgLeader() {
+    public String getAgLeader() {
         return agLeader;
     }
 
-    public void setAgLeader(User agLeader) {
+    public void setAgLeader(String agLeader) {
         this.agLeader = agLeader;
     }
 

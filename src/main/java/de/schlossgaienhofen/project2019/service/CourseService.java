@@ -47,5 +47,5 @@ public class CourseService {
     LOGGER.debug("<-- getAllCourses");
     return allCourseList;
   }
-
+  
 }

@@ -11,13 +11,20 @@
 <div class="container">
   <h1>Hallo</h1>
   <p>Willkommen auf der Startseite!</p>
-  <p>Jon war hier</p>
-  <p>Herr Horn war hier!</p>
-  <p>Cool</p>
-  <p> wowowoowowowowowowowo</p>
+ 
+ <br>
+<h4> Liste der AGs: </h4>
+<br>
 
-  <div th:each="allCourseList : ${allCourse}">
-    <p th:text="${allCourseList.getCourseName()}"></p>
+  <div th:each="allActivitiesList : ${allActivities}">
+  
+ <p> Name der AG: <span th:text="${allActivitiesList.name}"></span></p>
+ <p> Name des Leiters: <span th:text="${allActivitiesList.agLeader}"></span></p>
+ <p> Beschreibung: <span th:text="${allActivitiesList.description}"></span></p>
+ <p> Startdatum: <span th:text="${allActivitiesList.startDate}"></span></p>
+ <p> Enddatum: <span th:text="${allActivitiesList.endDate}"></span></p>
+ <p> marx. Teilnehmerzahl: <span  th:text="${allActivitiesList.maxParticipants}"></span></p>
+ <br>   
   </div>
 
 

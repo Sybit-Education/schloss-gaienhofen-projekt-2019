@@ -89,6 +89,18 @@ Im Anschluss könnt ihr unter *'File -> Open Project from File System...'* das P
 Nun könnt ihr auf den Pfeil neben dem grünen 'Run' Knopf klicken und auswählen, als was das Projekt gestartet werden soll. Wähl hier 'Spring Boot App'.
 Alternativ könnt ihr auf die Application.java Rechtsklick drücken und 'Run as' -> 'Spring Boot App' auswählen.
 
+
+## H2 Console
+
+Für die Entwicklung verwenden wir die In-Memory Datenbank **H2**. Das heißt,
+die Daten sind nur solange verfügbar, wie die Anwendung läuft. Nach dem Beenden
+sind diese wieder verloren.
+Um beim Entwickeln die gespeicherten Daten einsehen zu können, bietet H2 eine Console an. Diese ist in dem Projekt im 
+Browser unter [http://localhost:8080/h2] erreichbar.
+
+Die Console ist nach erfolgreichem Login aufrufbar.
+
+
 # Lizenz
 
 [LICENSE](LICENSE)

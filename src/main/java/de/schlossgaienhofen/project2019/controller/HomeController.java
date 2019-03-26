@@ -23,7 +23,7 @@ public class HomeController {
   }
 
   /**
-   * Shows all WeeklyReports on index
+   * Shows inital home page.
    *
    * @param model
    * @return

@@ -9,20 +9,17 @@
 <div th:replace="includes/navigationbar :: navigationbar"></div>
 
 <div class="container">
+<center>
 <h1>HALLO</h1>
 <br> 
 <p> Willkommen auf der Startseite! </p>
  
  <br>
- 
- <p> AGs ansehen: </p>
+ <h6><a href="/ag"><span>alle AGs ansehen</span></a></h6>
 
-  <div th:each="allActivitiesList : ${allActivities}">
-  
- <p> <a href="/ag"><span th:text="${allActivitiesList.name}"></span></a></p>
+
  <br>   
-  </div>
-
+  </center>
 
 </div>
 

@@ -18,22 +18,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ActivityGroupService {
-    
-    
-  private static final Logger LOGGER = LoggerFactory.getLogger(CourseService.class);
-
   
+  private static final Logger LOGGER = LoggerFactory.getLogger(ActivityGroupService.class);
 
   private final ActivityGroupRepository activityGroupRepository;
 
   public ActivityGroupService(ActivityGroupRepository activityGroupRepository) {
     this.activityGroupRepository = activityGroupRepository;
   }
-  
+
   public List<ActivityGroup> getAllActivityGroups(){
       List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll();
-      
+
       return allActivityGroups;
   }
-    
+
 }

@@ -19,8 +19,7 @@ import java.util.Map;
 @Controller
 public class HomeController {
 
- private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-
+  private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
    
   private final ActivityGroupService activityGroupService;
 
@@ -31,7 +30,7 @@ public class HomeController {
  
 
   /**
-   * Shows all WeeklyReports on index
+   * Shows inital home page.
    *
    * @param model
    * @return
@@ -39,8 +38,10 @@ public class HomeController {
   @GetMapping(value = "/")
   public String viewHome(Map<String, Object> model) {
     LOGGER.debug("----->viewHome");
-	List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
+    
+	  List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
     model.put("allActivities", allActivityGroups);
+    
     LOGGER.debug("<-----viewHome");
     return "index";
   } 

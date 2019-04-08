@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/dependencies :: dependencies">
+<meta charset="UTF-8">
+<title>Erstelle eine AG</title>
+</head>
+<body>
+<div th:replace="includes/navigationbar :: navigationbar"></div>
+
+<div class="container">
+ <br>
+	<h1> Neue AG anlegen </h1>
+ <br>
+ 
+ 		<div class="col-md-6 mb-3">
+            <label for="name">Name der AG</label>
+            <input type="text" class="form-control"  required>
+          </div>
+        
+	 
+	 	<div class="col-md-6 mb-3">
+            <label for="agLeader">Name des Leiters</label>
+            <input type="text" class="form-control"   required>
+          </div>
+          
+        <div class="col-md-6 mb-3">
+            <label for="description">Beschreibung</label>
+            <textarea rows="5" class="form-control"></textarea>
+          </div>  
+          
+        <div class="col-md-2 mb-3">
+            <label for="startDate">Startdatum</label>
+            <input type="date" class="form-control"  required>
+          </div>  
+
+		<div class="col-md-2 mb-3">
+            <label for="endDate">Enddatum</label>
+            <input type="date" class="form-control"  required>
+          </div>  
+          
+        <div class="col-md-2 mb-3">
+            <label for="maxParticipants">max. Teilnehmer</label>
+            <input type="number" class="form-control"  required>
+          </div>    
+          
+       	<br>
+       	<div>
+ 		<button type="button" class="btn btn-outline-success" >AG anlegen</button>   
+       	</div>
+           
+        <br>  
+        <br>  
+        <br>  
+        <br>  
+        <br>  
+        <br>  
+        <br>  
+
+        
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+
+</body>
+</html>

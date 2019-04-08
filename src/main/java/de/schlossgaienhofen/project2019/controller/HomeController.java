@@ -37,23 +37,15 @@ public class HomeController {
    */
   @GetMapping(value = "/")
   public String viewHome(Map<String, Object> model) {
-    LOGGER.debug("----->viewHome");
+    LOGGER.debug("-> viewHome");
     
 	  List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
     model.put("allActivities", allActivityGroups);
     
-    LOGGER.debug("<-----viewHome");
+    LOGGER.debug("<- viewHome");
     return "index";
   } 
     
-  
-  @GetMapping(value = "/ag")
-  public ModelAndView displayAg(ModelAndView modelAndView, Map<String, Object> model) {
-	List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
-	model.put("allActivities", allActivityGroups);
-    modelAndView.setViewName("ag");
-    return modelAndView;
-    
-  } 
+ 
   
 }

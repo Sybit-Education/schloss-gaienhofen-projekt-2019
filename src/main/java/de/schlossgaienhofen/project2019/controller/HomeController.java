@@ -48,7 +48,7 @@ public class HomeController {
     
   
   @GetMapping(value = "/ag")
-  public ModelAndView displayAg(ModelAndView modelAndView,Map<String, Object> model) {
+  public ModelAndView displayAg(ModelAndView modelAndView, Map<String, Object> model) {
 	List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
 	model.put("allActivities", allActivityGroups);
     modelAndView.setViewName("ag");

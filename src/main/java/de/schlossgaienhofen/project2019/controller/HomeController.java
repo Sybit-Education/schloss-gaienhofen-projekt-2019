@@ -1,7 +1,9 @@
 package de.schlossgaienhofen.project2019.controller;
 
 
-import org.jboss.jandex.TypeTarget.Usage;
+import de.schlossgaienhofen.project2019.entity.ActivityGroup;
+import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.service.ActivityGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,12 +27,14 @@ import javax.jws.soap.SOAPBinding.Use;
 public class HomeController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
-
+   
   private final ActivityGroupService activityGroupService;
 
   public HomeController(ActivityGroupService activityGroupService) {
-	  this.activityGroupService = activityGroupService;
+    this.activityGroupService = activityGroupService;
   }
+  
+ 
 
   /**
    * Shows inital home page.
@@ -40,22 +44,15 @@ public class HomeController {
    */
   @GetMapping(value = "/")
   public String viewHome(Map<String, Object> model) {
-    LOGGER.debug("--> viewHome");
-    LOGGER.debug("<-- viewHome");
+    LOGGER.debug("-> viewHome");
+    
+	  List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
+    model.put("allActivities", allActivityGroups);
+    
+    LOGGER.debug("<- viewHome");
     return "index";
-  }
-  
-  
-  
-  @GetMapping(value="/schuelerag")
-  public ModelAndView SchuelerAg(ModelAndView modelAndView, Map<String, Object> model) {
-	 
-	 List<ActivityGroup> ags = activityGroupService.getAllActivityGroups();
-	 model.put("allActivitiesList", ags);
-	 
-	 modelAndView.setViewName("schuelerAg");
-
-	 return modelAndView;
-  }
+  } 
+    
+ 
   
 }

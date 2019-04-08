@@ -23,7 +23,7 @@
 			<td><span th:text="${oneActivity.name}"></span></td>
 			<td><span th:text="${oneActivity.description}"></span></td>
 			<td>
-				<form>
+				<form th:action="@{/ag/assign(id=${oneActivity.id})}" th:method="post">
 					<button class="btn btn-primary">Ag Beitreten</button>
 				</form>
 			</td>

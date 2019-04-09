@@ -10,16 +10,13 @@
 
 <div class="container">
 
-  <center>
-    <h1>HALLO</h1>
+    <h1>Arbeitsgemeinschaften</h1>
   
-    <p> Willkommen auf der Startseite! </p>
+    <h2>Verfügbare Arbeitsgemeinschaften</h2>
  
     <h3 th:each="ag : ${allActivities}" >
-      <a th:href="@{/ag/detail(id=${ag.id})}"><span th:text="${ag.name}"></span></a>
+      <a th:href="@{/ag(id=${ag.id})}"><span th:text="${ag.name}"></span></a>
     </h3>
-
-  </center>
 
 </div>
 

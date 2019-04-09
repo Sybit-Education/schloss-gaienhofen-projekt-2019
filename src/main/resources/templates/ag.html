@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="includes/dependencies :: dependencies">
-  <title>Startseite</title>
+  <title>AG</title>
 </head>
 <body>
 
@@ -10,16 +10,8 @@
 
 <div class="container">
 
-  <center>
-    <h1>HALLO</h1>
+  <h1>AG: <span th:text="${ag.name}"></span></h1>
   
-    <p> Willkommen auf der Startseite! </p>
- 
-    <h3 th:each="ag : ${allActivities}" >
-      <a th:href="@{/ag/detail(id=${ag.id})}"><span th:text="${ag.name}"></span></a>
-    </h3>
-    <a href="/create"> Neue AG anlegen</a>
-  </center>
 
 </div>
 

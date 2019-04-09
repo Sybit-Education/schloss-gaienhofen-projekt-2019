@@ -33,4 +33,8 @@ public class ActivityGroupService {
       return allActivityGroups;
   }
 
+  public ActivityGroup get(Long id) {
+    return activityGroupRepository.getOne(id);
+  }
+
 }

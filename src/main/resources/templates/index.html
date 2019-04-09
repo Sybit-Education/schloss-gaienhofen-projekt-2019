@@ -18,7 +18,7 @@
     <h3 th:each="ag : ${allActivities}" >
       <a th:href="@{/ag/detail(id=${ag.id})}"><span th:text="${ag.name}"></span></a>
     </h3>
-    <a href="/create"> Neue AG anlegen</a>
+    <a th:href="@{/ag/create}"> Neue AG anlegen</a>
   </center>
 
 </div>

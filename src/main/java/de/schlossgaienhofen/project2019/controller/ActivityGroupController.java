@@ -50,4 +50,10 @@ public class ActivityGroupController {
     LOGGER.debug("<- get");
     return "ag";
   }
+  
+  @GetMapping(value = "/ag/create")
+  public ModelAndView displayRegister(ModelAndView modelAndView) {
+    modelAndView.setViewName("create");
+    return modelAndView;
+  }
 }

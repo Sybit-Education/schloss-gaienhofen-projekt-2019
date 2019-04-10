@@ -10,7 +10,7 @@ CREATE TABLE activity_group (
 );
 
 INSERT INTO activity_group (id, title, ag_leader, description, start_date, end_date, max_participants, ag_state)
-VALUES (1, 'AG1', '1', 'AG1 Herzlich Willkommen', '2019-09-01', '2020-09-01', 30, 'online');
+VALUES (1, 'Lerntierchen-Zucht', '1', 'Wir werden in der AG im 14-tägigen Turnus kleine <b>Lerntierchen</b> züchten. Wichtig ist, dass du eine Streichholzschachtel für deine Zucht hast und dich regelmässig um die Tiere kümmern kannst. Sie brauchen regelmässigen Lernstoff.', '2019-09-01', '2020-09-01', 30, 'online');
 
 INSERT INTO activity_group (id, title, ag_leader, description, start_date, end_date, max_participants, ag_state)
 VALUES (2, 'AG2', '2', 'AG2 Herzlich Willkommen', '2019-09-01', '2020-09-01', 20, 'online');

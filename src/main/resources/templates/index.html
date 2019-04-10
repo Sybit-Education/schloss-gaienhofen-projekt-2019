@@ -13,10 +13,27 @@
     <h1>Arbeitsgemeinschaften</h1>
   
     <h2>Verfügbare Arbeitsgemeinschaften</h2>
- 
-    <h3 th:each="ag : ${allActivities}" >
-      <a th:href="@{/ag/{id}(id=${ag.id})}"><span th:text="${ag.title}"></span></a>
-    </h3>
+    
+	<table class="table">
+    <thead>
+		<th>Name</th>
+		<th>Beschreibung</th>
+		<th>Auswählen</th>
+		</thead>
+    <tbody>
+      <tr th:each = "oneActivity : ${allActivities}">
+        <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
+        <td><span th:text="${oneActivity.description}"></span></td>
+        <td>
+          <div th:if="!${assignments.get(oneActivity.id)}">
+            <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">
+              <button class="btn btn-primary">anmelden</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+	</table>    
 
 </div>
 

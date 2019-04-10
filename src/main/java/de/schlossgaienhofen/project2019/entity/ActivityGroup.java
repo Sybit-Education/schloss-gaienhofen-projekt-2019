@@ -2,95 +2,158 @@ package de.schlossgaienhofen.project2019.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "ActivityGroup")
-public class ActivityGroup implements Serializable{
+public class ActivityGroup implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "id", updatable = false, nullable = false)
-    private Long id;
-    
-    private String name;
-   
-    private String agLeader;
-    
-    private String description;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private short maxParticipants;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+  @GenericGenerator(name = "native", strategy = "native")
+  @Column(name = "id", updatable = false, nullable = false)
+  private Long id;
 
-    public Long getId() {
-        return id;
+  private String title;
+
+  private String agLeader;
+
+  private String description;
+  private LocalDate startDate;
+  private LocalDate endDate;
+  private short maxParticipants;
+  
+  @OneToMany(mappedBy="id")
+  private Set<Attendee> attendees;
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  public String getAgLeader() {
+    return agLeader;
+  }
+
+  public void setAgLeader(String agLeader) {
+    this.agLeader = agLeader;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public LocalDate getStartDate() {
+    return startDate;
+  }
+
+  public void setStartDate(LocalDate startDate) {
+    this.startDate = startDate;
+  }
+
+  public LocalDate getEndDate() {
+    return endDate;
+  }
+
+  public void setEndDate(LocalDate endDate) {
+    this.endDate = endDate;
+  }
+
+  public short getMaxParticipants() {
+    return maxParticipants;
+  }
+
+  public void setMaxParticipants(short maxParticipants) {
+    this.maxParticipants = maxParticipants;
+  }
+  
+  public Set<Attendee> getAttendees() {
+    return attendees;
+  }
+
+  public void setAttendees(Set<Attendee> attendees) {
+    this.attendees = attendees;
+  }  
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 97 * hash + Objects.hashCode(this.id);
+    hash = 97 * hash + Objects.hashCode(this.title);
+    hash = 97 * hash + Objects.hashCode(this.agLeader);
+    hash = 97 * hash + Objects.hashCode(this.description);
+    hash = 97 * hash + Objects.hashCode(this.startDate);
+    hash = 97 * hash + Objects.hashCode(this.endDate);
+    hash = 97 * hash + this.maxParticipants;
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    if (obj == null) {
+      return false;
     }
-
-    public String getName() {
-        return name;
+    if (getClass() != obj.getClass()) {
+      return false;
     }
-
-    public void setName(String name) {
-        this.name = name;
+    final ActivityGroup other = (ActivityGroup) obj;
+    if (this.maxParticipants != other.maxParticipants) {
+      return false;
     }
-
-    public String getAgLeader() {
-        return agLeader;
+    if (!Objects.equals(this.title, other.title)) {
+      return false;
     }
-
-    public void setAgLeader(String agLeader) {
-        this.agLeader = agLeader;
+    if (!Objects.equals(this.agLeader, other.agLeader)) {
+      return false;
     }
-
-    public String getDescription() {
-        return description;
+    if (!Objects.equals(this.description, other.description)) {
+      return false;
     }
-
-    public void setDescription(String description) {
-        this.description = description;
+    if (!Objects.equals(this.id, other.id)) {
+      return false;
     }
-
-    public LocalDate getStartDate() {
-        return startDate;
+    if (!Objects.equals(this.startDate, other.startDate)) {
+      return false;
     }
-
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    if (!Objects.equals(this.endDate, other.endDate)) {
+      return false;
     }
+    return true;
+  }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public short getMaxParticipants() {
-        return maxParticipants;
-    }
-
-    public void setMaxParticipants(short maxParticipants) {
-        this.maxParticipants = maxParticipants;
-    }
-    
-    
-    
-    
-    
-    
-    
-
+  @Override
+  public String toString() {
+    return "ActivityGroup{" + "id=" + id + ", title=" + title + '}';
+  }
+  
 }

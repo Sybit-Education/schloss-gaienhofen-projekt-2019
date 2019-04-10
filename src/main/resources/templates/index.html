@@ -10,17 +10,32 @@
 
 <div class="container">
 
-  <center>
-    <h1>HALLO</h1>
+    <h1>Arbeitsgemeinschaften</h1>
   
-    <p> Willkommen auf der Startseite! </p>
- 
-    <h3 th:each="ag : ${allActivities}" >
-      <a th:href="@{/ag/detail(id=${ag.id})}"><span th:text="${ag.name}"></span></a>
-    </h3>
-    <a th:href="@{/ag/create}"> Neue AG anlegen</a>
-  </center>
-
+    <h2>Verfügbare Arbeitsgemeinschaften</h2>
+    
+	<table class="table">
+    <thead>
+		<th>Name</th>
+		<th>Beschreibung</th>
+		<th>Auswählen</th>
+		</thead>
+    <tbody>
+      <tr th:each = "oneActivity : ${allActivities}">
+        <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
+        <td><span th:text="${oneActivity.description}"></span></td>
+        <td>
+          <div th:if="!${assignments.get(oneActivity.id)}">
+            <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">
+              <button class="btn btn-primary">anmelden</button>
+            </form>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+	</table>    
+  
+  <a th:href="@{/ag/create}"> Neue AG anlegen</a>
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

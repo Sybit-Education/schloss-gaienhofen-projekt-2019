@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,8 +49,8 @@ public class ActivityGroupController {
     * @param model
     * @return 
     */
-  @GetMapping(value = "/ag")
-  public String get(@RequestParam(name = "id") Long id, Map<String, Object> model) {
+  @GetMapping(value = "/ag/{id}")
+  public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
     
     ActivityGroup ag = activityGroupService.get(id);

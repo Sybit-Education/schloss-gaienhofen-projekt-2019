@@ -10,8 +10,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import de.schlossgaienhofen.project2019.entity.ActivityGroup;
+import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.repository.ActivityGroupRepository;
+import de.schlossgaienhofen.project2019.service.ActivityGroupService;
+
 import java.util.List;
 import java.util.Map;
+
+import javax.jws.soap.SOAPBinding.Use;
 
 /**
  * Create HomeController Mapping index.html

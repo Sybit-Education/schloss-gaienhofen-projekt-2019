@@ -13,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,6 +32,15 @@ public class ActivityGroupController {
    public ActivityGroupController(ActivityGroupService activityGroupService) {
     this.activityGroupService = activityGroupService;
   }
+   
+  @GetMapping(value = "/ag")
+  public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
+    List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
+    model.put("allActivitiesList", allActivityGroups);
+    modelAndView.setViewName("schuelerAg");
+    return modelAndView;
+
+  }
   
    /**
     * Get detail page of specific ActivityGroup by given id.
@@ -38,8 +49,8 @@ public class ActivityGroupController {
     * @param model
     * @return 
     */
-  @GetMapping(value = "/ag")
-  public String get(@RequestParam(name = "id") Long id, Map<String, Object> model) {
+  @GetMapping(value = "/ag/{id}")
+  public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
     
     ActivityGroup ag = activityGroupService.get(id);
@@ -47,5 +58,13 @@ public class ActivityGroupController {
     
     LOGGER.debug("<- get");
     return "ag-detail";
+  }
+  
+  @PostMapping(value = "/ag/assign")
+  public String assign(@RequestParam(name="id") Long id) {
+    
+    LOGGER.debug("TODO: assign to curent user id={}", id);
+    
+    return "index";
   }
 }

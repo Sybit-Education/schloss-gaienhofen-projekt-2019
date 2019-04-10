@@ -9,12 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "ActivityGroup")
@@ -31,7 +29,11 @@ public class ActivityGroup implements Serializable {
   private String agLeader;
 
   private String description;
+  
+   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate startDate;
+  
+   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate endDate;
   private short maxParticipants;
   

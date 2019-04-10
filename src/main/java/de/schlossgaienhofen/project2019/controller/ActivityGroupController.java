@@ -9,15 +9,21 @@ import de.schlossgaienhofen.project2019.entity.ActivityGroup;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.service.ActivityGroupService;
 import de.schlossgaienhofen.project2019.service.UserService;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,10 +47,10 @@ public class ActivityGroupController {
 
   /**
    * List all ActivityGroups.
-   * 
+   *
    * @param modelAndView
    * @param model
-   * @return 
+   * @return
    */
   @GetMapping(value = "/ag")
   public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
@@ -75,8 +81,9 @@ public class ActivityGroupController {
 
   /**
    * Assign currendt authenticated user to given ActivityGroup.
+   *
    * @param id
-   * @return 
+   * @return
    */
   @PostMapping(value = "/ag/{id}/assign")
   public String assign(@PathVariable(name = "id") Long id) {
@@ -88,14 +95,28 @@ public class ActivityGroupController {
     LOGGER.debug("assign curent user=[{}] to AG with id=[{}]", authentication.getName(), id);
     User user = this.userService.findUserByEmail(authentication.getName());
     this.activityGroupService.assignUser(id, user);
-    
+
     LOGGER.debug("<- assign");
     return "redirect:/";
   }
-  
+
   @GetMapping(value = "/ag/create")
-  public ModelAndView displayRegister(ModelAndView modelAndView) {
+  public ModelAndView showForm(ModelAndView modelAndView) {
+    modelAndView.addObject("activityGroup", new ActivityGroup());
     modelAndView.setViewName("create");
+    return modelAndView;
+  }
+
+  @PostMapping(value = "/ag/create")
+  public ModelAndView saveForm(@ModelAttribute ActivityGroup activityGroup, ModelAndView modelAndView) {
+    LOGGER.debug("--> saveForm title={}", activityGroup.getTitle());
+
+    activityGroup = activityGroupService.save(activityGroup);
+    modelAndView.addObject("activityGroup", activityGroup);
+
+    modelAndView.setViewName("create");
+
+    LOGGER.debug("<-- saveForm");
     return modelAndView;
   }
 }

@@ -88,4 +88,8 @@ public class ActivityGroupService {
      }
     
   }
+
+  public ActivityGroup save(ActivityGroup activityGroup) {
+    return this.activityGroupRepository.saveAndFlush(activityGroup);
+  }
 }

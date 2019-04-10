@@ -5,6 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "User")
@@ -21,7 +23,9 @@ public class User implements Serializable {
   private String email;
   private String password;
   private char gender;
-
+  
+  @OneToMany(mappedBy = "id")
+  private Set<Attendee> attendee;
 
   public String getEmail() {
     return email;
@@ -74,4 +78,53 @@ public class User implements Serializable {
   public void setPassword(String password) {
     this.password = password;
   }
+
+  @Override
+  public int hashCode() {
+    int hash = 7;
+    hash = 41 * hash + Objects.hashCode(this.id);
+    hash = 41 * hash + Objects.hashCode(this.firstName);
+    hash = 41 * hash + Objects.hashCode(this.name);
+    hash = 41 * hash + Objects.hashCode(this.email);
+    hash = 41 * hash + this.gender;
+
+    return hash;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final User other = (User) obj;
+    if (this.gender != other.gender) {
+      return false;
+    }
+    if (!Objects.equals(this.firstName, other.firstName)) {
+      return false;
+    }
+    if (!Objects.equals(this.name, other.name)) {
+      return false;
+    }
+    if (!Objects.equals(this.email, other.email)) {
+      return false;
+    }
+    if (!Objects.equals(this.id, other.id)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public String toString() {
+    return "User{" + "id=" + id + ", email=" + email + '}';
+  }
+  
 }

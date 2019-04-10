@@ -24,7 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ActivityGroupController {
   
-    private static final Logger LOGGER = LoggerFactory.getLogger(ActivityGroupController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ActivityGroupController.class);
    
   private final ActivityGroupService activityGroupService;
 
@@ -41,7 +41,14 @@ public class ActivityGroupController {
 
   }
   
-  @GetMapping(value = "/ag/detail")
+   /**
+    * Get detail page of specific ActivityGroup by given id.
+    * 
+    * @param id ID of the ActivityGroup
+    * @param model
+    * @return 
+    */
+  @GetMapping(value = "/ag")
   public String get(@RequestParam(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
     
@@ -49,7 +56,7 @@ public class ActivityGroupController {
     model.put("ag", ag);
     
     LOGGER.debug("<- get");
-    return "ag";
+    return "ag-detail";
   }
   
   @PostMapping(value = "/ag/assign")

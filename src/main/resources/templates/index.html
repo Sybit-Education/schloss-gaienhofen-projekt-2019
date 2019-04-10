@@ -15,7 +15,7 @@
     <h2>Verfügbare Arbeitsgemeinschaften</h2>
  
     <h3 th:each="ag : ${allActivities}" >
-      <a th:href="@{/ag/{id}(id=${ag.id})}"><span th:text="${ag.name}"></span></a>
+      <a th:href="@{/ag/{id}(id=${ag.id})}"><span th:text="${ag.title}"></span></a>
     </h3>
 
 </div>

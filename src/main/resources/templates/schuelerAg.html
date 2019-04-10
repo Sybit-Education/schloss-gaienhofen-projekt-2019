@@ -20,7 +20,7 @@
 		<th>Ag Auswaehlen</th>
 		
 		<tr th:each = "oneActivity : ${allActivitiesList}">
-			<td><span th:text="${oneActivity.name}"></span></td>
+			<td><span th:text="${oneActivity.title}"></span></td>
 			<td><span th:text="${oneActivity.description}"></span></td>
 			<td>
 				<form th:action="@{/ag/assign(id=${oneActivity.id})}" th:method="post">

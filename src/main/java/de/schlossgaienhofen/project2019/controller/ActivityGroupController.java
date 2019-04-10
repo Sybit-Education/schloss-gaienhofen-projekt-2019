@@ -90,6 +90,6 @@ public class ActivityGroupController {
     this.activityGroupService.assignUser(id, user);
     
     LOGGER.debug("<- assign");
-    return "redirect:index";
+    return "redirect:/";
   }
 }

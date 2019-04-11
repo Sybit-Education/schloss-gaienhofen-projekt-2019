@@ -23,7 +23,7 @@
     <tbody>
       <tr th:each = "oneActivity : ${allActivities}">
         <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
-        <td><span th:text="${oneActivity.description}"></span></td>
+        <td><span th:utext="${oneActivity.description}"></span></td>
         <td>
           <div th:if="!${assignments.get(oneActivity.id)}">
             <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">

@@ -6,6 +6,7 @@
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
+import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.ActivityGroupRepository;
 import java.util.List;
 import org.junit.Assert;
@@ -39,4 +40,14 @@ public class ActivityGroupServiceTest {
         Assert.assertEquals(3, activityGroups.size());
     }
     
+    @Test
+    public void testGetAllActivityGroupsOfUser() {
+      User user = new User();
+      user.setId(Long.valueOf(1));
+      
+      List<ActivityGroup> activityGroups = activityGroupService.getActivityGroupsOfUser(user);
+      
+      Assert.assertNotNull(activityGroups);
+      Assert.assertEquals(1, activityGroups.size());    
+    }
 }

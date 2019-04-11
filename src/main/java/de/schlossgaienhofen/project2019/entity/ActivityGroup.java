@@ -9,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
@@ -30,6 +27,7 @@ public class ActivityGroup implements Serializable {
 
   private String agLeader;
 
+  private String summary;
   private String description;
   private LocalDate startDate;
   private LocalDate endDate;
@@ -60,6 +58,14 @@ public class ActivityGroup implements Serializable {
 
   public void setAgLeader(String agLeader) {
     this.agLeader = agLeader;
+  }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
   }
 
   public String getDescription() {
@@ -108,6 +114,7 @@ public class ActivityGroup implements Serializable {
     hash = 97 * hash + Objects.hashCode(this.id);
     hash = 97 * hash + Objects.hashCode(this.title);
     hash = 97 * hash + Objects.hashCode(this.agLeader);
+    hash = 97 * hash + Objects.hashCode(this.summary);
     hash = 97 * hash + Objects.hashCode(this.description);
     hash = 97 * hash + Objects.hashCode(this.startDate);
     hash = 97 * hash + Objects.hashCode(this.endDate);
@@ -136,6 +143,9 @@ public class ActivityGroup implements Serializable {
     if (!Objects.equals(this.agLeader, other.agLeader)) {
       return false;
     }
+    if (!Objects.equals(this.summary, other.summary)) {
+      return false;
+    }    
     if (!Objects.equals(this.description, other.description)) {
       return false;
     }

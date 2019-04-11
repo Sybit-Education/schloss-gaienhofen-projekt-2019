@@ -103,15 +103,13 @@ public class ActivityGroupController {
   }
 
   @PostMapping(value = "/ag/create")
-  public ModelAndView saveForm(@ModelAttribute ActivityGroup activityGroup, ModelAndView modelAndView) {
+  public String saveForm(@ModelAttribute ActivityGroup activityGroup,  Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", activityGroup.getTitle());
 
     activityGroup = activityGroupService.create(activityGroup);
-    modelAndView.addObject("activityGroup", activityGroup);
-
-    modelAndView.setViewName("create");
+    model.put("activityGroup", activityGroup);
 
     LOGGER.debug("<-- saveForm");
-    return modelAndView;
+    return "redirect:/ag/" + activityGroup.getId();
   }
 }

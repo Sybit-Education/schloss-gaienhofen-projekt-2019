@@ -106,7 +106,7 @@ public class ActivityGroupController {
   public ModelAndView saveForm(@ModelAttribute ActivityGroup activityGroup, ModelAndView modelAndView) {
     LOGGER.debug("--> saveForm title={}", activityGroup.getTitle());
 
-    activityGroup = activityGroupService.save(activityGroup);
+    activityGroup = activityGroupService.create(activityGroup);
     modelAndView.addObject("activityGroup", activityGroup);
 
     modelAndView.setViewName("create");

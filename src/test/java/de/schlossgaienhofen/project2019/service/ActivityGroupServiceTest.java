@@ -19,24 +19,52 @@ import org.springframework.test.context.junit4.SpringRunner;
  *
  * @author cwr
  */
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ActivityGroupServiceTest {
+  
+  @Autowired
+  ActivityGroupService activityGroupService;
+  
+  @Autowired
+  ActivityGroupRepository activitGroupRepository;
+  
+  @Test
+  public void testGetAllActivityGroups() {
     
-    @Autowired
-    ActivityGroupService activityGroupService;
+    List<ActivityGroup> activityGroups = activityGroupService.getAllActivityGroups();
     
-    @Autowired
-    ActivityGroupRepository activitGroupRepository;
+    Assert.assertNotNull(activityGroups);
+    Assert.assertTrue(activityGroups.size() > 2);
+    Assert.assertNotNull(activityGroups.get(0));
+  }
+  
+  @Test
+  public void testCreateActivityGroup() {
+    ActivityGroup ag = new ActivityGroup();
+    ag.setTitle("Titel");
+    ag.setAgLeader("Leader");
     
-    @Test
-    public void testGetAllActivityGroups(){
-        
-        List<ActivityGroup> activityGroups = activityGroupService.getAllActivityGroups();
-        
-        
-        Assert.assertEquals(3, activityGroups.size());
-    }
+    int sizeBefore = activityGroupService.getAllActivityGroups().size();
     
+    Assert.assertNull(ag.getId());
+    ag = activityGroupService.create(ag);
+    
+    Assert.assertNotNull(ag);
+    Assert.assertNotNull(ag.getId());
+    
+    int sizeAfter = activityGroupService.getAllActivityGroups().size();
+    
+    Assert.assertEquals(sizeBefore + 1, sizeAfter);
+  }
+  
+  @Test(expected = IllegalArgumentException.class)
+  public void testCreateActivityGroup_withId() {
+    ActivityGroup ag = new ActivityGroup();
+    ag.setId(Long.valueOf(12));
+    ag.setTitle("Titel");
+    ag.setAgLeader("Leader");
+    
+    activityGroupService.create(ag);
+  }
 }

@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 /**
@@ -34,7 +35,7 @@ public class ActivityGroupService {
   }
 
   public List<ActivityGroup> getAllActivityGroups(){
-      List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll();
+      List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
 
       return allActivityGroups;
   }

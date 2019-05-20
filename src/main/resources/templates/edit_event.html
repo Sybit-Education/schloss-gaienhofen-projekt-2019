@@ -17,7 +17,7 @@
   <h1> Event bearbeiten </h1>
   <br>
 
-  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
+  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="get">
 
     <div class="col-md-8">
       <label for="title">Name des Events</label>
@@ -27,7 +27,7 @@
 
     <div class="col-md-8">
       <label for="type"> Typ des Events</label>
-      <input id="type" type="text" class="form-control" required></input>
+      <input id="type" type="text" class="form-control" th:field="*{type}" required></input>
       <br>
     </div>
 
@@ -39,7 +39,7 @@
 
     <div class="col-md-8">
       <label for="location">Treffpunkt</label>
-      <input id="location" type="text" class="form-control" required></input>
+      <input id="location" type="text" class="form-control" th:field="*{location}" required></input>
       <br>
     </div>
 

@@ -11,6 +11,10 @@
 <div class="container">
 
   <h1>AG: <span th:text="${ag.title}"></span></h1>
+  
+  <form th:action="@{/ag/edit/{id}(id=${ag.id})}" >
+            <button class="btn btn-primary">bearbeiten</button>
+  </form>
 
 
 </div>

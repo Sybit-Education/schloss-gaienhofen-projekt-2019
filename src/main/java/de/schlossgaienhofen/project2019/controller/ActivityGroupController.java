@@ -91,7 +91,7 @@ public class ActivityGroupController {
   @GetMapping(value = "/ag/create")
   public ModelAndView showForm(ModelAndView modelAndView) {
     modelAndView.addObject("activityGroup", new ActivityGroup());
-    modelAndView.setViewName("create");
+    modelAndView.setViewName("edit_event");
     return modelAndView;
   }
 
@@ -105,4 +105,17 @@ public class ActivityGroupController {
     LOGGER.debug("<-- saveForm");
     return "redirect:/ag/" + activityGroup.getId();
   }
+  
+  @GetMapping(value = "/ag/edit/{id}")
+  public ModelAndView edit(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
+    LOGGER.debug("-> get id={}", id);
+
+    ActivityGroup ag = activityGroupService.get(id);
+    model.put("activityGroup", ag);
+    modelAndView.setViewName("edit_event");
+
+    LOGGER.debug("<- get");
+    return modelAndView;
+  }
+  
 }

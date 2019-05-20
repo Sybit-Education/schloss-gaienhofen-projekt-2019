@@ -86,7 +86,7 @@ public class UserServiceImpl implements UserService {
   public User findUserById(@NotEmpty long id) {
     LOGGER.debug("--> findUserById");
     Optional<User> ourUser = userRepository.findById(id);
-    User user = new User();
+    User user;
     if (ourUser.isPresent()) {
       user = ourUser.get();
     } else {

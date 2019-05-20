@@ -63,10 +63,6 @@ public class ActivityGroupController {
     ActivityGroup ag = activityGroupService.get(id);
 
     int agLeaderId = Integer.parseInt(ag.getAgLeader());
-   /* 
-    String mess = "" + agLeaderId;
-    throw new IllegalArgumentException(mess);
-    */
 
     User agLeader = userService.findUserById(1);
 

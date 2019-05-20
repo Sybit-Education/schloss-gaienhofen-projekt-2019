@@ -36,6 +36,9 @@ public class ActivityGroup implements Serializable {
   private String location;
   private String type;
 
+  private String agState;
+
+
   @OneToMany(mappedBy = "id")
   private Set<Attendee> attendees;
 
@@ -125,6 +128,14 @@ public class ActivityGroup implements Serializable {
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public String getAgState() {
+    return agState;
+  }
+
+  public void setAgState(String agState) {
+    this.agState = agState;
   }
 
   @Override

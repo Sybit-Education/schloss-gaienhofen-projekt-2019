@@ -61,7 +61,7 @@ public class EventController {
     LOGGER.debug("-> get id={}", id);
 
     Event event= eventService.get(id);
-    model.put("ag", event);
+    model.put("event", event);
 
     LOGGER.debug("<- get");
     return "ag-detail";
@@ -90,7 +90,7 @@ public class EventController {
 
   @GetMapping(value = "/ag/create")
   public ModelAndView showForm(ModelAndView modelAndView) {
-    modelAndView.addObject("activityGroup", new Event());
+    modelAndView.addObject("event", new Event());
     modelAndView.setViewName("create");
     return modelAndView;
   }

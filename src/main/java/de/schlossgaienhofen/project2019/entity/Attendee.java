@@ -1,21 +1,14 @@
 package de.schlossgaienhofen.project2019.entity;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedDate;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
+
 /**
- * 
  * @author ssr
  */
 @Entity
@@ -27,15 +20,15 @@ public class Attendee implements Serializable {
   @GenericGenerator(name = "native", strategy = "native")
   @Column(name = "id", updatable = false, nullable = false)
   private Long id;
-  
+
   @ManyToOne
   @JoinColumn(name = "attendee_id")
   private User attendee;
 
   @ManyToOne
-  @JoinColumn(name = "ag_id")  
+  @JoinColumn(name = "ag_id")
   private ActivityGroup activityGroup;
-  
+
   @CreatedDate
   private LocalDate assignemtDate;
 
@@ -62,7 +55,6 @@ public class Attendee implements Serializable {
   public void setActivityGroup(ActivityGroup activityGroup) {
     this.activityGroup = activityGroup;
   }
-  
 
 
   public LocalDate getAssignemtDate() {
@@ -109,7 +101,6 @@ public class Attendee implements Serializable {
     }
     return true;
   }
-
 
 
   @Override

@@ -1,17 +1,12 @@
 package de.schlossgaienhofen.project2019.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "ActivityGroup")
@@ -32,8 +27,8 @@ public class ActivityGroup implements Serializable {
   private LocalDate startDate;
   private LocalDate endDate;
   private short maxParticipants;
-  
-  @OneToMany(mappedBy="id")
+
+  @OneToMany(mappedBy = "id")
   private Set<Attendee> attendees;
 
   public Long getId() {
@@ -99,14 +94,14 @@ public class ActivityGroup implements Serializable {
   public void setMaxParticipants(short maxParticipants) {
     this.maxParticipants = maxParticipants;
   }
-  
+
   public Set<Attendee> getAttendees() {
     return attendees;
   }
 
   public void setAttendees(Set<Attendee> attendees) {
     this.attendees = attendees;
-  }  
+  }
 
   @Override
   public int hashCode() {
@@ -145,7 +140,7 @@ public class ActivityGroup implements Serializable {
     }
     if (!Objects.equals(this.summary, other.summary)) {
       return false;
-    }    
+    }
     if (!Objects.equals(this.description, other.description)) {
       return false;
     }
@@ -165,5 +160,5 @@ public class ActivityGroup implements Serializable {
   public String toString() {
     return "ActivityGroup{" + "id=" + id + ", title=" + title + '}';
   }
-  
+
 }

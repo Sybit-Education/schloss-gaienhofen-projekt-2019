@@ -10,16 +10,16 @@ import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.ActivityGroupRepository;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author cwr
  */
 @Service
@@ -45,6 +45,7 @@ public class ActivityGroupService {
 
   /**
    * Get List of ActivityGroups which are assigned to given user.
+   *
    * @param user
    * @return List of assigned ActivityGroups
    */
@@ -66,15 +67,14 @@ public class ActivityGroupService {
 
   public ActivityGroup get(Long id) {
     LOGGER.debug("-> get id={]}", id);
-    
+
     final ActivityGroup ag = activityGroupRepository.getOne(id);
-    
+
     LOGGER.debug("<- get ag={]}", ag);
     return ag;
   }
 
   /**
-   *
    * @param id
    * @param user
    * @return

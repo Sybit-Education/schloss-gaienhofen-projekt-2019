@@ -1,14 +1,14 @@
 package de.schlossgaienhofen.project2019.service.internal;
 
-import java.io.InputStream;
-import java.util.Properties;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.MimeMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.subethamail.smtp.helper.SimpleMessageListener;
+
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class SimpleMessageListenerImpl implements SimpleMessageListener {
 

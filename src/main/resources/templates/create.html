@@ -5,6 +5,17 @@
   <link href="/libs/summernote/summernote.css" rel="stylesheet"/>
   <meta charset="UTF-8">
   <title>Erstelle eine AG</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+  </script>
 </head>
 <body>
 <div th:replace="includes/navigationbar :: navigationbar"></div>
@@ -27,20 +38,30 @@
     </div>
 
     <div class="col-md-8">
-      <label for="description">Beschreibung</label>
-      <textarea id="description" rows="5" class="form-control" th:field="*{description}"></textarea>
+      <label for="summary">Kurzbeschreibung</label>
+      <textarea id="summary" rows="5" class="form-control" th:field="*{summary}"></textarea>
     </div>
+    
+    <div class="col-md-8">
+    <br>
+    Ausführliche Beschreibung
+    <label id="description" for="description" th:field="*{description}"></label>
+    </div>
+    
     <div class="row col-12">
       <div class="col-md-3">
         <label for="startDate">Startdatum</label>
-        <input id="startDate" type="date" class="form-control" th:field="*{startDate}" required>
+        <input id="datepicker" type="text" class="form-control" th:field="*{startDate}" required>
       </div>
 
-      <div class="col-md-3">
+ 
+       <div class="col-md-3">
         <label for="endDate">Enddatum</label>
-        <input id="endDate" type="date" class="form-control" th:field="*{endDate}" required>
+        <input id="datepicker" type="text" class="form-control" th:field="*{endDate}" required>
       </div>
     </div>
+    
+    
     <div class="col-md-3">
       <label for="maxParticipants">max. Teilnehmer</label>
       <input id="maxParticipants" type="number" class="form-control" th:field="*{maxParticipants}" required>
@@ -62,6 +83,7 @@
 <script type="text/javascript" src="/libs/summernote/lang/summernote-de-DE.min.js"></script>
 
 <script>
+ 
   $(document).ready(function () {
     $("#description").summernote({
       height: 300, // set editor height
@@ -69,7 +91,6 @@
       // height of editor
       // maxHeight: null, // set maximum
       // height of editor
-      placeholder: "Beschreibung der AG",
       focus: false,
       lang: 'de-DE',
       toolbar: [

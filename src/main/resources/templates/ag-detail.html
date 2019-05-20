@@ -10,8 +10,8 @@
 
 <div class="container">
 
-  <h1>AG: <span th:text="${ag.title}"></span></h1>
-  
+  <h1>AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
+
   <form th:action="@{/ag/edit/{id}(id=${ag.id})}" >
             <button class="btn btn-primary">bearbeiten</button>
   </form>

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta th:replace="includes/dependencies :: dependencies"/>
-  <link href="/libs/summernote/summernote.css" rel="stylesheet"/>
-  <meta charset="UTF-8">
+
+
   <title>Erstelle eine AG</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
 
 </head>
 
@@ -28,9 +24,9 @@
       <input id="title" type="text" class="form-control" th:field="*{title}" required></input>
       <br>
     </div>
-    
+
     <div class="col-md-8">
-		<label for="type"> Typ des Events</label>	    
+		<label for="type"> Typ des Events</label>
     	<input id="type" type="text" class="form-control" required></input>
     	<br>
     </div>
@@ -40,13 +36,13 @@
       <input id="agLeader" type="text" class="form-control" th:field="*{agLeader}" required></input>
       <br>
     </div>
-    
+
         <div class="col-md-8">
       <label for="location">Ort</label>
       <input id="location" type="text" class="form-control" required></input>
       <br>
     </div>
-    
+
 
     <div class="col-md-8">
 
@@ -57,7 +53,7 @@
 
     <div class="col-md-8">
       <label for="description">Ausführliche Beschreibung</label>
-      <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+      <textarea id="description" class="form-control summernote" th:field="*{description}"></textarea>
       <br>
     </div>
 
@@ -88,18 +84,14 @@
 <div th:replace="includes/footer :: footer"></div>
 <div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
 
-<script type="text/javascript" src="/libs/summernote/summernote.min.js"></script>
-<script type="text/javascript" src="/libs/summernote/lang/summernote-de-DE.min.js"></script>
 
 <script>
 
   $(document).ready(function () {
-    $("#description").summernote({
+    $(".summernote").summernote({
       height: 300, // set editor height
-      minHeight: 200, // set minimum
-      // height of editor
-      // maxHeight: null, // set maximum
-      // height of editor
+      minHeight: 200, // set minimum height of editor
+      // maxHeight: null, // set maximum height of editor
       focus: false,
       lang: 'de-DE',
       toolbar: [

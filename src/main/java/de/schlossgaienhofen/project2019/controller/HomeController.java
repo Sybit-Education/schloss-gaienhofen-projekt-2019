@@ -12,16 +12,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import de.schlossgaienhofen.project2019.entity.ActivityGroup;
-import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
-import de.schlossgaienhofen.project2019.service.ActivityGroupService;
-import de.schlossgaienhofen.project2019.service.UserService;
 import java.util.HashMap;
-import java.util.Iterator;
-
 import java.util.List;
 import java.util.Map;
 

@@ -105,6 +105,7 @@ public class ActivityGroup implements Serializable {
   public void setAttendees(Set<Attendee> attendees) {
     this.attendees = attendees;
   }
+
   public String getAgState() {
     return agState;
   }
@@ -112,6 +113,7 @@ public class ActivityGroup implements Serializable {
   public void setAgState(String agState) {
     this.agState = agState;
   }
+
   @Override
   public int hashCode() {
     int hash = 7;

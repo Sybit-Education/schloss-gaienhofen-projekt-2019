@@ -8,9 +8,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/**
- * @author ssr
- */
 @Entity
 @Table(name = "Attendee")
 public class Attendee implements Serializable {

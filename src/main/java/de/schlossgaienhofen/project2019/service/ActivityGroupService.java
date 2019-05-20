@@ -40,8 +40,8 @@ public class ActivityGroupService {
     List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
     List<ActivityGroup> allActiveActivityGroups = new ArrayList<>();
 
-    for(ActivityGroup activityGroup : allActivityGroups){
-      if (activityGroup.getAgState().equals("online")){
+    for (ActivityGroup activityGroup : allActivityGroups) {
+      if (activityGroup.getAgState().equals("online")) {
         allActiveActivityGroups.add(activityGroup);
       }
 

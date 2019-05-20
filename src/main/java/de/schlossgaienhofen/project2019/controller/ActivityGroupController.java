@@ -59,17 +59,17 @@ public class ActivityGroupController {
   @GetMapping(value = "/ag/{id}")
   public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
-    
+
     ActivityGroup ag = activityGroupService.get(id);
-    
+
     int agLeaderId = Integer.parseInt(ag.getAgLeader());
    /* 
     String mess = "" + agLeaderId;
     throw new IllegalArgumentException(mess);
     */
-    
+
     User agLeader = userService.findUserById(1);
-    
+
     model.put("agLeader", agLeader);
     model.put("ag", ag);
 

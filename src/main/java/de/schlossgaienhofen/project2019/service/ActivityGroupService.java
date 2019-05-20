@@ -35,6 +35,22 @@ public class ActivityGroupService {
     return allActivityGroups;
   }
 
+  public List<ActivityGroup> getAllActiveActivityGroups() {
+    LOGGER.debug("-> getAllActivityGroups");
+    List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
+    List<ActivityGroup> allActiveActivityGroups = new ArrayList<>();
+
+    for(ActivityGroup activityGroup : allActivityGroups){
+      if (activityGroup.getAgState().equals("online")){
+        allActiveActivityGroups.add(activityGroup);
+      }
+
+    }
+
+    LOGGER.debug("<- getAllActivityGroups size={}", allActivityGroups.size());
+    return allActiveActivityGroups;
+  }
+
   /**
    * Get List of ActivityGroups which are assigned to given user.
    *

@@ -40,7 +40,9 @@ public class ActivityGroupController {
   @GetMapping(value = "/ag")
   public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
     List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
+
     model.put("allActivitiesList", allActivityGroups);
+
     modelAndView.setViewName("schuelerAg");
 
     return modelAndView;

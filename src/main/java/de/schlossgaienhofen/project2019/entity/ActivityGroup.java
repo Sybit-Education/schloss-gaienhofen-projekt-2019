@@ -28,6 +28,9 @@ public class ActivityGroup implements Serializable {
   private LocalDate endDate;
   private short maxParticipants;
 
+  private String agState;
+
+
   @OneToMany(mappedBy = "id")
   private Set<Attendee> attendees;
 
@@ -102,7 +105,13 @@ public class ActivityGroup implements Serializable {
   public void setAttendees(Set<Attendee> attendees) {
     this.attendees = attendees;
   }
+  public String getAgState() {
+    return agState;
+  }
 
+  public void setAgState(String agState) {
+    this.agState = agState;
+  }
   @Override
   public int hashCode() {
     int hash = 7;

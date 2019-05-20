@@ -1,0 +1,111 @@
+dn: dc=springframework,dc=org
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: springframework
+
+dn: ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=azubi1,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Azubi 1
+sn: Hamilton
+uid: azubi1
+sAMAccountName: azubi1
+userPassword: azubi1
+
+dn: uid=azubi2,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Azubi 2
+sn: Johnson
+uid: azubi2
+sAMAccountName: azubi2
+userPassword: azubi2
+
+dn: uid=azubi3,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Azubi 3
+sn: Johnson
+uid: azubi3
+sAMAccountName: azubi3
+userPassword: azubi3
+
+dn: uid=azubi4,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Azubi 4
+sn: Johnson
+uid: azubi4
+sAMAccountName: azubi4
+userPassword: azubi4
+
+dn: uid=mentor1,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Mentor 1
+sn: Johnson
+uid: mentor1
+sAMAccountName: mentor1
+userPassword: mentor1
+
+dn: uid=mentor2,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Mentor 2
+sn: Johnson
+uid: mentor2
+sAMAccountName: mentor2
+userPassword: mentor2
+
+dn: uid=admin,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Administrator
+sn: Smeth
+uid: admin
+sAMAccountName: admin
+userPassword: admin
+
+
+dn: cn=azubis,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: azubis
+ou: azubis
+uniqueMember: uid=azubi1,ou=people,dc=springframework,dc=org
+uniqueMember: uid=azubi2,ou=people,dc=springframework,dc=org
+uniqueMember: uid=azubi3,ou=people,dc=springframework,dc=org
+uniqueMember: uid=azubi4,ou=people,dc=springframework,dc=org
+
+dn: cn=sobadmin,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: sobadmin
+ou: sobadmin
+uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
+uniqueMember: uid=mentor2,ou=people,dc=springframework,dc=org

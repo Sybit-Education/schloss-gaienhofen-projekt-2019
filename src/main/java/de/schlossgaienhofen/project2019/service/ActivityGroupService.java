@@ -108,9 +108,6 @@ public class ActivityGroupService {
   }
 
   public ActivityGroup create(@NotNull ActivityGroup activityGroup) {
-    if (activityGroup.getId() != null) {
-      throw new IllegalArgumentException("On ActivityGroup creation ID could not be set.");
-    }
-    return this.activityGroupRepository.saveAndFlush(activityGroup);
+    return activityGroupRepository.saveAndFlush(activityGroup);
   }
 }

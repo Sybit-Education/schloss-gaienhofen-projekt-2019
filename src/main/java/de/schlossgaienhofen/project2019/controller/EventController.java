@@ -60,8 +60,10 @@ public class EventController {
   public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
 
-    Event event= eventService.get(id);
-    model.put("event", event);
+    Event event = eventService.get(id);
+    if (event != null) {
+      model.put("event", event);
+    }
 
     LOGGER.debug("<- get");
     return "ag-detail";

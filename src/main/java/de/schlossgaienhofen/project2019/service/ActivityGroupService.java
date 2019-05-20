@@ -124,7 +124,7 @@ public class ActivityGroupService {
   }
 
   public ActivityGroup create(@NotNull ActivityGroup activityGroup) {
-    if(activityGroup.getId() != null) {
+    if (activityGroup.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
     return activityGroupRepository.saveAndFlush(activityGroup);

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.schlossgaienhofen.project2019.controller;
 
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
@@ -11,6 +6,7 @@ import de.schlossgaienhofen.project2019.service.ActivityGroupService;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,21 +19,16 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author ssr
- */
 @Controller
 public class ActivityGroupController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ActivityGroupController.class);
 
-  private final ActivityGroupService activityGroupService;
-  private final UserService userService;
+  @Autowired
+  private ActivityGroupService activityGroupService;
 
-  public ActivityGroupController(ActivityGroupService activityGroupService, UserService userService) {
-    this.activityGroupService = activityGroupService;
-    this.userService = userService;
-  }
+  @Autowired
+  private UserService userService;
 
   /**
    * List all ActivityGroups.
@@ -74,7 +65,7 @@ public class ActivityGroupController {
   }
 
   /**
-   * Assign currendt authenticated user to given ActivityGroup.
+   * Assign current authenticated user to given ActivityGroup.
    *
    * @param id
    * @return
@@ -86,7 +77,7 @@ public class ActivityGroupController {
     final SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
 
-    LOGGER.debug("assign curent user=[{}] to AG with id=[{}]", authentication.getName(), id);
+    LOGGER.debug("assign current user= {} to AG with id= {}", authentication.getName(), id);
     User user = this.userService.findUserByEmail(authentication.getName());
     this.activityGroupService.assignUser(id, user);
 

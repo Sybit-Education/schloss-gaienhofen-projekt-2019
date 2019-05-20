@@ -38,8 +38,24 @@ public class ActivityGroupServiceImpl implements ActivityGroupService {
   }
 
   @Override
+  public List<ActivityGroup> getAllInactiveActivityGroups() {
+    LOGGER.debug("-> getAllInactiveActivityGroups");
+    List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
+    List<ActivityGroup> allInactiveActivityGroups = new ArrayList<>();
+
+    for (ActivityGroup activityGroup : allActivityGroups) {
+      if (activityGroup.getAgState().equals("offline")) {
+        allInactiveActivityGroups.add(activityGroup);
+      }
+
+    }
+    LOGGER.debug("<- getAllInactiveActivityGroups size={}", allActivityGroups.size());
+    return allInactiveActivityGroups;
+  }
+
+  @Override
   public List<ActivityGroup> getAllActiveActivityGroups() {
-    LOGGER.debug("-> getAllActivityGroups");
+    LOGGER.debug("-> getAllActiveActivityGroups");
     List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
     List<ActivityGroup> allActiveActivityGroups = new ArrayList<>();
 
@@ -49,7 +65,7 @@ public class ActivityGroupServiceImpl implements ActivityGroupService {
       }
 
     }
-    LOGGER.debug("<- getAllActivityGroups size={}", allActivityGroups.size());
+    LOGGER.debug("<- getAllActiveActivityGroups size={}", allActivityGroups.size());
     return allActiveActivityGroups;
   }
 

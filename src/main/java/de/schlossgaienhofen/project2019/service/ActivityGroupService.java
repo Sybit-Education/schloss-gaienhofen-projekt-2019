@@ -12,6 +12,8 @@ public interface ActivityGroupService {
 
   List<ActivityGroup> getAllActiveActivityGroups();
 
+  List<ActivityGroup> getAllInactiveActivityGroups();
+
   /**
    * Get List of ActivityGroups which are assigned to given user.
    *

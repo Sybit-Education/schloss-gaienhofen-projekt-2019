@@ -42,7 +42,8 @@ public class HomeController {
     LOGGER.debug("-> viewHome");
     List<ActivityGroup> allActivityGroupsActive = activityGroupService.getAllActiveActivityGroups();
     model.put("allActivityGroupsActive", allActivityGroupsActive);
-
+    List<ActivityGroup> allActivityGroupsInactive = activityGroupService.getAllInactiveActivityGroups();
+    model.put("allActivityGroupsInactive", allActivityGroupsInactive);
     SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
     User user = this.userService.findUserByEmail(authentication.getName());

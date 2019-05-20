@@ -19,4 +19,4 @@ INSERT INTO activity_group (id, title, ag_leader,  summary, description, start_d
 VALUES (2, 'AG2', '2', 'Summary 2', 'AG2 Herzlich Willkommen', '2019-09-01', '2020-09-01', 20, 'online', 'E2', 'AG');
 
 INSERT INTO activity_group (id, title, ag_leader,  summary, description, start_date, end_date, max_participants, ag_state, location, type)
-VALUES (3, 'AG3', '3', 'Summary 3', 'AG3 Herzlich Willkommen', '2019-09-01', '2020-09-01', 80, 'draft', 'E2', 'AG');
+VALUES (3, 'AG3', '3', 'Summary 3', 'AG3 Herzlich Willkommen', '2019-09-01', '2020-09-01', 80, 'offline', 'E2', 'AG');

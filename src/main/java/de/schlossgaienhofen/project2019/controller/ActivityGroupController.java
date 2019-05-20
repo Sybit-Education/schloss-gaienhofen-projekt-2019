@@ -11,10 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -96,11 +93,12 @@ public class ActivityGroupController {
   }
 
   @PostMapping(value = "/ag/create")
-  public String saveForm(@ModelAttribute ActivityGroup activityGroup, Map<String, Object> model) {
+  public String saveForm(@ModelAttribute ActivityGroup activityGroup,  Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", activityGroup.getTitle());
 
     activityGroup = activityGroupService.create(activityGroup);
     model.put("activityGroup", activityGroup);
+
 
     LOGGER.debug("<-- saveForm");
     return "redirect:/ag/" + activityGroup.getId();

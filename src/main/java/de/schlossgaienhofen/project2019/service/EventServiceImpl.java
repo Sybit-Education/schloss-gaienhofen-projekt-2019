@@ -78,7 +78,7 @@ public class EventServiceImpl implements EventService {
     if (eventOptional.isPresent()) {
       event = eventOptional.get();
     }
-    LOGGER.debug("<- get");
+    LOGGER.debug("<- get event={}", event);
     return event;
   }
 

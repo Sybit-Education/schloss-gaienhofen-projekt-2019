@@ -12,7 +12,7 @@
 
   <h1>AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
 
-  <form th:action="@{/ag/edit/{id}(id=${ag.id})}" >
+  <form th:action="@{/event/edit/{id}(id=${event.id})}" >
             <button class="btn btn-primary">bearbeiten</button>
   </form>
 

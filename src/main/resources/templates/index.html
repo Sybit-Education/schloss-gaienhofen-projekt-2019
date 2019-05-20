@@ -28,7 +28,7 @@
     </thead>
     <tbody>
     <tr th:each="oneEvent : ${allEventsActive}">
-      <td><a th:href="@{/ag/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
+      <td><a th:href="@{/event/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
       <td><span th:utext="${oneEvent.summary}"></span></td>
       <td><span th:utext="${oneEvent.location}"></span></td>
       <td><span th:utext="${oneEvent.startDate}"></span></td>
@@ -38,7 +38,7 @@
           ✔️ angemeldet
         </div>
         <div th:if="!${assignments.get(oneEvent.id)}">
-          <form th:action="@{/ag/{id}/assign(id=${oneEvent.id})}" th:method="post">
+          <form th:action="@{/event/{id}/assign(id=${oneEvent.id})}" th:method="post">
             <button class="btn btn-primary">anmelden</button>
           </form>
         </div>
@@ -47,7 +47,7 @@
     </tbody>
   </table>
 
-  <a th:href="@{/ag/create}"> Neue AG anlegen</a>
+  <a th:href="@{/event/create}"> Neue AG anlegen</a>
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

@@ -13,70 +13,71 @@
 <div th:replace="includes/navigationbar :: navigationbar"></div>
 
 <div class="container">
-  <br>
+
   <h1> Event bearbeiten </h1>
-  <br>
 
   <form action="#" th:action="@{/ag/create}" th:object="${event}" method="post">
 
-    <div class="col-md-8">
-      <label for="title">Name des Events</label>
-      <input id="title" type="text" class="form-control" th:field="*{title}" required/>
-      <br>
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="type"> Typ des Events</label>
+        <select id="type" type="text" class="form-control" th:field="*{type}" required>
+          <option value="event">Veranstaltung</option>
+          <option value="event">AG</option>
+        </select>
+      </div>
+
+      <div class="col-md-9 form-group">
+        <label for="title">Name des Events</label>
+        <input id="title" type="text" class="form-control" th:field="*{title}" required/>
+
+      </div>
     </div>
 
-    <div class="col-md-8">
-      <label for="type"> Typ des Events</label>
-      <input id="type" type="text" class="form-control" th:field="*{type}" required/>
-      <br>
-    </div>
-
-    <div class="col-md-8">
-      <label for="leaderId">Name des Leiters</label>
-      <input id="leaderId" type="text" class="form-control" th:field="*{leaderId}" required/>
-      <br>
-    </div>
-
-    <div class="col-md-8">
-      <label for="location">Treffpunkt</label>
-      <input id="location" type="text" class="form-control" th:field="*{location}" required/>
-      <br>
-    </div>
-
-
-    <div class="col-md-8">
-
+    <div class="form-group">
       <label for="summary">Kurzbeschreibung</label>
-      <input id="summary" maxlength="40" class="form-control" th:field="*{summary}"/>
+      <input id="summary" type="text" maxlength="40" class="form-control" th:field="*{summary}"></input>
     </div>
 
-
-    <div class="col-md-8">
+    <div class="form-group">
       <label for="description">Ausführliche Beschreibung</label>
-      <textarea id="description" class="form-control summernote" th:field="*{description}"></textarea>
-      <br>
+      <textarea id="description" class="form-control summernote" th:field="*{description}" rows="5"></textarea>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6 form-group">
+        <label for="leaderId">Leiter</label>
+        <input id="leaderId" type="text" class="form-control" th:field="*{leaderId}" required/>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <label for="location">Treffpunkt/Ort</label>
+        <input id="location" type="text" class="form-control" th:field="*{location}" required/>
+      </div>
     </div>
 
 
-    <div class="row col-12">
-      <div class="col-md-3">
-        <label for="datepickerstart">Startdatum</label>
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="datepickerstart">Beginn</label>
         <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required/>
       </div>
 
-      <div class="col-md-3">
-        <label for="datepickerend">Enddatum</label>
+      <div class="col-md-3 form-group">
+        <label for="datepickerend">Ende</label>
         <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required/>
-        <br>
       </div>
     </div>
 
-
-    <br>
-    <div class="col-md-3">
-      <button type="submit" class="btn btn-outline-success">speichern</button>
+    <div class="row">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-outline-success">Speichern</button>
+      </div>
+      <div class="col-md-3">
+        <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
+      </div>
     </div>
-
   </form>
 
 </div>
@@ -97,7 +98,7 @@
       toolbar: [
         ['style', ['bold', 'italic', 'underline', 'clear']],
         ['para', ['ul', 'ol']],
-        ['insert', ['link', 'table']],
+        ['insert', ['link']],
         ['misc', ['undo', 'redo']]
       ],
       hint: {
@@ -134,12 +135,8 @@
       window.emojiUrls = data;
     });
   });
-</script>
 
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
   $(function () {
     $("#datepickerstart").datepicker();
   });

@@ -11,15 +11,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
 
+@RequestMapping(value = "/event")
 @Controller
 public class EventController {
 
@@ -38,7 +36,7 @@ public class EventController {
    * @param model
    * @return
    */
-  @GetMapping(value = "/ag")
+  @GetMapping(value = "/")
   public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
     List<Event> allEvents = eventService.getAllEvents();
 
@@ -56,7 +54,7 @@ public class EventController {
    * @param model
    * @return
    */
-  @GetMapping(value = "/ag/{id}")
+  @GetMapping(value = "/{id}")
   public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
 
@@ -75,7 +73,7 @@ public class EventController {
    * @param id
    * @return
    */
-  @PostMapping(value = "/ag/{id}/assign")
+  @PostMapping(value = "/{id}/assign")
   public String assign(@PathVariable(name = "id") Long id) {
     LOGGER.debug("-> assign id={}", id);
 
@@ -90,14 +88,14 @@ public class EventController {
     return "redirect:/";
   }
 
-  @GetMapping(value = "/ag/create")
+  @GetMapping(value = "/create")
   public ModelAndView showForm(ModelAndView modelAndView) {
     modelAndView.addObject("event", new Event());
     modelAndView.setViewName("edit_event");
     return modelAndView;
   }
 
-  @PostMapping(value = "/ag/create")
+  @PostMapping(value = "/create")
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
@@ -108,12 +106,12 @@ public class EventController {
     return "redirect:/ag/" + event.getId();
   }
 
-  @GetMapping(value = "/ag/edit/{id}")
+  @GetMapping(value = "/edit/{id}")
   public ModelAndView edit(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
     LOGGER.debug("-> get id={}", id);
 
     Event event = eventService.get(id);
-    model.put("activityGroup", event);
+    model.put("event", event);
     modelAndView.setViewName("edit_event");
 
     LOGGER.debug("<- get");

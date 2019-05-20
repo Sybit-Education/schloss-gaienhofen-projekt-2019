@@ -1,6 +1,7 @@
 package de.schlossgaienhofen.project2019.entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -24,8 +25,13 @@ public class ActivityGroup implements Serializable {
 
   private String summary;
   private String description;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate startDate;
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate endDate;
+
   private short maxParticipants;
   private String location;
   private String type;

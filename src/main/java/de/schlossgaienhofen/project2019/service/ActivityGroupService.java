@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,11 +92,11 @@ public class ActivityGroupService {
    */
   public ActivityGroup assignUser(Long id, User user) {
     LOGGER.debug("-> assignUser id={} user={}", id, user.getEmail());
+
     ActivityGroup ag = get(id);
     if (ag == null) {
       throw new IllegalArgumentException("Couldn't fetch agData properly");
     }
-
     Attendee attendee = attendeeRepository.findByIdAndAttendeeId(id, user.getId());
     if (attendee == null) {
 
@@ -120,5 +121,12 @@ public class ActivityGroupService {
   public boolean isAssigned(User user, ActivityGroup ag) {
     Attendee attendee = attendeeRepository.findByIdAndAttendeeId(ag.getId(), user.getId());
     return attendee != null;
+  }
+
+  public ActivityGroup create(@NotNull ActivityGroup activityGroup) {
+    if(activityGroup.getId() != null) {
+      throw new IllegalArgumentException("Newly created object does not have an id.");
+    }
+    return activityGroupRepository.saveAndFlush(activityGroup);
   }
 }

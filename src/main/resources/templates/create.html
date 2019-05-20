@@ -17,7 +17,7 @@
   <h1> Neues Event anlegen </h1>
   <br>
 
-  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
+  <form action="#" th:action="@{/ag/create}" th:object="${event}" method="post">
 
     <div class="col-md-8">
       <label for="title">Name des Events</label>
@@ -32,8 +32,8 @@
     </div>
 
     <div class="col-md-8">
-      <label for="agLeader">Name des Leiters</label>
-      <input id="agLeader" type="text" class="form-control" th:field="*{agLeader}" required></input>
+      <label for="leaderId">Name des Leiters</label>
+      <input id="leaderId" type="text" class="form-control" th:field="*{leaderId}" required></input>
       <br>
     </div>
 

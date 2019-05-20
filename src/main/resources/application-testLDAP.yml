@@ -1,0 +1,9 @@
+spring:
+  ldap:
+    embedded:
+      ldif: classpath:test-schema.ldif
+      base-dn: dc=springframework,dc=org
+      port: 8389
+      validation:
+        enabled: false
+    

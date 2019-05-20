@@ -1,8 +1,8 @@
 
 spring:
-  application:
-    name: Projekt 2019
-    
+  profiles:
+    include: testLDAP
+
   datasource:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false

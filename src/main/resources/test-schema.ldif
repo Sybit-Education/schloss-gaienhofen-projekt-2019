@@ -14,98 +14,53 @@ objectclass: top
 objectclass: organizationalUnit
 ou: people
 
-dn: uid=azubi1,ou=people,dc=springframework,dc=org
+dn: uid=schueler1,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Azubi 1
-sn: Hamilton
-uid: azubi1
-sAMAccountName: azubi1
-userPassword: azubi1
+cn: Max
+sn: Schüler
+uid: schueler@test.de
+sAMAccountName: schueler1
+userPassword: test
 
-dn: uid=azubi2,ou=people,dc=springframework,dc=org
+dn: uid=schueler2,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Azubi 2
+cn: Jenny
 sn: Johnson
-uid: azubi2
-sAMAccountName: azubi2
-userPassword: azubi2
+uid: schueler2@test.de
+sAMAccountName: schueler2
+userPassword: test
 
-dn: uid=azubi3,ou=people,dc=springframework,dc=org
+
+
+dn: uid=lehrer1,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Azubi 3
-sn: Johnson
-uid: azubi3
-sAMAccountName: azubi3
-userPassword: azubi3
-
-dn: uid=azubi4,ou=people,dc=springframework,dc=org
-objectclass: top
-objectclass: person
-objectclass: organizationalPerson
-objectclass: inetOrgPerson
-cn: Azubi 4
-sn: Johnson
-uid: azubi4
-sAMAccountName: azubi4
-userPassword: azubi4
-
-dn: uid=mentor1,ou=people,dc=springframework,dc=org
-objectclass: top
-objectclass: person
-objectclass: organizationalPerson
-objectclass: inetOrgPerson
-cn: Mentor 1
-sn: Johnson
-uid: mentor1
-sAMAccountName: mentor1
-userPassword: mentor1
-
-dn: uid=mentor2,ou=people,dc=springframework,dc=org
-objectclass: top
-objectclass: person
-objectclass: organizationalPerson
-objectclass: inetOrgPerson
-cn: Mentor 2
-sn: Johnson
-uid: mentor2
-sAMAccountName: mentor2
-userPassword: mentor2
-
-dn: uid=admin,ou=people,dc=springframework,dc=org
-objectclass: top
-objectclass: person
-objectclass: organizationalPerson
-objectclass: inetOrgPerson
-cn: Administrator
-sn: Smeth
-uid: admin
-sAMAccountName: admin
-userPassword: admin
+cn: Heinz
+sn: Leher
+uid: lehrer@test.de
+sAMAccountName: lehrer1
+userPassword: test
 
 
-dn: cn=azubis,ou=groups,dc=springframework,dc=org
+dn: cn=schueler,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: azubis
-ou: azubis
-uniqueMember: uid=azubi1,ou=people,dc=springframework,dc=org
-uniqueMember: uid=azubi2,ou=people,dc=springframework,dc=org
-uniqueMember: uid=azubi3,ou=people,dc=springframework,dc=org
-uniqueMember: uid=azubi4,ou=people,dc=springframework,dc=org
+cn: schueler
+ou: schuler
+uniqueMember: uid=schueler1,ou=people,dc=springframework,dc=org
+uniqueMember: uid=schuler2,ou=people,dc=springframework,dc=org
 
-dn: cn=sobadmin,ou=groups,dc=springframework,dc=org
+dn: cn=lehrer,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: sobadmin
-ou: sobadmin
-uniqueMember: uid=admin,ou=people,dc=springframework,dc=org
-uniqueMember: uid=mentor2,ou=people,dc=springframework,dc=org
+cn: lehrer
+ou: lehrer
+uniqueMember: uid=lehrer1,ou=people,dc=springframework,dc=org

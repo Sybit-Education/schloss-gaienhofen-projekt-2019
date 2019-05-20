@@ -18,42 +18,60 @@
 
 <div class="container">
   <br>
-  <h1> Neue AG anlegen </h1>
+  <h1> Neues Event anlegen </h1>
+  <br>
 
   <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
 
     <div class="col-md-8">
-      <label for="title">Name der AG</label>
-      <input id="title" type="text" class="form-control" th:field="*{title}" required>
+      <label for="title">Name des Events</label>
+      <input id="title" type="text" class="form-control" th:field="*{title}" required></input>
+      <br>
     </div>
-
+    
+    <div class="col-md-8">
+		<label for="type"> Typ des Events</label>	    
+    	<input id="type" type="text" class="form-control" required></input>
+    	<br>
+    </div>
 
     <div class="col-md-8">
       <label for="agLeader">Name des Leiters</label>
-      <input id="agLeader" type="text" class="form-control" th:field="*{agLeader}" required>
+      <input id="agLeader" type="text" class="form-control" th:field="*{agLeader}" required></input>
+      <br>
     </div>
+    
+        <div class="col-md-8">
+      <label for="location">Ort</label>
+      <input id="location" type="text" class="form-control" required></input>
+      <br>
+    </div>
+    
 
     <div class="col-md-8">
     <label for="summary">Kurzbeschreibung</label>
-    <input id="summary" maxlength="100"  class="form-control" th:field="*{summary}"></input>
+    <input id="summary" maxlength="100"  class="form-control" th:field="*{summary}" required></input>
+    <br>
     </div>
     
 
     <div class="col-md-8">
       <label for="description">Ausführliche Beschreibung</label>
       <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+      <br>
     </div>
     
 
     <div class="row col-12">
       <div class="col-md-3">
         <label for="datepickerstart">Startdatum</label>
-        <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required>
+        <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required></input>
       </div>
 
        <div class="col-md-3">
         <label for="datepickerend">Enddatum</label>
-        <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required>
+        <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required></input>
+        <br>
       </div>
     </div>
     

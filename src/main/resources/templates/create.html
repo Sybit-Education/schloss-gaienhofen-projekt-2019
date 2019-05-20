@@ -35,7 +35,7 @@
 
     <div class="col-md-8">
     Kurzbeschreibung
-    <input id="summary" class="form-control" th:field="*{summary}"></input>
+    <input id="summary" maxlength="100"  class="form-control" th:field="*{summary}"></input>
     </div>
     
 
@@ -48,12 +48,12 @@
     <div class="row col-12">
       <div class="col-md-3">
         <label for="startDate">Startdatum</label>
-        <input id="datepickerstart" type="text" class="form-control" th:field="*{startDate}" required>
+        <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required>
       </div>
 
        <div class="col-md-3">
         <label for="endDate">Enddatum</label>
-        <input id="datepickerend" type="text" class="form-control" th:field="*{endDate}" required>
+        <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required>
       </div>
     </div>
     

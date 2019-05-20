@@ -69,7 +69,7 @@ public class ActivityGroupServiceTest {
   @Test
   public void testGetAllActivityGroupsOfUser() {
     User user = new User();
-    user.setId(Long.valueOf(1));
+    user.setId(Long.valueOf(1L));
 
     List<ActivityGroup> activityGroups = activityGroupService.getActivityGroupsOfUser(user);
 

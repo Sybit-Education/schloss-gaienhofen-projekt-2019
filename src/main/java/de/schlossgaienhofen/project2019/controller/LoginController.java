@@ -1,7 +1,6 @@
 package de.schlossgaienhofen.project2019.controller;
 
 import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.repository.UserRepository;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +19,6 @@ public class LoginController {
 
   @Autowired
   private UserService userService;
-
-  @Autowired
-  private UserRepository userRepository;
 
   /**
    * Mapping for loginPage
@@ -49,7 +45,7 @@ public class LoginController {
 
     LOGGER.debug("--> register");
     modelAndView.setViewName("register");
-    if (userRepository.findByEmail(user.getEmail()) != null) {
+    if (userService.findUserByEmail(user.getEmail()) != null) {
       modelAndView.addObject("message", "This email already exists!");
       modelAndView.setViewName("error");
     }

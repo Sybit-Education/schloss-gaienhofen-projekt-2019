@@ -17,29 +17,29 @@
   <h1> Neues Event anlegen </h1>
   <br>
 
-  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
+  <form action="#" th:action="@{/ag/create}" th:object="${event}" method="post">
 
     <div class="col-md-8">
       <label for="title">Name des Events</label>
-      <input id="title" type="text" class="form-control" th:field="*{title}" required></input>
+      <input id="title" type="text" class="form-control" th:field="*{title}" required/>
       <br>
     </div>
 
     <div class="col-md-8">
       <label for="type"> Typ des Events</label>
-      <input id="type" type="text" class="form-control" required></input>
+      <input id="type" type="text" class="form-control" required/>
       <br>
     </div>
 
     <div class="col-md-8">
-      <label for="agLeader">Name des Leiters</label>
-      <input id="agLeader" type="text" class="form-control" th:field="*{agLeader}" required></input>
+      <label for="leaderId">Name des Leiters</label>
+      <input id="leaderId" type="text" class="form-control" th:field="*{leaderId}" required/>
       <br>
     </div>
 
     <div class="col-md-8">
       <label for="location">Treffpunkt</label>
-      <input id="location" type="text" class="form-control" required></input>
+      <input id="location" type="text" class="form-control" required/>
       <br>
     </div>
 
@@ -61,12 +61,12 @@
     <div class="row col-12">
       <div class="col-md-3">
         <label for="datepickerstart">Startdatum</label>
-        <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required></input>
+        <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required/>
       </div>
 
       <div class="col-md-3">
         <label for="datepickerend">Enddatum</label>
-        <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required></input>
+        <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required/>
         <br>
       </div>
     </div>

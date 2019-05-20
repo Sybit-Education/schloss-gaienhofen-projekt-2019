@@ -5,7 +5,7 @@
   <meta th:replace="includes/dependencies :: dependencies"/>
 
 
-  <title>Erstelle eine AG</title>
+  <title>Event bearbeiten</title>
 
 </head>
 
@@ -14,7 +14,7 @@
 
 <div class="container">
   <br>
-  <h1> Neues Event anlegen </h1>
+  <h1> Event bearbeiten </h1>
   <br>
 
   <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
@@ -74,7 +74,7 @@
 
     <br>
     <div class="col-md-3">
-      <button type="submit" class="btn btn-outline-success">AG anlegen</button>
+      <button type="submit" class="btn btn-outline-success">speichern</button>
     </div>
 
   </form>

@@ -5,6 +5,7 @@ import de.schlossgaienhofen.project2019.repository.UserRepository;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
@@ -16,13 +17,10 @@ import java.security.NoSuchAlgorithmException;
 @Service
 public class UserService {
 
-  private final UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class);
-
-  public UserService(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
 
   /**
    * Saves a User to DB

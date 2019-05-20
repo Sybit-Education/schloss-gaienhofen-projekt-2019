@@ -1,49 +1,51 @@
 <!DOCTYPE HTML>
 
 <html xmlns:th="http://www.thymeleaf.org">
-  <head th:replace="includes/dependencies :: dependencies">
-    <title>Gaienhofen Login</title>
-  </head>
-  <body class="bg-light">
+<head th:replace="includes/dependencies :: dependencies">
+  <title>Gaienhofen Login</title>
+</head>
+<body class="bg-light">
 
-    <div class="container">
+<div class="container">
 
-      <div class="row justify-content-center  py-3">
-        <div class="col-md-4">
-          <div class="card">
-            <form th:action="@{/login}" method="post">
-              
+  <div class="row justify-content-center  py-3">
+    <div class="col-md-4">
+      <div class="card">
+        <form th:action="@{/login}" method="post">
 
-              <div class="card-body">
-                <a th:href="@{/}"><img class="card-img-top" src="/images/logo.png"/></a>
-                <h2 class="card-title py-3">Login</h2>
-                <div class="text-danger" th:if="${param.error}">
-                  Email oder Passwort falsch.
-                </div>
-                <div th:if="${param.logout}">
-                  Du wurdest erfolgreich abgemeldet.
-                </div>
-                <div class="form-group">
-                  <label for="username">E-Mail:</label>
-                  <input type="email" class="form-control" name="username" id="username" placeholder="E-Mail" autofocus required />
-                </div>
-                <div class="form-group">
-                  <label  for="password">Passwort:</label>
-                  <input type="password" class="form-control" name="password" id="password" placeholder="Passwort" required />
-                </div>
-                <div>Noch kein Zugang? <a href="/login/register">Registrieren</a></div>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block">Anmelden</button>
-              </div>
-            </form>
+
+          <div class="card-body">
+            <a th:href="@{/}"><img class="card-img-top" src="/images/logo.png"/></a>
+            <h2 class="card-title py-3">Login</h2>
+            <div class="text-danger" th:if="${param.error}">
+              Email oder Passwort falsch.
+            </div>
+            <div th:if="${param.logout}">
+              Du wurdest erfolgreich abgemeldet.
+            </div>
+            <div class="form-group">
+              <label for="username">E-Mail:</label>
+              <input type="email" class="form-control" name="username" id="username" placeholder="E-Mail" autofocus
+                     required/>
+            </div>
+            <div class="form-group">
+              <label for="password">Passwort:</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="Passwort"
+                     required/>
+            </div>
+            <div>Noch kein Zugang? <a href="/login/register">Registrieren</a></div>
           </div>
-        </div>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-block">Anmelden</button>
+          </div>
+        </form>
       </div>
     </div>
-    <div th:replace="includes/footer :: footer"></div>
-    <div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
-  </body>
+  </div>
+</div>
+<div th:replace="includes/footer :: footer"></div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+</body>
 
 </html>
 

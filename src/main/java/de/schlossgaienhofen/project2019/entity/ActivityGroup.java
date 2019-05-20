@@ -1,5 +1,8 @@
 package de.schlossgaienhofen.project2019.entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -28,16 +32,18 @@ public class ActivityGroup implements Serializable {
 
   private String agLeader;
 
+  private String summary;
   private String description;
-  
-   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate startDate;
-  
-   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+
+  @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate endDate;
+
   private short maxParticipants;
-  
-  @OneToMany(mappedBy="id")
+
+  @OneToMany(mappedBy = "id")
   private Set<Attendee> attendees;
 
   public Long getId() {
@@ -62,6 +68,14 @@ public class ActivityGroup implements Serializable {
 
   public void setAgLeader(String agLeader) {
     this.agLeader = agLeader;
+  }
+
+  public String getSummary() {
+    return summary;
+  }
+
+  public void setSummary(String summary) {
+    this.summary = summary;
   }
 
   public String getDescription() {
@@ -95,14 +109,14 @@ public class ActivityGroup implements Serializable {
   public void setMaxParticipants(short maxParticipants) {
     this.maxParticipants = maxParticipants;
   }
-  
+
   public Set<Attendee> getAttendees() {
     return attendees;
   }
 
   public void setAttendees(Set<Attendee> attendees) {
     this.attendees = attendees;
-  }  
+  }
 
   @Override
   public int hashCode() {
@@ -110,6 +124,7 @@ public class ActivityGroup implements Serializable {
     hash = 97 * hash + Objects.hashCode(this.id);
     hash = 97 * hash + Objects.hashCode(this.title);
     hash = 97 * hash + Objects.hashCode(this.agLeader);
+    hash = 97 * hash + Objects.hashCode(this.summary);
     hash = 97 * hash + Objects.hashCode(this.description);
     hash = 97 * hash + Objects.hashCode(this.startDate);
     hash = 97 * hash + Objects.hashCode(this.endDate);
@@ -138,6 +153,9 @@ public class ActivityGroup implements Serializable {
     if (!Objects.equals(this.agLeader, other.agLeader)) {
       return false;
     }
+    if (!Objects.equals(this.summary, other.summary)) {
+      return false;
+    }
     if (!Objects.equals(this.description, other.description)) {
       return false;
     }
@@ -157,5 +175,5 @@ public class ActivityGroup implements Serializable {
   public String toString() {
     return "ActivityGroup{" + "id=" + id + ", title=" + title + '}';
   }
-  
+
 }

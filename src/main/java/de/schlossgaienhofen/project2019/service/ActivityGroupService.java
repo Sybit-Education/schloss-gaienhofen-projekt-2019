@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
@@ -10,51 +5,86 @@ import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.ActivityGroupRepository;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
+
 import java.time.LocalDate;
 import java.util.List;
 import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author cwr
- */
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class ActivityGroupService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(ActivityGroupService.class);
 
-  private final ActivityGroupRepository activityGroupRepository;
-  private final AttendeeRepository attendeeRepository;
+  @Autowired
+  private ActivityGroupRepository activityGroupRepository;
 
-  public ActivityGroupService(ActivityGroupRepository activityGroupRepository, AttendeeRepository attendeeRepository) {
-    this.activityGroupRepository = activityGroupRepository;
-    this.attendeeRepository = attendeeRepository;
-  }
+  @Autowired
+  private AttendeeRepository attendeeRepository;
 
   public List<ActivityGroup> getAllActivityGroups() {
-    List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll();
+    LOGGER.debug("-> getAllActivityGroups");
+    List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
 
+    LOGGER.debug("<- getAllActivityGroups size={}", allActivityGroups.size());
     return allActivityGroups;
   }
 
+  /**
+   * Get List of ActivityGroups which are assigned to given user.
+   *
+   * @param user
+   * @return List of assigned ActivityGroups
+   */
+  public List<ActivityGroup> getActivityGroupsOfUser(User user) {
+    LOGGER.debug("-> getActivityGroupsOfUser user={}", user.getEmail());
+    List<ActivityGroup> allActivityGroups = activityGroupRepository.findAll(Sort.by("title"));
+
+    List<ActivityGroup> myActivityGroups = new ArrayList<>();
+
+    for (ActivityGroup activityGroup : allActivityGroups) {
+      if (isAssigned(user, activityGroup)) {
+        myActivityGroups.add(activityGroup);
+      }
+    }
+
+    LOGGER.debug("<- getActivityGroupsOfUser size={}", myActivityGroups.size());
+    return myActivityGroups;
+  }
+
   public ActivityGroup get(Long id) {
-    return activityGroupRepository.getOne(id);
+    LOGGER.debug("-> get id={}", id);
+    ActivityGroup activityGroup = null;
+    Optional<ActivityGroup> activityGroupOptional = activityGroupRepository.findById(id);
+    if (activityGroupOptional.isPresent()) {
+      activityGroup = activityGroupOptional.get();
+    }
+    LOGGER.debug("<- get");
+    return activityGroup;
   }
 
   /**
-   *
    * @param id
    * @param user
    * @return
    */
   public ActivityGroup assignUser(Long id, User user) {
-    LOGGER.debug("--> assignUser id={} user={}", id, user.getEmail());
+    LOGGER.debug("-> assignUser id={} user={}", id, user.getEmail());
 
-    ActivityGroup ag = this.get(id);
-
+    ActivityGroup ag = get(id);
+    if (ag == null) {
+      throw new IllegalArgumentException("Couldn't fetch agData properly");
+    }
     Attendee attendee = attendeeRepository.findByIdAndAttendeeId(id, user.getId());
     if (attendee == null) {
 
@@ -72,20 +102,13 @@ public class ActivityGroupService {
     ag = activityGroupRepository.saveAndFlush(ag);
     attendeeRepository.saveAndFlush(attendee);
 
-    LOGGER.debug("<-- assignUser");
+    LOGGER.debug("<- assignUser");
     return ag;
   }
 
   public boolean isAssigned(User user, ActivityGroup ag) {
-
     Attendee attendee = attendeeRepository.findByIdAndAttendeeId(ag.getId(), user.getId());
-
-    if (attendee == null) {
-      return false;
-    } else {
-      return true;
-    }
-
+    return attendee != null;
   }
 
   public ActivityGroup create(@NotNull ActivityGroup activityGroup) {

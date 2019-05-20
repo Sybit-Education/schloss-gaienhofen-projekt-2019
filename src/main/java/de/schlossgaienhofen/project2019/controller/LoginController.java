@@ -5,6 +5,7 @@ import de.schlossgaienhofen.project2019.repository.UserRepository;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,13 +18,11 @@ public class LoginController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(LoginController.class);
 
-  private final UserService userService;
-  private final UserRepository userRepository;
+  @Autowired
+  private UserService userService;
 
-  public LoginController(UserService userService, UserRepository userRepository) {
-    this.userService = userService;
-    this.userRepository = userRepository;
-  }
+  @Autowired
+  private UserRepository userRepository;
 
   /**
    * Mapping for loginPage
@@ -55,7 +54,7 @@ public class LoginController {
       modelAndView.setViewName("error");
     }
     userService.addNewUser(user);
-    
+
     modelAndView.setViewName("login");
 
     LOGGER.debug("<-- register");

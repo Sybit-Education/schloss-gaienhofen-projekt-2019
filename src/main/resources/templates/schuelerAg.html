@@ -8,33 +8,33 @@
 
 <body>
 
-	<div th:replace="includes/navigationbar :: navigationbar"></div>
-	
-	<div class="container">
-	
-	<h3>Hier sind alle Ags zum Auswaehlen</h3>
-	
-	<table class="table">
-		<th>AG Name</th>
-		<th>AG Beschreibung</th>
-		<th>Ag Auswaehlen</th>
-		
-		<tr th:each = "oneActivity : ${allActivitiesList}">
-			<td><span th:text="${oneActivity.title}"></span></td>
-			<td><span th:text="${oneActivity.description}"></span></td>
-			<td>
-				<form th:action="@{/ag/assign(id=${oneActivity.id})}" th:method="post">
-					<button class="btn btn-primary">Ag Beitreten</button>
-				</form>
-			</td>
-		</tr>
-	
-	</table>
-	
-	</div>
-	
-	<div th:replace="includes/footer :: footer"></div>
-	<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+<div th:replace="includes/navigationbar :: navigationbar"></div>
+
+<div class="container">
+
+  <h3>Hier sind alle Ags zum Auswaehlen</h3>
+
+  <table class="table">
+    <th>AG Name</th>
+    <th>AG Beschreibung</th>
+    <th>Ag Auswaehlen</th>
+
+    <tr th:each="oneActivity : ${allActivitiesList}">
+      <td><span th:text="${oneActivity.title}"></span></td>
+      <td><span th:text="${oneActivity.description}"></span></td>
+      <td>
+        <form th:action="@{/ag/assign(id=${oneActivity.id})}" th:method="post">
+          <button class="btn btn-primary">Ag Beitreten</button>
+        </form>
+      </td>
+    </tr>
+
+  </table>
+
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
 
 
 </body>

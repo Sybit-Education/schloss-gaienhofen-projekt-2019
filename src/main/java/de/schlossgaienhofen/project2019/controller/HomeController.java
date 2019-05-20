@@ -1,15 +1,10 @@
 package de.schlossgaienhofen.project2019.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
 import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
 import de.schlossgaienhofen.project2019.service.ActivityGroupService;
 import de.schlossgaienhofen.project2019.service.UserService;
+
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -19,9 +14,18 @@ import de.schlossgaienhofen.project2019.service.ActivityGroupService;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Create HomeController Mapping index.html
@@ -31,16 +35,14 @@ public class HomeController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
-  private final ActivityGroupService activityGroupService;
-  private final UserService userService;
+  @Autowired
+  private ActivityGroupService activityGroupService;
 
-  public HomeController(ActivityGroupService activityGroupService, UserService userService) {
-    this.activityGroupService = activityGroupService;
-    this.userService = userService;
-  }
+  @Autowired
+  private UserService userService;
 
   /**
-   * Shows inital home page.
+   * Shows initial home page.
    *
    * @param model
    * @return
@@ -56,18 +58,15 @@ public class HomeController {
     Authentication authentication = context.getAuthentication();
     User user = this.userService.findUserByEmail(authentication.getName());
 
-    Map<Long, Boolean> assinments = new HashMap();
-    for (Iterator<ActivityGroup> iterator = allActivityGroups.iterator(); iterator.hasNext();) {
-      ActivityGroup next = iterator.next();
-
+    Map<Long, Boolean> assignment = new HashMap<>();
+    for (ActivityGroup next : allActivityGroups) {
       if (activityGroupService.isAssigned(user, next)) {
-        assinments.put(next.getId(), true);
+        assignment.put(next.getId(), true);
       } else {
-        assinments.put(next.getId(), false);
+        assignment.put(next.getId(), false);
       }
     }
-    model.put("assignments", assinments);
-
+    model.put("assignments", assignment);
     LOGGER.debug("<- viewHome");
     return "index";
   }

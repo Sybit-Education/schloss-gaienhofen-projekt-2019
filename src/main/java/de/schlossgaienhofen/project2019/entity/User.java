@@ -1,4 +1,3 @@
-
 package de.schlossgaienhofen.project2019.entity;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -23,7 +22,7 @@ public class User implements Serializable {
   private String email;
   private String password;
   private char gender;
-  
+
   @OneToMany(mappedBy = "id")
   private Set<Attendee> attendee;
 
@@ -126,5 +125,5 @@ public class User implements Serializable {
   public String toString() {
     return "User{" + "id=" + id + ", email=" + email + '}';
   }
-  
+
 }

@@ -10,31 +10,31 @@
 
 <div class="container">
 
-    <h1>Arbeitsgemeinschaften</h1>
-  
-    <h2>Verfügbare Arbeitsgemeinschaften</h2>
-    
-	<table class="table">
+  <h1>Arbeitsgemeinschaften</h1>
+
+  <h2>Verfügbare Arbeitsgemeinschaften</h2>
+
+  <table class="table">
     <thead>
-		<th>Name</th>
-		<th>Beschreibung</th>
-		<th>Auswählen</th>
-		</thead>
+    <th>Name</th>
+    <th>Beschreibung</th>
+    <th>Auswählen</th>
+    </thead>
     <tbody>
-      <tr th:each = "oneActivity : ${allActivities}">
-        <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
-        <td><span th:utext="${oneActivity.description}"></span></td>
-        <td>
-          <div th:if="!${assignments.get(oneActivity.id)}">
-            <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">
-              <button class="btn btn-primary">anmelden</button>
-            </form>
-          </div>
-        </td>
-      </tr>
+    <tr th:each="oneActivity : ${allActivities}">
+      <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
+      <td><span th:utext="${oneActivity.summary}"></span></td>
+      <td>
+        <div th:if="!${assignments.get(oneActivity.id)}">
+          <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">
+            <button class="btn btn-primary">anmelden</button>
+          </form>
+        </div>
+      </td>
+    </tr>
     </tbody>
-	</table>    
-  
+  </table>
+
   <a th:href="@{/ag/create}"> Neue AG anlegen</a>
 </div>
 

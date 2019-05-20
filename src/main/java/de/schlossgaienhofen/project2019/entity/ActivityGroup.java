@@ -104,6 +104,7 @@ public class ActivityGroup implements Serializable {
   public void setAttendees(Set<Attendee> attendees) {
     this.attendees = attendees;
   }
+
   public String getLocation() {
     return location;
   }
@@ -111,6 +112,7 @@ public class ActivityGroup implements Serializable {
   public void setLocation(String location) {
     this.location = location;
   }
+
   public String getType() {
     return type;
   }

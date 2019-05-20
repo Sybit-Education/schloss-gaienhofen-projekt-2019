@@ -14,7 +14,7 @@
 
   <appender name="RollingFile"
             class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>${LOGS}/berichtsheft.log</file>
+    <file>${LOGS}/events-manager.log</file>
     <encoder
       class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
       <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
@@ -32,27 +32,24 @@
     </rollingPolicy>
   </appender>
 
-  <springProfile name="default, development">
+  <springProfile name="default, develop">
 
     <!-- LOG everything at INFO level -->
-    <root level="info">
-      <appender-ref ref="RollingFile"/>
+    <root level="INFO">
       <appender-ref ref="Console"/>
     </root>
 
-    <logger name="org.springframework" level="info" additivity="false">
-      <appender-ref ref="RollingFile"/>
+    <logger name="org.springframework" level="INFO" additivity="false">
       <appender-ref ref="Console"/>
     </logger>
 
     <!-- LOG "de.schlossgaienhofen.project2019" at TRACE level -->
-    <logger name="de.schlossgaienhofen.project2019" level="trace" additivity="false">
-      <appender-ref ref="RollingFile"/>
+    <logger name="de.schlossgaienhofen.project2019" level="TRACE" additivity="false">
       <appender-ref ref="Console"/>
     </logger>
   </springProfile>
 
-  <springProfile name="test, prod">
+  <springProfile name="test, production">
 
     <logger name="de.schlossgaienhofen.project2019" level="INFO" additivity="false">
       <appender-ref ref="RollingFile"/>

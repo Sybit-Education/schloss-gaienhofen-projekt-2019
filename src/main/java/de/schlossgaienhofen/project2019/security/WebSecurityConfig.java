@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-@Profile({"default", "dev"})
+@Profile({"default", "develop"})
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 

@@ -40,16 +40,15 @@ public class HomeController {
   @GetMapping(value = "/")
   public String viewHome(Map<String, Object> model) {
     LOGGER.debug("-> viewHome");
-
-    List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
-    model.put("allActivities", allActivityGroups);
+    List<ActivityGroup> allActivityGroupsActive = activityGroupService.getAllActiveActivityGroups();
+    model.put("allActivityGroupsActive", allActivityGroupsActive);
 
     SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
     User user = this.userService.findUserByEmail(authentication.getName());
 
     Map<Long, Boolean> assignment = new HashMap<>();
-    for (ActivityGroup next : allActivityGroups) {
+    for (ActivityGroup next : allActivityGroupsActive) {
       if (activityGroupService.isAssigned(user, next)) {
         assignment.put(next.getId(), true);
       } else {

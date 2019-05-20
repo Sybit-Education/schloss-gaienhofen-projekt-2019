@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceTest {
+public class UserServiceImplTest {
 
   @Autowired
   UserService userService;

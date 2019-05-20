@@ -60,7 +60,7 @@ public class ActivityGroupServiceTest {
   @Test(expected = IllegalArgumentException.class)
   public void testCreateActivityGroup_withId() {
     ActivityGroup ag = new ActivityGroup();
-    ag.setId(Long.valueOf(12));
+    ag.setId(Long.valueOf(12L));
     ag.setTitle("Titel");
     ag.setAgLeader("Leader");
     activityGroupService.create(ag);

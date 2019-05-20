@@ -8,7 +8,7 @@ CREATE TABLE activity_group (
     end_date DATE ,
     max_participants tinyint,
     ag_state varchar(10),
-    location varchar(5),
+    location varchar(50),
     type varchar(50),
 );
 

@@ -10,10 +10,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- *
  * @author cwr
  */
 @Repository
-public interface ActivityGroupRepository extends JpaRepository<ActivityGroup, Long>{
-    
+public interface ActivityGroupRepository extends JpaRepository<ActivityGroup, Long> {
+
 }

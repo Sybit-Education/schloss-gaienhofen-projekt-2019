@@ -10,12 +10,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- *
  * @author ssr
  */
 @Repository
-public interface AttendeeRepository extends JpaRepository<Attendee, Long>{
+public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
 
   public Attendee findByIdAndAttendeeId(Long ag, Long user);
-  
+
 }

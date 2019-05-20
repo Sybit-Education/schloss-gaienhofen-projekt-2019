@@ -1,4 +1,3 @@
-
 package de.schlossgaienhofen.project2019.security;
 
 import de.schlossgaienhofen.project2019.entity.User;

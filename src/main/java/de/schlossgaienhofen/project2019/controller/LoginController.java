@@ -55,7 +55,7 @@ public class LoginController {
       modelAndView.setViewName("error");
     }
     userService.addNewUser(user);
-    
+
     modelAndView.setViewName("login");
 
     LOGGER.debug("<-- register");

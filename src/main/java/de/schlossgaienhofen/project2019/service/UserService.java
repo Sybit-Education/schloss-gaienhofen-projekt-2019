@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -73,6 +74,28 @@ public class UserService {
     if (user == null) throw new IllegalArgumentException("User is null");
     LOGGER.debug("<-- findUserByEmail");
     return user;
+  }
+  
+  
+
+  /**
+   * Returns a userObject by given id
+   *
+   * @param id
+   * @return user
+   */
+  public User findUserById(@NotEmpty long id) {
+	    LOGGER.debug("--> findUserById");
+	    Optional<User> ourUser = userRepository.findById(id);
+	    User user = new User();
+	    if(ourUser.isPresent()) {
+	    	user = ourUser.get();
+	    }
+	    else {
+	    	throw new IllegalArgumentException("User is null.");
+	    }
+	    LOGGER.debug("<-- findUserById");
+	    return user;
   }
 
   /**

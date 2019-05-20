@@ -21,12 +21,18 @@
     <thead>
     <th>Name</th>
     <th>Beschreibung</th>
+    <th>Ort</th>
+    <th>Startdatum</th>
+    <th>Enddatum</th>
     <th>Auswählen</th>
     </thead>
     <tbody>
     <tr th:each="oneActivity : ${allActivityGroupsActive}">
       <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
       <td><span th:utext="${oneActivity.summary}"></span></td>
+      <td><span th:utext="${oneActivity.location}"></span></td>
+      <td><span th:utext="${oneActivity.startDate}"></span></td>
+      <td><span th:utext="${oneActivity.endDate}"></span></td>
       <td>
         <div th:if="${assignments.get(oneActivity.id)}">
           ✔️ angemeldet

@@ -27,6 +27,8 @@ public class ActivityGroup implements Serializable {
   private LocalDate startDate;
   private LocalDate endDate;
   private short maxParticipants;
+  private String location;
+  private String type;
 
   private String agState;
 
@@ -104,6 +106,22 @@ public class ActivityGroup implements Serializable {
 
   public void setAttendees(Set<Attendee> attendees) {
     this.attendees = attendees;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getAgState() {

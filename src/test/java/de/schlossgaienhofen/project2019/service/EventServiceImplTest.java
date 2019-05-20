@@ -25,7 +25,7 @@ public class EventServiceImplTest {
   @Test
   public void testGetAllActivityGroups() {
 
-    List<Event> events = eventService.getAllActivityGroups();
+    List<Event> events = eventService.getAllEvents();
 
     Assert.assertNotNull(events);
     Assert.assertTrue(events.size() > 2);
@@ -38,7 +38,7 @@ public class EventServiceImplTest {
     ag.setTitle("Titel");
     ag.setLeaderId("Leader");
 
-    int sizeBefore = eventService.getAllActivityGroups().size();
+    int sizeBefore = eventService.getAllEvents().size();
 
     Assert.assertNull(ag.getId());
     ag = eventService.create(ag);
@@ -46,7 +46,7 @@ public class EventServiceImplTest {
     Assert.assertNotNull(ag);
     Assert.assertNotNull(ag.getId());
 
-    int sizeAfter = eventService.getAllActivityGroups().size();
+    int sizeAfter = eventService.getAllEvents().size();
 
     Assert.assertEquals(sizeBefore + 1, sizeAfter);
   }
@@ -65,7 +65,7 @@ public class EventServiceImplTest {
     User user = new User();
     user.setId(1L);
 
-    List<Event> events = eventService.getActivityGroupsOfUser(user);
+    List<Event> events = eventService.getEventsOfUser(user);
 
     Assert.assertNotNull(events);
     Assert.assertEquals(1, events.size());

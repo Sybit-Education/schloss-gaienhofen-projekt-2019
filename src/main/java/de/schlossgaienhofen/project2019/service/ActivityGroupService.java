@@ -5,17 +5,13 @@ import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.ActivityGroupRepository;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
-
-import java.time.LocalDate;
-import java.util.List;
-import javax.validation.constraints.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,117 +1,117 @@
 <!DOCTYPE html>
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
-  <head >
-    <meta th:replace="includes/dependencies :: dependencies" />
-    <link href="/libs/summernote/summernote.css" rel="stylesheet"/>
-    <meta charset="UTF-8">
-    <title>Erstelle eine AG</title>
-  </head>
-  <body>
-    <div th:replace="includes/navigationbar :: navigationbar"></div>
+<head>
+  <meta th:replace="includes/dependencies :: dependencies"/>
+  <link href="/libs/summernote/summernote.css" rel="stylesheet"/>
+  <meta charset="UTF-8">
+  <title>Erstelle eine AG</title>
+</head>
+<body>
+<div th:replace="includes/navigationbar :: navigationbar"></div>
 
-    <div class="container">
-      <br>
-      <h1> Neue AG anlegen </h1>
+<div class="container">
+  <br>
+  <h1> Neue AG anlegen </h1>
 
-      <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post" >
+  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
 
-        <div class="col-md-8">
-          <label for="title">Name der AG</label>
-          <input id="title" type="text" class="form-control" th:field="*{title}" required>
-        </div>
-
-
-        <div class="col-md-8">
-          <label for="agLeader">Name des Leiters</label>
-          <input id="agLeader" type="text" class="form-control"  th:field="*{agLeader}" required>
-        </div>
-
-        <div class="col-md-8">
-          <label for="description">Beschreibung</label>
-          <textarea id="description" rows="5" class="form-control" th:field="*{description}"></textarea>
-        </div>  
-        <div class="row col-12">
-          <div class="col-md-3">
-            <label for="startDate">Startdatum</label>
-            <input id="startDate" type="date" class="form-control"  th:field="*{startDate}" required>
-          </div>  
-
-          <div class="col-md-3">
-            <label for="endDate">Enddatum</label>
-            <input id="endDate" type="date" class="form-control" th:field="*{endDate}" required>
-          </div>  
-        </div>
-        <div class="col-md-3">
-          <label for="maxParticipants">max. Teilnehmer</label>
-          <input id="maxParticipants" type="number" class="form-control" th:field="*{maxParticipants}" required>
-        </div>    
-
-       	<br>
-       	<div class="col-md-3">
-          <button type="submit" class="btn btn-outline-success" >AG anlegen</button>   
-       	</div>
-
-      </form>
-
+    <div class="col-md-8">
+      <label for="title">Name der AG</label>
+      <input id="title" type="text" class="form-control" th:field="*{title}" required>
     </div>
 
-    <div th:replace="includes/footer :: footer"></div>
-    <div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
 
-    <script type="text/javascript" src="/libs/summernote/summernote.min.js"></script>
-    <script type="text/javascript" src="/libs/summernote/lang/summernote-de-DE.min.js"></script>
+    <div class="col-md-8">
+      <label for="agLeader">Name des Leiters</label>
+      <input id="agLeader" type="text" class="form-control" th:field="*{agLeader}" required>
+    </div>
 
-    <script>
-      $(document).ready(function () {
-        $("#description").summernote({
-          height: 300, // set editor height
-          minHeight: 200, // set minimum
-          // height of editor
-          // maxHeight: null, // set maximum
-          // height of editor
-          placeholder: "Beschreibung der AG",
-          focus: false,
-          lang: 'de-DE',
-          toolbar: [
-            ['style', ['bold', 'italic', 'underline', 'clear']],
-            ['para', ['ul', 'ol']],
-            ['insert', ['link', 'table']],
-            ['misc', ['undo', 'redo']]
-          ],
-          hint: {
-            match: /:([\-+\w]+)$/,
-            search: function (keyword, callback) {
-              callback($.grep(emojis, function (item) {
-                return item.indexOf(keyword) === 0;
-              }));
-            },
-            template: function (item) {
-              var content = emojiUrls[item];
-              return '<img src="' + content + '" width="20" /> :' + item + ':';
-            },
-            content: function (item) {
-              var url = emojiUrls[item];
-              if (url) {
-                return $('<img />').attr('src', url).css('width', 20)[0];
-              }
-              return '';
-            }
-          },
-          callbacks: {
-            onInit: function () {
-              $('body > .note-popover').hide();
-            }
+    <div class="col-md-8">
+      <label for="description">Beschreibung</label>
+      <textarea id="description" rows="5" class="form-control" th:field="*{description}"></textarea>
+    </div>
+    <div class="row col-12">
+      <div class="col-md-3">
+        <label for="startDate">Startdatum</label>
+        <input id="startDate" type="date" class="form-control" th:field="*{startDate}" required>
+      </div>
+
+      <div class="col-md-3">
+        <label for="endDate">Enddatum</label>
+        <input id="endDate" type="date" class="form-control" th:field="*{endDate}" required>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <label for="maxParticipants">max. Teilnehmer</label>
+      <input id="maxParticipants" type="number" class="form-control" th:field="*{maxParticipants}" required>
+    </div>
+
+    <br>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-outline-success">AG anlegen</button>
+    </div>
+
+  </form>
+
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+
+<script type="text/javascript" src="/libs/summernote/summernote.min.js"></script>
+<script type="text/javascript" src="/libs/summernote/lang/summernote-de-DE.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#description").summernote({
+      height: 300, // set editor height
+      minHeight: 200, // set minimum
+      // height of editor
+      // maxHeight: null, // set maximum
+      // height of editor
+      placeholder: "Beschreibung der AG",
+      focus: false,
+      lang: 'de-DE',
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['para', ['ul', 'ol']],
+        ['insert', ['link', 'table']],
+        ['misc', ['undo', 'redo']]
+      ],
+      hint: {
+        match: /:([\-+\w]+)$/,
+        search: function (keyword, callback) {
+          callback($.grep(emojis, function (item) {
+            return item.indexOf(keyword) === 0;
+          }));
+        },
+        template: function (item) {
+          var content = emojiUrls[item];
+          return '<img src="' + content + '" width="20" /> :' + item + ':';
+        },
+        content: function (item) {
+          var url = emojiUrls[item];
+          if (url) {
+            return $('<img />').attr('src', url).css('width', 20)[0];
           }
-        });
+          return '';
+        }
+      },
+      callbacks: {
+        onInit: function () {
+          $('body > .note-popover').hide();
+        }
+      }
+    });
 
-        $.ajax({
-          url: 'https://api.github.com/emojis',
-          async: false
-        }).then(function (data) {
-          window.emojis = Object.keys(data);
-          window.emojiUrls = data;
-        });
-      });
-    </script>
-  </body>
+    $.ajax({
+      url: 'https://api.github.com/emojis',
+      async: false
+    }).then(function (data) {
+      window.emojis = Object.keys(data);
+      window.emojiUrls = data;
+    });
+  });
+</script>
+</body>
 </html>

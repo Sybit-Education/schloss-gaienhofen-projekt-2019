@@ -36,7 +36,7 @@ public class Event implements Serializable {
   private String location;
   private String type;
 
-  private String agState;
+  private String eventState;
 
 
   @OneToMany(mappedBy = "id")
@@ -130,12 +130,12 @@ public class Event implements Serializable {
     this.type = type;
   }
 
-  public String getAgState() {
-    return agState;
+  public String getEventState() {
+    return eventState;
   }
 
-  public void setAgState(String agState) {
-    this.agState = agState;
+  public void setEventState(String eventState) {
+    this.eventState = eventState;
   }
 
   @Override

@@ -44,7 +44,7 @@ public class EventServiceImpl implements EventService {
     List<Event> allActiveEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
-      if (event.getAgState().equals("online")) {
+      if (event.getEventState().equals("online")) {
         allActiveEvents.add(event);
       }
 

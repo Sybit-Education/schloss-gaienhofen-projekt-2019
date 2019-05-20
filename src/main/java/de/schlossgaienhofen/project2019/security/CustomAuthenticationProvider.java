@@ -4,6 +4,7 @@ import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,11 +18,9 @@ import java.util.ArrayList;
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
-  private final UserService userService;
 
-  public CustomAuthenticationProvider(UserService userService) {
-    this.userService = userService;
-  }
+  @Autowired
+  private UserService userService;
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {

@@ -1,16 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.ActivityGroupRepository;
-
-import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,15 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ActivityGroupServiceTest {
+public class ActivityGroupServiceImplTest {
 
   @Autowired
   ActivityGroupService activityGroupService;
 
   @Autowired
-  ActivityGroupRepository activitGroupRepository;
+  ActivityGroupRepository activityGroupRepository;
 
   @Test
   public void testGetAllActivityGroups() {
@@ -60,7 +54,7 @@ public class ActivityGroupServiceTest {
   @Test(expected = IllegalArgumentException.class)
   public void testCreateActivityGroup_withId() {
     ActivityGroup ag = new ActivityGroup();
-    ag.setId(Long.valueOf(12L));
+    ag.setId(12L);
     ag.setTitle("Titel");
     ag.setAgLeader("Leader");
     activityGroupService.create(ag);
@@ -69,7 +63,7 @@ public class ActivityGroupServiceTest {
   @Test
   public void testGetAllActivityGroupsOfUser() {
     User user = new User();
-    user.setId(Long.valueOf(1L));
+    user.setId(1L);
 
     List<ActivityGroup> activityGroups = activityGroupService.getActivityGroupsOfUser(user);
 

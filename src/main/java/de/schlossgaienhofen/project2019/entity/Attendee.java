@@ -8,9 +8,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-/**
- * @author ssr
- */
 @Entity
 @Table(name = "Attendee")
 public class Attendee implements Serializable {
@@ -27,7 +24,7 @@ public class Attendee implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "ag_id")
-  private ActivityGroup activityGroup;
+  private Event event;
 
   @CreatedDate
   private LocalDate assignemtDate;
@@ -48,12 +45,12 @@ public class Attendee implements Serializable {
     this.attendee = attendee;
   }
 
-  public ActivityGroup getActivityGroup() {
-    return activityGroup;
+  public Event getEvent() {
+    return event;
   }
 
-  public void setActivityGroup(ActivityGroup activityGroup) {
-    this.activityGroup = activityGroup;
+  public void setEvent(Event event) {
+    this.event = event;
   }
 
 
@@ -70,7 +67,7 @@ public class Attendee implements Serializable {
     int hash = 7;
     hash = 53 * hash + Objects.hashCode(this.id);
     hash = 53 * hash + Objects.hashCode(this.attendee);
-    hash = 53 * hash + Objects.hashCode(this.activityGroup);
+    hash = 53 * hash + Objects.hashCode(this.event);
     hash = 53 * hash + Objects.hashCode(this.assignemtDate);
     return hash;
   }
@@ -93,7 +90,7 @@ public class Attendee implements Serializable {
     if (!Objects.equals(this.attendee, other.attendee)) {
       return false;
     }
-    if (!Objects.equals(this.activityGroup, other.activityGroup)) {
+    if (!Objects.equals(this.event, other.event)) {
       return false;
     }
     if (!Objects.equals(this.assignemtDate, other.assignemtDate)) {

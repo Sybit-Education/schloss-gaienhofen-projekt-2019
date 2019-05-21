@@ -1,7 +1,6 @@
 package de.schlossgaienhofen.project2019.controller;
 
 import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.repository.UserRepository;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

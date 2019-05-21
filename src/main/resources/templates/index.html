@@ -12,30 +12,33 @@
 
   <h1>Arbeitsgemeinschaften</h1>
 
+  <p>Willkommen bei der Verwaltung der Arbeitsgemeinschaften (AGs) unserr Schule.</p>
+  <p>Wir sind sicher, es ist auch für Dich eine interessante AG dabei.</p>
+
   <h2>Verfügbare Arbeitsgemeinschaften</h2>
 
   <table class="table">
     <thead>
     <th>Name</th>
     <th>Beschreibung</th>
-    <th>Ort</th>
+    <th>Treffpunkt</th>
     <th>Startdatum</th>
     <th>Enddatum</th>
     <th>Auswählen</th>
     </thead>
     <tbody>
-    <tr th:each="oneActivity : ${allActivities}">
-      <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
-      <td><span th:utext="${oneActivity.summary}"></span></td>
-      <td><span th:utext="${oneActivity.location}"></span></td>
-      <td><span th:utext="${oneActivity.startDate}"></span></td>
-      <td><span th:utext="${oneActivity.endDate}"></span></td>
+    <tr th:each="oneEvent : ${allEventsActive}">
+      <td><a th:href="@{/ag/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
+      <td><span th:utext="${oneEvent.summary}"></span></td>
+      <td><span th:utext="${oneEvent.location}"></span></td>
+      <td><span th:utext="${oneEvent.startDate}"></span></td>
+      <td><span th:utext="${oneEvent.endDate}"></span></td>
       <td>
-        <div th:if="${assignments.get(oneActivity.id)}">
+        <div th:if="${assignments.get(oneEvent.id)}">
           ✔️ angemeldet
         </div>
-        <div th:if="!${assignments.get(oneActivity.id)}">
-          <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">
+        <div th:if="!${assignments.get(oneEvent.id)}">
+          <form th:action="@{/ag/{id}/assign(id=${oneEvent.id})}" th:method="post">
             <button class="btn btn-primary">anmelden</button>
           </form>
         </div>
@@ -44,6 +47,7 @@
     </tbody>
   </table>
 
+  <a th:href="@{/ag/create}"> Neue AG anlegen</a>
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

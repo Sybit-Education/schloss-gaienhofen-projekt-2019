@@ -1,8 +1,8 @@
 package de.schlossgaienhofen.project2019.controller;
 
-import de.schlossgaienhofen.project2019.entity.ActivityGroup;
+import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.service.ActivityGroupService;
+import de.schlossgaienhofen.project2019.service.EventService;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,12 +21,12 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class ActivityGroupController {
+public class EventController {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ActivityGroupController.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
 
   @Autowired
-  private ActivityGroupService activityGroupService;
+  private EventService eventService;
 
   @Autowired
   private UserService userService;
@@ -39,17 +40,19 @@ public class ActivityGroupController {
    */
   @GetMapping(value = "/ag")
   public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
-    List<ActivityGroup> allActivityGroups = activityGroupService.getAllActivityGroups();
-    model.put("allActivitiesList", allActivityGroups);
+    List<Event> allEvents = eventService.getAllEvents();
+
+    model.put("allActivitiesList", allEvents);
+
     modelAndView.setViewName("schuelerAg");
 
     return modelAndView;
   }
 
   /**
-   * Get detail page of specific ActivityGroup by given id.
+   * Get detail page of specific Event by given id.
    *
-   * @param id    ID of the ActivityGroup
+   * @param id    ID of the Event
    * @param model
    * @return
    */
@@ -57,15 +60,17 @@ public class ActivityGroupController {
   public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> get id={}", id);
 
-    ActivityGroup ag = activityGroupService.get(id);
-    model.put("ag", ag);
+    Event event = eventService.get(id);
+    if (event != null) {
+      model.put("event", event);
+    }
 
     LOGGER.debug("<- get");
     return "ag-detail";
   }
 
   /**
-   * Assign current authenticated user to given ActivityGroup.
+   * Assign current authenticated user to given Event.
    *
    * @param id
    * @return
@@ -79,9 +84,27 @@ public class ActivityGroupController {
 
     LOGGER.debug("assign current user= {} to AG with id= {}", authentication.getName(), id);
     User user = this.userService.findUserByEmail(authentication.getName());
-    this.activityGroupService.assignUser(id, user);
+    this.eventService.assignUser(id, user);
 
     LOGGER.debug("<- assign");
     return "redirect:/";
+  }
+
+  @GetMapping(value = "/ag/create")
+  public ModelAndView showForm(ModelAndView modelAndView) {
+    modelAndView.addObject("event", new Event());
+    modelAndView.setViewName("create");
+    return modelAndView;
+  }
+
+  @PostMapping(value = "/ag/create")
+  public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
+    LOGGER.debug("--> saveForm title={}", event.getTitle());
+
+    event = eventService.create(event);
+    model.put("event", event);
+
+    LOGGER.debug("<-- saveForm");
+    return "redirect:/ag/" + event.getId();
   }
 }

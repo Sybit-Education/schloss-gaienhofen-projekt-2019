@@ -11,8 +11,8 @@
   <groupId>de.schlossgaienhofen</groupId>
   <artifactId>project2019</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>project2019</name>
-  <description>Project 2019 - Schloss Gaienhofen</description>
+  <name>schloss-gaienhofen-events</name>
+  <description>Events and AGs - Schloss Gaienhofen</description>
 
   <properties>
     <java.version>1.8</java.version>

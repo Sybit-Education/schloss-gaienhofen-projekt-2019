@@ -1,5 +1,6 @@
 package de.schlossgaienhofen.project2019.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Profile({"default", "develop"})
@@ -24,20 +26,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Value("${ldap.port:389}")
   private int port;
 
+  @Autowired
+  private AuthenticationSuccessHandler successHandler;
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
       .authorizeRequests()
-      .antMatchers("/favicon.ico", "/libs/**", "/js/**", "/css/**", "/images/**", "/login", "/error", "/login/register").permitAll()
+      .antMatchers("/favicon.ico", "/libs/**", "/js/**", "/css/**", "/images/**", "/login", "/error").permitAll()
       .anyRequest().authenticated()
       .and()
       .formLogin()
       .loginPage("/login")
+      .successHandler(successHandler)
       .permitAll()
       .and()
       .csrf().ignoringAntMatchers("/h2/**")
-      .and()
-      .headers().frameOptions().disable()
       .and()
       .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
   }
@@ -45,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider = new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
-    //TODO: authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
+    authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
     authManagerBuilder.ldapAuthentication()
       .userDnPatterns("uid={0},ou=people")
@@ -55,9 +59,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       .and()
       .passwordCompare()
       .passwordEncoder(new LdapShaPasswordEncoder())
-      .passwordAttribute("userPassword");
-      //TODO .and()
-      //TODO .authoritiesMapper(new AuthoritiesMapper());
+      .passwordAttribute("userPassword")
+      .and()
+      .authoritiesMapper(new AuthoritiesMapper());
   }
 }
 

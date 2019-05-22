@@ -71,19 +71,20 @@
       </div>
     </div>
 
+    <div class="col-md-8">
+    <select th:field="*{agState}" class="custom-select">
+      <option selected value="offline">Entwurf</option>
+      <option value="online">Öffentlich</option>
+    </select>
+    <br>
+  </div>
 
     <br>
     <div class="row">
     <div class="col-md-3">
-      <button type="submit" id="save" class="btn btn-outline-success">AG anlegen</button>
+      <button type="submit" id="save" class="btn btn-outline-success">AG speichern</button>
     </div>
-
-      <select th:field="*{agState}" class="custom-select">
-        <option selected>Open this select menu</option>
-        <option value="online">Öffentlich</option>
-        <option value="offline">Privat</option>
-      </select>
-
+    </div>
   </form>
 
 </div>

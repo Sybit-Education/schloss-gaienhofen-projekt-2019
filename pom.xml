@@ -11,7 +11,7 @@
   <groupId>de.schlossgaienhofen</groupId>
   <artifactId>project2019</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>schloss-gaienhofen-events</name>
+  <name>Schloss Gaienhofen - Events</name>
   <description>Events and AGs - Schloss Gaienhofen</description>
 
   <properties>

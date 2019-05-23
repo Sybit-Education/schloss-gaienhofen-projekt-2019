@@ -1,5 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
+import de.schlossgaienhofen.project2019.data.SelectOption;
+import de.schlossgaienhofen.project2019.data.SelectOptionFactory;
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
 import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.User;
@@ -44,7 +46,7 @@ public class ActivityGroupServiceImpl implements ActivityGroupService {
     List<ActivityGroup> allInactiveActivityGroups = new ArrayList<>();
 
     for (ActivityGroup activityGroup : allActivityGroups) {
-      if (activityGroup.getAgState().equals("offline")) {
+      if (activityGroup.getAgState().equals("2")) {
         allInactiveActivityGroups.add(activityGroup);
       }
 
@@ -60,7 +62,7 @@ public class ActivityGroupServiceImpl implements ActivityGroupService {
     List<ActivityGroup> allActiveActivityGroups = new ArrayList<>();
 
     for (ActivityGroup activityGroup : allActivityGroups) {
-      if (activityGroup.getAgState().equals("online")) {
+      if (activityGroup.getAgState().equals("1")) {
         allActiveActivityGroups.add(activityGroup);
       }
 

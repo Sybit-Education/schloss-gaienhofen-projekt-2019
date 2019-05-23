@@ -1,8 +1,10 @@
 package de.schlossgaienhofen.project2019.controller;
 
+import de.schlossgaienhofen.project2019.data.SelectOption;
 import de.schlossgaienhofen.project2019.entity.ActivityGroup;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.service.ActivityGroupService;
+import de.schlossgaienhofen.project2019.service.StateService;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,9 @@ public class ActivityGroupController {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private StateService stateService;
 
   /**
    * List all ActivityGroups.
@@ -86,10 +91,11 @@ public class ActivityGroupController {
   }
 
   @GetMapping(value = "/ag/create")
-  public ModelAndView showForm(ModelAndView modelAndView) {
-    modelAndView.addObject("activityGroup", new ActivityGroup());
-    modelAndView.setViewName("create");
-    return modelAndView;
+  public ModelAndView showForm(Map<String, Object> model, ActivityGroup activityGroup) {
+
+    Map<String, Object> stringObjectMap = mapStateToModel(model, activityGroup);
+
+    return new ModelAndView("create", stringObjectMap);
   }
 
   @PostMapping(value = "/ag/create")
@@ -99,8 +105,25 @@ public class ActivityGroupController {
     activityGroup = activityGroupService.create(activityGroup);
     model.put("activityGroup", activityGroup);
 
+    mapStateToModel(model, activityGroup);
 
     LOGGER.debug("<-- saveForm");
     return "redirect:/ag/" + activityGroup.getId();
   }
+
+  private Map<String, Object> mapStateToModel(Map<String, Object> model, ActivityGroup activityGroup) {
+
+    LOGGER.debug("--> mapStateToModel");
+
+    LOGGER.trace("activityGroup = {}", activityGroup);
+    model.put("activityGroup", activityGroup);
+
+    List<SelectOption> selectStateList = stateService.getSelectOptionFactory(activityGroup);
+    model.put("allStates", selectStateList);
+
+    LOGGER.debug("<-- mapStateToModel");
+
+    return model;
+  }
+
 }

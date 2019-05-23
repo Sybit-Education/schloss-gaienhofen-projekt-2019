@@ -17,7 +17,7 @@
   <h1> Neues Event anlegen </h1>
   <br>
 
-  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" method="post">
+  <form action="#" th:action="@{/ag/create}" th:object="${activityGroup}" id="activityGroup" method="post">
 
     <div class="col-md-8">
       <label for="title">Name des Events</label>
@@ -50,34 +50,38 @@
       <input id="summary" maxlength="40" class="form-control" th:field="*{summary}"/>
     </div>
 
-
     <div class="col-md-8">
       <label for="description">Ausführliche Beschreibung</label>
       <textarea id="description" class="form-control summernote" th:field="*{description}"></textarea>
       <br>
     </div>
 
-
     <div class="row col-12">
       <div class="col-md-3">
         <label for="datepickerstart">Startdatum</label>
-        <input id="datepickerstart" type="Date" class="form-control" th:field="*{startDate}" required></input>
+        <input id="datepickerstart" type="date" class="form-control" th:field="*{startDate}" required></input>
       </div>
 
       <div class="col-md-3">
         <label for="datepickerend">Enddatum</label>
-        <input id="datepickerend" type="Date" class="form-control" th:field="*{endDate}" required></input>
+        <input id="datepickerend" type="date" class="form-control" th:field="*{endDate}" required></input>
         <br>
       </div>
     </div>
 
     <div class="col-md-8">
-    <select th:field="*{agState}" class="custom-select">
-      <option selected value="offline">Entwurf</option>
-      <option value="online">Öffentlich</option>
-    </select>
-    <br>
-  </div>
+    <div class="dropdown">
+      <select class="form-control defaultSettingsSelect"
+              th:field="${activityGroup.agState}" id="areaSelect" type="text" required>
+        <option class="link_dropdown_white"
+                th:each="selectOption: ${allStates}"
+                th:value="${selectOption.value}"
+                th:text="${selectOption.label}"
+                th:selected="${selectOption.selected}">
+        </option>
+      </select>
+    </div>
+    </div>
 
     <br>
     <div class="row">

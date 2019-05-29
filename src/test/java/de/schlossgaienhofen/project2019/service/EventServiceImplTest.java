@@ -34,9 +34,13 @@ public class EventServiceImplTest {
 
   @Test
   public void testCreateActivityGroup() {
+    User leader = new User();
+    leader.setId(2L);
+    leader.setEmail("test@mail.com");
+
     Event ag = new Event();
     ag.setTitle("Titel");
-    ag.setLeaderId("Leader");
+    ag.setLeader(leader);
 
     int sizeBefore = eventService.getAllEvents().size();
 
@@ -53,10 +57,14 @@ public class EventServiceImplTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testCreateActivityGroup_withId() {
+    User leader = new User();
+    leader.setId(12L);
+    leader.setEmail("test@mail.com");
+
     Event ag = new Event();
-    ag.setId(12L);
+    ag.setId(2L);
     ag.setTitle("Titel");
-    ag.setLeaderId("Leader");
+    ag.setLeader(leader);
     eventService.create(ag);
   }
 

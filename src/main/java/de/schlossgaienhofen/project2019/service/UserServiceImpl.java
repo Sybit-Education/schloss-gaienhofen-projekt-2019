@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -79,6 +80,20 @@ public class UserServiceImpl implements UserService {
     LOGGER.debug("<-- getSHA");
     return hashText.toString();
 
+  }
+
+  @Override
+  public User findUserById(@NotEmpty long id) {
+    LOGGER.debug("--> findUserById");
+    Optional<User> ourUser = userRepository.findById(id);
+    User user;
+    if (ourUser.isPresent()) {
+      user = ourUser.get();
+    } else {
+      throw new IllegalArgumentException("User is null.");
+    }
+    LOGGER.debug("<-- findUserById");
+    return user;
   }
 
   /**

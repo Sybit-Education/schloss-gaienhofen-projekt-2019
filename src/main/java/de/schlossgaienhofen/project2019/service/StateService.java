@@ -1,7 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.data.SelectOption;
-import de.schlossgaienhofen.project2019.entity.ActivityGroup;
+import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.State;
 
 import java.util.List;
@@ -16,9 +16,9 @@ public interface StateService {
 
   /**
    *
-   * @param activityGroup
+   * @param event
    * @return
    */
-  List<SelectOption> getSelectOptionFactory(ActivityGroup activityGroup);
+  List<SelectOption> getSelectOptionFactory(Event event);
 
 }

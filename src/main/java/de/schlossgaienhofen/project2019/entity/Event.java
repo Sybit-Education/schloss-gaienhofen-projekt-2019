@@ -21,7 +21,8 @@ public class Event implements Serializable {
 
   private String title;
 
-  private String leaderId;
+  @ManyToOne
+  private User leader;
 
   private String summary;
   private String description;
@@ -58,12 +59,12 @@ public class Event implements Serializable {
     this.title = title;
   }
 
-  public String getLeaderId() {
-    return leaderId;
+  public User getLeader() {
+    return leader;
   }
 
-  public void setLeaderId(String leaderId) {
-    this.leaderId = leaderId;
+  public void setLeader(User leader) {
+    this.leader = leader;
   }
 
   public String getSummary() {
@@ -143,7 +144,7 @@ public class Event implements Serializable {
     int hash = 7;
     hash = 97 * hash + Objects.hashCode(this.id);
     hash = 97 * hash + Objects.hashCode(this.title);
-    hash = 97 * hash + Objects.hashCode(this.leaderId);
+    hash = 97 * hash + Objects.hashCode(this.leader);
     hash = 97 * hash + Objects.hashCode(this.summary);
     hash = 97 * hash + Objects.hashCode(this.description);
     hash = 97 * hash + Objects.hashCode(this.startDate);
@@ -170,7 +171,7 @@ public class Event implements Serializable {
     if (!Objects.equals(this.title, other.title)) {
       return false;
     }
-    if (!Objects.equals(this.leaderId, other.leaderId)) {
+    if (!Objects.equals(this.leader, other.leader)) {
       return false;
     }
     if (!Objects.equals(this.summary, other.summary)) {

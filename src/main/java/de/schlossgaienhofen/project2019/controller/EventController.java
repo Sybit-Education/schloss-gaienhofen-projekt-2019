@@ -65,6 +65,11 @@ public class EventController {
       model.put("event", event);
     }
 
+
+    User agLeader = event.getLeader();
+
+    model.put("agLeader", agLeader);
+
     LOGGER.debug("<- get");
     return "ag-detail";
   }
@@ -84,7 +89,7 @@ public class EventController {
 
     LOGGER.debug("assign current user= {} to AG with id= {}", authentication.getName(), id);
     User user = this.userService.findUserByEmail(authentication.getName());
-    this.eventService.assignUser(id, user);
+    eventService.assignUser(id, user);
 
     LOGGER.debug("<- assign");
     return "redirect:/";

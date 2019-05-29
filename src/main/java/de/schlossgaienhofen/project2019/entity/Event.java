@@ -10,8 +10,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "ActivityGroup")
-public class ActivityGroup implements Serializable {
+@Table(name = "Event")
+public class Event implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -21,7 +21,8 @@ public class ActivityGroup implements Serializable {
 
   private String title;
 
-  private String agLeader;
+  @ManyToOne
+  private User leader;
 
   private String summary;
   private String description;
@@ -36,7 +37,7 @@ public class ActivityGroup implements Serializable {
   private String location;
   private String type;
 
-  private String agState;
+  private String eventState;
 
 
   @OneToMany(mappedBy = "id")
@@ -58,12 +59,12 @@ public class ActivityGroup implements Serializable {
     this.title = title;
   }
 
-  public String getAgLeader() {
-    return agLeader;
+  public User getLeader() {
+    return leader;
   }
 
-  public void setAgLeader(String agLeader) {
-    this.agLeader = agLeader;
+  public void setLeader(User leader) {
+    this.leader = leader;
   }
 
   public String getSummary() {
@@ -130,12 +131,12 @@ public class ActivityGroup implements Serializable {
     this.type = type;
   }
 
-  public String getAgState() {
-    return agState;
+  public String getEventState() {
+    return eventState;
   }
 
-  public void setAgState(String agState) {
-    this.agState = agState;
+  public void setEventState(String eventState) {
+    this.eventState = eventState;
   }
 
   @Override
@@ -143,7 +144,7 @@ public class ActivityGroup implements Serializable {
     int hash = 7;
     hash = 97 * hash + Objects.hashCode(this.id);
     hash = 97 * hash + Objects.hashCode(this.title);
-    hash = 97 * hash + Objects.hashCode(this.agLeader);
+    hash = 97 * hash + Objects.hashCode(this.leader);
     hash = 97 * hash + Objects.hashCode(this.summary);
     hash = 97 * hash + Objects.hashCode(this.description);
     hash = 97 * hash + Objects.hashCode(this.startDate);
@@ -163,14 +164,14 @@ public class ActivityGroup implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final ActivityGroup other = (ActivityGroup) obj;
+    final Event other = (Event) obj;
     if (this.maxParticipants != other.maxParticipants) {
       return false;
     }
     if (!Objects.equals(this.title, other.title)) {
       return false;
     }
-    if (!Objects.equals(this.agLeader, other.agLeader)) {
+    if (!Objects.equals(this.leader, other.leader)) {
       return false;
     }
     if (!Objects.equals(this.summary, other.summary)) {
@@ -193,7 +194,7 @@ public class ActivityGroup implements Serializable {
 
   @Override
   public String toString() {
-    return "ActivityGroup{" + "id=" + id + ", title=" + title + '}';
+    return "Event{" + "id=" + id + ", title=" + title + '}';
   }
 
 }

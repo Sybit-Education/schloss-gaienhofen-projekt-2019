@@ -10,9 +10,31 @@
 
 <div class="container">
 
-  <h1>AG: <span th:text="${ag.title}"></span></h1>
+  <h1 class="">AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
+  <h5><span th:utext="${event.summary}"></span></h5>
 
-
+  <table class="table">
+    <tr>
+      <td class="col-3"><span><b>Leiter</b></span></td>
+      <td><span th:text="${agLeader.firstName}"></span> <span th:text="${agLeader.name}"></span></td>
+    </tr>
+    <tr>
+      <td class="col-3"><span><b>Beschreibung</b></span></td>
+      <td><span th:utext="${event.description}"></span></td>
+    </tr>
+    <tr>
+      <td class="col-3"><span><b>Start Datum</b></span></td>
+      <td><span th:text="${event.startDate}"></span></td>
+    </tr>
+    <tr>
+      <td class="col-3"><span><b>End Datum</b></span></td>
+      <td><span th:text="${event.endDate}"></span></td>
+    </tr>
+    <tr>
+      <td class="col-3"><span><b>Maximale Teilnehmerzahl</b></span></td>
+      <td><span th:text="${event.maxParticipants}"></span></td>
+    </tr>
+  </table>
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

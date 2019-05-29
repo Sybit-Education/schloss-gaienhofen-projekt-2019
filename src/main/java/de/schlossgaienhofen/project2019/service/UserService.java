@@ -32,4 +32,13 @@ public interface UserService {
    */
 
   String getSHA(String input) throws NoSuchAlgorithmException;
+
+  /**
+   * Returns a userObject by given id
+   *
+   * @param id
+   * @return user
+   */
+
+  User findUserById(@NotEmpty long id);
 }

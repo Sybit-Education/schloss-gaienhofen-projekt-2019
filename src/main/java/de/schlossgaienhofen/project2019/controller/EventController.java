@@ -66,7 +66,7 @@ public class EventController {
     }
 
 
-    User agLeader = userService.findUserById(1);
+    User agLeader = event.getLeader();
 
     model.put("agLeader", agLeader);
 

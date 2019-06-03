@@ -18,13 +18,12 @@
 
   <form action="#" th:action="@{/ag/create}" th:object="${event}" method="post">
 
-    <div class="row">
+
+    
+          <div class="row">
       <div class="col-md-3 form-group">
         <label for="type"> Typ des Events</label>
-        <select id="type" type="text" class="form-control" th:field="*{type}" required>
-          <option value="event">Veranstaltung</option>
-          <option value="event">AG</option>
-        </select>
+       <input id="type" type="text" class="form-control" th:field="*{type}" required> 
       </div>
 
       <div class="col-md-9 form-group">

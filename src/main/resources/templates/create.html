@@ -31,9 +31,9 @@
       <br>
     </div>
 
-    <div class="col-md-8">
+   <div class="col-md-8">
       <label for="leaderId">Name des Leiters</label>
-      <input id="leaderId" type="text" class="form-control" th:field="*{leaderId}" required/>
+      <input id="leaderId" type="text" class="form-control" th:field="*{leader}" required/>
       <br>
     </div>
 
@@ -75,6 +75,8 @@
     <br>
     <div class="col-md-3">
       <button type="submit" class="btn btn-outline-success">AG anlegen</button>
+      <br>
+      <a target="_blank" rel="noopener noreferrer" th:href="@{/attendeelist}"> Teilnehmerliste drucken und bearbeiten</a>
     </div>
 
   </form>

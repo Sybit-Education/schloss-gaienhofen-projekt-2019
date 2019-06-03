@@ -112,4 +112,9 @@ public class EventController {
     LOGGER.debug("<-- saveForm");
     return "redirect:/ag/" + event.getId();
   }
+  @GetMapping(value = "/attendeelist")
+  public ModelAndView showAttendees(ModelAndView modelAndView) {
+    modelAndView.setViewName("attendeelist");
+    return modelAndView;
+  }
 }

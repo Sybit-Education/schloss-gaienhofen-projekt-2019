@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/dependencies :: dependencies">
+  <title>Teilnehmerliste</title>
+</head>
+<body>
+<table class="table">
+  <thead>
+  <th>Name</th>
+  <th>Vorname</th>
+  <th>Klasse</th>
+  <th>Email</th>
+  <th class="d-print-none">Schüler Abmelden</th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  </thead>
+  <tbody>
+  <tr th:each="oneAttendee : ${allAttendees}">
+    <td><span th:utext="${oneAttendee.name}"></span></td>
+    <td><span th:utext="${oneAttendee.firstName}"></span></td>
+    <td></td>
+    <td><span th:utext="${oneAttendee.email}"></span></td>
+ <!--   <td class="d-print-none">
+      <div th:if="!${assignments.get(oneAttendee.id)}">
+      ✔️ abgemeldet
+      </div>
+      <div th:if="${assignments.get(oneAttendee.id)}">
+        <form th:action="@{/ag/{id}/remove(id=${oneAttendee.id})}" th:method="post">
+          <button class="btn btn-primary">abmelden</button>
+        </form>
+      </div>
+   </td> -->
+  </tr>
+  </tbody>
+</table>
+
+
+</body>
+</html>

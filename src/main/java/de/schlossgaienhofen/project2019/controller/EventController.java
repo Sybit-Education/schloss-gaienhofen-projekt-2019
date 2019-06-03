@@ -108,7 +108,7 @@ public class EventController {
     model.put("event", event);
 
     LOGGER.debug("<-- saveForm");
-    return "redirect:/ag/" + event.getId();
+    return "redirect:/event/" + event.getId();
   }
 
   @GetMapping(value = "/edit/{id}")

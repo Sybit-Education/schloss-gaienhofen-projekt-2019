@@ -29,10 +29,6 @@
       <td class="col-3"><span><b>End Datum</b></span></td>
       <td><span th:text="${event.endDate}"></span></td>
     </tr>
-    <tr>
-      <td class="col-3"><span><b>Maximale Teilnehmerzahl</b></span></td>
-      <td><span th:text="${event.maxParticipants}"></span></td>
-    </tr>
   </table>
   <form th:action="@{/event/edit/{id}(id=${event.id})}" >
             <button class="btn btn-primary">bearbeiten</button>

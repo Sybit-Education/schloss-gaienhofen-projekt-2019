@@ -8,15 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Map;
 
+@RequestMapping(value = "/event")
 @Controller
 public class EventController extends UserManager {
 
@@ -26,14 +24,14 @@ public class EventController extends UserManager {
   private EventService eventService;
 
   /**
-   * List all ActivityGroups.
+   * List viewAll ActivityGroups.
    *
    * @param modelAndView
    * @param model
    * @return
    */
-  @GetMapping(value = "/ag")
-  public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
+  @GetMapping(value = "/")
+  public ModelAndView viewAll(ModelAndView modelAndView, Map<String, Object> model) {
     List<Event> allEvents = eventService.getAllEvents();
 
     model.put("allActivitiesList", allEvents);
@@ -50,11 +48,11 @@ public class EventController extends UserManager {
    * @param model
    * @return
    */
-  @GetMapping(value = "/ag/{id}")
-  public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
-    LOGGER.debug("-> get id={}", id);
+  @GetMapping(value = "/{id}")
+  public String getEventById(@PathVariable(name = "id") Long id, Map<String, Object> model) {
+    LOGGER.debug("-> getEventById id={}", id);
 
-    Event event = eventService.get(id);
+    Event event = eventService.getEventById(id);
 
     if (event != null) {
       User agLeader = event.getLeader();
@@ -62,8 +60,8 @@ public class EventController extends UserManager {
       model.put("agLeader", agLeader);
     }
 
-    LOGGER.debug("<- get");
-    return "ag-detail";
+    LOGGER.debug("<- getEventById");
+    return "event-detail";
   }
 
   /**
@@ -72,32 +70,62 @@ public class EventController extends UserManager {
    * @param id
    * @return
    */
-  @PostMapping(value = "/ag/{id}/assign")
+  @PostMapping(value = "/{id}/assign")
   public String assign(@PathVariable(name = "id") Long id) {
     LOGGER.debug("-> assign id={}", id);
 
     User user = getCurrentUser();
-    eventService.assignUser(id, user);
+    eventService.assignEventIdWithUser(id, user);
 
     LOGGER.debug("<- assign");
     return "redirect:/";
   }
 
-  @GetMapping(value = "/ag/create")
+  @GetMapping(value = "/create")
   public ModelAndView showForm(ModelAndView modelAndView) {
     modelAndView.addObject("event", new Event());
-    modelAndView.setViewName("create");
+    modelAndView.setViewName("update_event");
     return modelAndView;
   }
 
-  @PostMapping(value = "/ag/create")
+  @PostMapping(value = "/create")
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
-    event = eventService.create(event);
+    event = eventService.saveEvent(event);
     model.put("event", event);
 
     LOGGER.debug("<-- saveForm");
-    return "redirect:/ag/" + event.getId();
+    return "redirect:/event/" + event.getId();
+  }
+
+  @GetMapping(value = "/update/{id}")
+  public ModelAndView update(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
+    LOGGER.debug("-> getEventById id={}", id);
+
+    Event event = eventService.getEventById(id);
+    model.put("event", event);
+    modelAndView.setViewName("update_event");
+
+    LOGGER.debug("<- getEventById");
+    return modelAndView;
+  }
+
+  @PostMapping(value = "/update/{id}")
+  public String updateEvent(@ModelAttribute Event event, @PathVariable(name = "id") Long id) {
+    LOGGER.debug("-> getEventById id={}", id);
+
+    Event oldEvent = eventService.getEventById(id);
+    event.setId(oldEvent.getId());
+    eventService.updateEvent(event);
+
+    LOGGER.debug("<- getEventById");
+    return "redirect:/";
+  }
+
+  @GetMapping(value = "/update/{id}/delete")
+  public String deleteEvent (@PathVariable (name ="id") Long id) {
+    eventService.deleteEventById(id);
+	  return "redirect:/";
   }
 }

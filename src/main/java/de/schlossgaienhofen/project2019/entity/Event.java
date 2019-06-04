@@ -33,7 +33,6 @@ public class Event implements Serializable {
   @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
   private LocalDate endDate;
 
-  private short maxParticipants;
   private String location;
   private String type;
 
@@ -99,14 +98,6 @@ public class Event implements Serializable {
     this.endDate = endDate;
   }
 
-  public short getMaxParticipants() {
-    return maxParticipants;
-  }
-
-  public void setMaxParticipants(short maxParticipants) {
-    this.maxParticipants = maxParticipants;
-  }
-
   public Set<Attendee> getAttendees() {
     return attendees;
   }
@@ -149,7 +140,6 @@ public class Event implements Serializable {
     hash = 97 * hash + Objects.hashCode(this.description);
     hash = 97 * hash + Objects.hashCode(this.startDate);
     hash = 97 * hash + Objects.hashCode(this.endDate);
-    hash = 97 * hash + this.maxParticipants;
     return hash;
   }
 
@@ -165,9 +155,6 @@ public class Event implements Serializable {
       return false;
     }
     final Event other = (Event) obj;
-    if (this.maxParticipants != other.maxParticipants) {
-      return false;
-    }
     if (!Objects.equals(this.title, other.title)) {
       return false;
     }

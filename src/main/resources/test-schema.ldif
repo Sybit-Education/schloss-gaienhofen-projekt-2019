@@ -16,26 +16,6 @@ objectclass: organizationalUnit
 ou: people
 
 
-
-dn: dc=schloss-gaienhofen,dc=info
-objectclass: top
-objectclass: domain
-objectclass: extensibleObject
-dc: schloss-gaienhofen
-
-dn: ou=groups,dc=schloss-gaienhofen,dc=info
-objectclass: top
-objectclass: organizationalUnit
-ou: groups
-
-dn: ou=people,dc=schloss-gaienhofen,dc=info
-objectclass: top
-objectclass: organizationalUnit
-ou: people
-
-
-
-
 dn: uid=max.schueler,ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: person
@@ -43,7 +23,8 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Max
 sn: Schüler
-uid: max.schueler@schloss-gaienhofen.email
+uid: max.schueler
+mail: max.schueler@schloss-gaienhofen.email
 sAMAccountName: max.schueler
 userPassword: test
 
@@ -54,35 +35,30 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Jenny
 sn: Johnson
-uid: jenny.johnson@schloss-gaienhofen.email
+uid: jenny.johnson
+mail: jenny.johnson@schloss-gaienhofen.email
 sAMAccountName: jenny.johnson
 userPassword: test
 
 
 
-dn: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=info
+dn: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Heinz
 sn: Leher
-uid: heinz.lehrer@schloss-gaienhofen.info
+uid: heinz.lehrer
+mail: heinz.lehrer@schloss-gaienhofen.info
 sAMAccountName: heinz.lehrer
 userPassword: test
 
 
-dn: cn=schueler,ou=groups,dc=schloss-gaienhofen,dc=email
-objectclass: top
-objectclass: groupOfUniqueNames
-cn: schueler
-ou: schuler
-uniqueMember: uid=max.schueler,ou=people,dc=schloss-gaienhofen,dc=email
-uniqueMember: uid=jenny.schueler,ou=people,dc=schloss-gaienhofen,dc=email
 
-dn: cn=lehrer,ou=groups,dc=schloss-gaienhofen,dc=info
+dn: cn=Lehrer-Gruppe,ou=groups,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: groupOfUniqueNames
-cn: lehrer
-ou: lehrer
-uniqueMember: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=info
+cn: Lehrer-Gruppe
+ou: Lehrer-Gruppe
+uniqueMember: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=email

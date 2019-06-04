@@ -17,11 +17,7 @@ import java.util.Set;
  */
 public class AuthoritiesMapper implements GrantedAuthoritiesMapper {
 
-   private static final String LDAP_GROUP_PUPIL = "schueler";
-
-   private static final String LDAP_GROUP_TEACHER = "lehrer";
-
-   private static final String LDAP_GROUP_SECRETARY = "sekretariat";
+   private static final String LDAP_GROUP_TEACHER = "Lehrer-Gruppe";
 
    private static final Logger LOGGER = LoggerFactory.getLogger(AuthoritiesMapper.class);
 
@@ -46,9 +42,7 @@ public class AuthoritiesMapper implements GrantedAuthoritiesMapper {
 
          if (LDAP_GROUP_TEACHER.equalsIgnoreCase(authority)) {
             roles.add(Authority.ROLE_TEACHER);
-         } else if (LDAP_GROUP_SECRETARY.equalsIgnoreCase(authority)) {
-            roles.add(Authority.ROLE_SECRETARY);
-         } else if (LDAP_GROUP_PUPIL.equalsIgnoreCase(authority)) {
+         } else {
            roles.add(Authority.ROLE_PUPIL);
          }
       }

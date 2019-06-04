@@ -2,6 +2,6 @@ spring:
   ldap:
     embedded:
       ldif: classpath:test-schema.ldif
-      port: 8389
+      port: 389
       validation:
         enabled: false

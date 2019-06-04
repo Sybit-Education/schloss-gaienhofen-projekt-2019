@@ -12,8 +12,7 @@ import org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//TODO: Profile anpassen / erstellen
-@Profile({"prod"})
+@Profile({"default"})
 @Configuration
 public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
@@ -25,6 +24,9 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
   @Value("#{environment.getProperty('port')}")
   private int port;
+
+  @Value("${ldap.root:dc=schloss-gaienhofen,dc=email}")
+  private String root;
 
   @Autowired
   private AuthenticationSuccessHandler successHandler;
@@ -46,22 +48,23 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
       .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider = new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
-    authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
     authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
     authManagerBuilder.ldapAuthentication()
-      .groupSearchBase("ou=groups")
-      .userSearchFilter("(&(objectClass=user)(userPrincipalName={0}))")
+      .userDnPatterns("mail={0},ou=people")
+      .groupSearchBase("ou=people")
       .contextSource()
-      .url(url).port(port).root("dc=schloss-gaienhofen,dc=de")
-      .managerDn("managerDn").managerPassword("managerPassword")
+      .url(url).port(port).root(root)
       .and()
-      .userDetailsContextMapper(new InetOrgPersonContextMapper()).authoritiesMapper(new AuthoritiesMapper())
+      .passwordCompare()
+      .passwordEncoder(new LdapShaPasswordEncoder())
+      .passwordAttribute("userPassword")
       .and()
-      .authenticationProvider(authenticationProvider);
+      .authoritiesMapper(new AuthoritiesMapper());
   }
 }
+

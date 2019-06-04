@@ -1,7 +1,19 @@
+ldap:
+  url: ldap://localhost
+  port: 389
+  domain: schloss-gaienhofen.email
+  root: dc=schloss-gaienhofen,dc=email
+
 
 spring:
-  profiles:
-    include: testLDAP
+
+  ldap:
+    embedded:
+      base-dn: dc=schloss-gaienhofen,dc=email
+      ldif: classpath:test-schema.ldif
+      port: 389
+      validation:
+        enabled: false
 
   datasource:
     driverClassName: org.h2.Driver

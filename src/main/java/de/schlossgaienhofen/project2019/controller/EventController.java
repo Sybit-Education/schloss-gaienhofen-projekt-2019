@@ -124,7 +124,8 @@ public class EventController extends UserManager {
     modelAndView.setViewName("update_event");
 
     LOGGER.debug("<- getEventById");
-    return modelAndView;
+    Map<String, Object> stringObjectMap = mapStateToModel(model, event);
+    return new ModelAndView("update_event", stringObjectMap);
   }
 
   @PostMapping(value = "/update/{id}")

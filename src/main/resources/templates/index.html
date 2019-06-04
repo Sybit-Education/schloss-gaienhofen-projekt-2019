@@ -61,7 +61,7 @@
     </thead>
     <tbody>
     <tr th:each="oneActivity : ${allEventsInactive}">
-      <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
+      <td><a th:href="@{/event/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
       <td><span th:utext="${oneActivity.summary}"></span></td>
       <td><span th:utext="${oneActivity.location}"></span></td>
       <td><span th:utext="${oneActivity.startDate}"></span></td>
@@ -71,7 +71,7 @@
           ✔️ angemeldet
         </div>
         <div th:if="!${assignments.get(oneActivity.id)}">
-          <form th:action="@{/ag/{id}/assign(id=${oneActivity.id})}" th:method="post">
+          <form th:action="@{/event/{id}/assign(id=${oneActivity.id})}" th:method="post">
             <button class="btn btn-primary">anmelden</button>
           </form>
         </div>

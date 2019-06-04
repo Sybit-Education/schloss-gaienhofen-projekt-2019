@@ -10,12 +10,12 @@
 
 <div class="container">
 
-  <h1>AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
+  <h1> <span th:if="${event!=null}" th:text="${event.type}"></span>: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
 
   <table class="table">
     <tr>
       <td class="col-3"><span><b>Leiter</b></span></td>
-      <td><span th:text="${agLeader.firstName}"></span> <span th:text="${agLeader.name}"></span></td>
+      <td><span th:text="${event.leader}"></span></td>
     </tr>
     <tr>
       <td class="col-3"><span><b>Beschreibung</b></span></td>

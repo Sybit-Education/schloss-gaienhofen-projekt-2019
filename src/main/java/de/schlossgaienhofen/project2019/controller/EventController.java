@@ -1,9 +1,11 @@
 package de.schlossgaienhofen.project2019.controller;
 
+import de.schlossgaienhofen.project2019.data.SelectOption;
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.EventService;
+import de.schlossgaienhofen.project2019.service.StateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class EventController extends UserManager {
 
   @Autowired
   private EventService eventService;
+
+  @Autowired
+  private StateService stateService;
 
   /**
    * List viewAll ActivityGroups.
@@ -82,18 +87,29 @@ public class EventController extends UserManager {
   }
 
   @GetMapping(value = "/create")
-  public ModelAndView showForm(ModelAndView modelAndView) {
+  public ModelAndView showForm(ModelAndView modelAndView, Map<String, Object> model, Event event) {
     modelAndView.addObject("event", new Event());
     modelAndView.setViewName("update_event");
-    return modelAndView;
-  }
+    Map<String, Object> stringObjectMap = mapStateToModel(model, event);
 
+    return new ModelAndView("update_event", stringObjectMap);
+    }
+
+  /**
+   * creates an event
+   *
+   * @param event
+   * @param model
+   * @return
+   */
   @PostMapping(value = "/create")
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
     event = eventService.saveEvent(event);
     model.put("event", event);
+
+    mapStateToModel(model, event);
 
     LOGGER.debug("<-- saveForm");
     return "redirect:/event/" + event.getId();
@@ -108,7 +124,8 @@ public class EventController extends UserManager {
     modelAndView.setViewName("update_event");
 
     LOGGER.debug("<- getEventById");
-    return modelAndView;
+    Map<String, Object> stringObjectMap = mapStateToModel(model, event);
+    return new ModelAndView("update_event", stringObjectMap);
   }
 
   @PostMapping(value = "/update/{id}")
@@ -128,4 +145,20 @@ public class EventController extends UserManager {
     eventService.deleteEventById(id);
 	  return "redirect:/";
   }
+
+  private Map<String, Object> mapStateToModel(Map<String, Object> model, Event event) {
+
+    LOGGER.debug("--> mapStateToModel");
+
+    LOGGER.trace("event = {}", event);
+    model.put("event", event);
+
+    List<SelectOption> selectStateList = stateService.getSelectOptionFactory(event);
+    model.put("allStates", selectStateList);
+
+    LOGGER.debug("<-- mapStateToModel");
+
+    return model;
+  }
+
 }

@@ -68,6 +68,20 @@
       </div>
     </div>
 
+
+
+      <div class="dropdown">
+        <select class="form-control defaultSettingsSelect"
+                th:field="${event.eventState}" id="areaSelect" type="text" required>
+          <option class="link_dropdown_white"
+                  th:each="selectOption: ${allStates}"
+                  th:value="${selectOption.value}"
+                  th:text="${selectOption.label}"
+                  th:selected="${selectOption.selected}">
+          </option>
+        </select>
+      </div>
+    <br>
     <div class="row">
       <div class="col-md-3">
         <button type="submit" class="btn btn-outline-success">Speichern</button>
@@ -79,6 +93,7 @@
         <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
       </div>
     </div>
+    <br>
   </form>
 
 </div>

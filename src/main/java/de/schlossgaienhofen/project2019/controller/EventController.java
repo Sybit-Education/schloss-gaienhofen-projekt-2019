@@ -90,7 +90,7 @@ public class EventController extends UserManager {
 
 
     String to = user.getEmail();
-    String content = "Hallo " + userName + ",\n Hier die Bestätigung, dass Sie sich zur AG" + eventName + " angemeldet haben";
+    String content = "Hallo " + userName + ",\n Hier die Bestätigung, dass Sie sich zur AG " + eventName + " angemeldet haben";
     String subject = "Anmeldung zur AG " + eventName;
 
     mailService.sendSimpleMessage(to, subject, content);

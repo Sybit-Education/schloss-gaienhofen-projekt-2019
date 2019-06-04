@@ -27,6 +27,9 @@ public class EventController extends UserManager {
   @Autowired
   private EventService eventService;
 
+  @Autowired
+  MailServiceImpl mailService;
+
   /**
    * List all ActivityGroups.
    *
@@ -82,19 +85,19 @@ public class EventController extends UserManager {
     eventService.assignEventIdWithUser(id, user);
 
     //Senden einer Bestätigungsmail
-    Event event = eventService.get(id);
+    Event event = eventService.getEventById(id);
     String eventName = event.getTitle();
-    
+
     String userName = user.getFirstName();
-    
-    MailServiceImpl mailService = new MailServiceImpl();
+
+
     String to = user.getEmail();
     String content = "Hallo " + userName + ",\n Hier die Bestätigung, dass Sie sich zur AG" + eventName + " angemeldet haben";
     String subject = "Anmeldung zur AG " + eventName;
-    
+
     mailService.sendSimpleMessage(to, subject, content);
-    
-    
+
+
     LOGGER.debug("<- assign");
     return "redirect:/";
   }

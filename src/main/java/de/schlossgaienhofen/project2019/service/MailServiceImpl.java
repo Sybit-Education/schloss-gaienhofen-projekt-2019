@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -19,10 +20,12 @@ public class MailServiceImpl implements MailService {
   public void sendSimpleMessage(String to, String subject, String text) {
     LOGGER.debug("--> sendSimpleMessage");
     SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo("christian.wolter@sybit.de");
+    message.setFrom("gainhofentestmail@web.de");
+    message.setTo(to);
     message.setSubject(subject);
     message.setText(text);
     emailSender.send(message);
+    LOGGER.debug("--> Message send to:" + to);
     LOGGER.debug("<-- sendSimpleMessage");
   }
 }

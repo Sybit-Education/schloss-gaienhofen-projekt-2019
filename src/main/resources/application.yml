@@ -13,13 +13,15 @@ spring:
     port: 587
     username: gainhofentestmail@web.de
     password: testMail1234
+    protocol: smtp
     properties:
       mail:
         smtp:
           auth: true
-          starttls:
-            enable: true
-            required: true
+          starttls.enable: true
+          ssl.trust: smtp.web.de
+          tls: true
+
   h2:
     console:
       enabled: true
@@ -33,7 +35,4 @@ spring:
     hibernate:
       ddl-auto: none
 
-smtpserver:
-  enabled: true
-  hostName: smtp.web.de
-  port: 587
+

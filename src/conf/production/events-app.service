@@ -3,8 +3,9 @@ Description=Events application
 After=syslog.target
 
 [Service]
-User=events-app
-ExecStart=/path/to/project2019-0.0.1-SNAPSHOT.jar SuccessExitStatus=143
+User=event-manager
+ExecStart=/usr/bin/java -jar /opt/events-app/project2019-0.0.1-SNAPSHOT.jar -Dspring.profiles.active=production
+SuccessExitStatus=143
 
 [Install]
 WantedBy=multi-user.target

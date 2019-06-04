@@ -1,3 +1,5 @@
+
+
 ldap:
   url: ldap://localhost
   port: 389
@@ -6,14 +8,6 @@ ldap:
 
 
 spring:
-
-  ldap:
-    embedded:
-      base-dn: dc=schloss-gaienhofen,dc=email
-      ldif: classpath:test-schema.ldif
-      port: 389
-      validation:
-        enabled: false
 
   datasource:
     driverClassName: org.h2.Driver

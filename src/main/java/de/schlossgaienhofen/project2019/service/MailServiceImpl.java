@@ -19,7 +19,7 @@ public class MailServiceImpl implements MailService {
   public void sendSimpleMessage(String to, String subject, String text) {
     LOGGER.debug("--> sendSimpleMessage");
     SimpleMailMessage message = new SimpleMailMessage();
-    message.setTo(to);
+    message.setTo("christian.wolter@sybit.de");
     message.setSubject(subject);
     message.setText(text);
     emailSender.send(message);

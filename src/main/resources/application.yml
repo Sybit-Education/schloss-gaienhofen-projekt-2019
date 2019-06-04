@@ -2,23 +2,24 @@
 spring:
   application:
     name: Projekt 2019
-    
+
   datasource:
     driverClassName: org.h2.Driver
     url: jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
     username: root
     password: ""
   mail:
-    host: localhost
-    port: 2525
-    username:
-    password:
+    host: smtp.web.de
+    port: 587
+    username: gainhofentestmail@web.de
+    password: testMail1234
     properties:
       mail:
         smtp:
-          auth: false
+          auth: true
           starttls:
             enable: true
+            required: true
   h2:
     console:
       enabled: true
@@ -34,5 +35,5 @@ spring:
 
 smtpserver:
   enabled: true
-  hostName: localhost
-  port: 2525
+  hostName: smtp.web.de
+  port: 587

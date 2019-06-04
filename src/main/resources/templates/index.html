@@ -59,7 +59,7 @@
     <th>Auswählen</th>
     </thead>
     <tbody>
-    <tr th:each="oneActivity : ${allActivityGroupsInactive}">
+    <tr th:each="oneActivity : ${allEventsInactive}">
       <td><a th:href="@{/ag/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
       <td><span th:utext="${oneActivity.summary}"></span></td>
       <td><span th:utext="${oneActivity.location}"></span></td>

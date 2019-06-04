@@ -44,13 +44,29 @@ public class EventServiceImpl implements EventService {
     List<Event> allActiveEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
-      if (event.getEventState().equals("online")) {
+      if (event.getEventState().equals("1")) {
         allActiveEvents.add(event);
       }
 
     }
     LOGGER.debug("<- getAllEvents size={}", allEvents.size());
     return allActiveEvents;
+  }
+
+  @Override
+  public List<Event> getAllInactiveEvents() {
+    LOGGER.debug("-> getAllEvents");
+    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allInactiveEvents = new ArrayList<>();
+
+    for (Event event : allEvents) {
+      if (event.getEventState().equals("2")) {
+        allInactiveEvents.add(event);
+      }
+
+    }
+    LOGGER.debug("<- getAllEvents size={}", allEvents.size());
+    return allInactiveEvents;
   }
 
   @Override

@@ -39,11 +39,14 @@
     </tr>
 
   </table>
+  <div class="row">
   <form th:action="@{/event/update/{id}(id=${event.id})}">
     <button class="btn btn-primary">bearbeiten</button>
   </form>
-
-
+    <div class="col-sm">
+  <a target="_blank" rel="noopener noreferrer" th:href="@{/event/{id}/attendeelist(id=${id})}"> Teilnehmerliste drucken und bearbeiten</a>
+    </div>
+  </div>
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

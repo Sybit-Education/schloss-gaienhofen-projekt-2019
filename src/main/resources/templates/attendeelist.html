@@ -29,10 +29,10 @@
   </thead>
   <tbody>
   <tr th:each="oneAttendee : ${allattendeesbyAgId}">
-    <td><span th:utext="${oneAttendee.id}"></span></td>
-   <!-- <td><span th:utext="${oneAttendee.firstName}"></span></td>
+    <td><span th:utext="${oneAttendee.getAttendee().getName()}"></span></td>
+    <td><span th:utext="${oneAttendee.getAttendee().getFirstName()}"></span></td>
     <td></td>
-    <td><span th:utext="${oneAttendee.email}"></span></td> -->
+    <td><span th:utext="${oneAttendee.getAttendee().getEmail()}"></span></td>
  <!--   <td class="d-print-none">
       <div th:if="!${assignments.get(oneAttendee.id)}">
       ✔️ abgemeldet

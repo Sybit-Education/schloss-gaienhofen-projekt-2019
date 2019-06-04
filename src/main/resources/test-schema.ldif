@@ -1,66 +1,97 @@
-dn: dc=springframework,dc=org
+dn: dc=email
 objectclass: top
 objectclass: domain
 objectclass: extensibleObject
-dc: springframework
+dc: email
 
-dn: ou=groups,dc=springframework,dc=org
+dn: dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: schloss-gaienhofen
+
+dn: ou=groups,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: organizationalUnit
 ou: groups
 
-dn: ou=people,dc=springframework,dc=org
+dn: ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: organizationalUnit
 ou: people
 
-dn: uid=schueler1,ou=people,dc=springframework,dc=org
+dn: dc=info
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: info
+
+dn: dc=schloss-gaienhofen,dc=info
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: schloss-gaienhofen
+
+dn: ou=groups,dc=schloss-gaienhofen,dc=info
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=schloss-gaienhofen,dc=info
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+
+
+
+dn: uid=max.schueler,ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Max
 sn: Schüler
-uid: schueler@test.de
-sAMAccountName: schueler1
+uid: max.schueler@schloss-gaienhofen.email
+sAMAccountName: max.schueler
 userPassword: test
 
-dn: uid=schueler2,ou=people,dc=springframework,dc=org
+dn: uid=jenny.schueler,ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Jenny
 sn: Johnson
-uid: schueler2@test.de
-sAMAccountName: schueler2
+uid: jenny.johnson@schloss-gaienhofen.email
+sAMAccountName: jenny.johnson
 userPassword: test
 
 
 
-dn: uid=lehrer1,ou=people,dc=springframework,dc=org
+dn: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=info
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Heinz
 sn: Leher
-uid: lehrer@test.de
-sAMAccountName: lehrer1
+uid: heinz.lehrer@schloss-gaienhofen.info
+sAMAccountName: heinz.lehrer
 userPassword: test
 
 
-dn: cn=schueler,ou=groups,dc=springframework,dc=org
+dn: cn=schueler,ou=groups,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: groupOfUniqueNames
 cn: schueler
 ou: schuler
-uniqueMember: uid=schueler1,ou=people,dc=springframework,dc=org
-uniqueMember: uid=schuler2,ou=people,dc=springframework,dc=org
+uniqueMember: uid=max.schueler,ou=people,dc=schloss-gaienhofen,dc=email
+uniqueMember: uid=jenny.schueler,ou=people,dc=schloss-gaienhofen,dc=email
 
-dn: cn=lehrer,ou=groups,dc=springframework,dc=org
+dn: cn=lehrer,ou=groups,dc=schloss-gaienhofen,dc=info
 objectclass: top
 objectclass: groupOfUniqueNames
 cn: lehrer
 ou: lehrer
-uniqueMember: uid=lehrer1,ou=people,dc=springframework,dc=org
+uniqueMember: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=info

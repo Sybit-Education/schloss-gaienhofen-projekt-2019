@@ -23,7 +23,7 @@ public interface EventService {
 
   List<Event> getEventsOfUser(User user);
 
-  Event get(Long id);
+  Event getEventById(Long id);
 
   /**
    * @param id
@@ -31,9 +31,9 @@ public interface EventService {
    * @return
    */
 
-  Event assignUser(Long id, User user);
+  Event assignEventIdWithUser(Long id, User user);
 
-  boolean isAssigned(User user, Event ag);
+  boolean isUserAssignedWithEvent(User user, Event ag);
 
-  Event create(@NotNull Event event);
+  Event saveEvent(@NotNull Event event);
 }

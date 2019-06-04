@@ -3,15 +3,13 @@ package de.schlossgaienhofen.project2019.controller;
 import de.schlossgaienhofen.project2019.data.SelectOption;
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.EventService;
 import de.schlossgaienhofen.project2019.service.StateService;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class EventController {
+public class EventController extends UserManager {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
 
@@ -63,19 +61,17 @@ public class EventController {
    */
   @GetMapping(value = "/ag/{id}")
   public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
-    LOGGER.debug("-> get id={}", id);
+    LOGGER.debug("-> getEventById id={}", id);
 
-    Event event = eventService.get(id);
+    Event event = eventService.getEventById(id);
+
     if (event != null) {
+      User agLeader = event.getLeader();
       model.put("event", event);
+      model.put("agLeader", agLeader);
     }
 
-
-    User agLeader = event.getLeader();
-
-    model.put("agLeader", agLeader);
-
-    LOGGER.debug("<- get");
+    LOGGER.debug("<- getEventById");
     return "ag-detail";
   }
 
@@ -89,12 +85,8 @@ public class EventController {
   public String assign(@PathVariable(name = "id") Long id) {
     LOGGER.debug("-> assign id={}", id);
 
-    final SecurityContext context = SecurityContextHolder.getContext();
-    Authentication authentication = context.getAuthentication();
-
-    LOGGER.debug("assign current user= {} to AG with id= {}", authentication.getName(), id);
-    User user = this.userService.findUserByEmail(authentication.getName());
-    eventService.assignUser(id, user);
+    User user = getCurrentUser();
+    eventService.assignEventIdWithUser(id, user);
 
     LOGGER.debug("<- assign");
     return "redirect:/";
@@ -110,6 +102,7 @@ public class EventController {
 
   /**
    * creates an event
+   *
    * @param event
    * @param model
    * @return
@@ -118,7 +111,7 @@ public class EventController {
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
-    event = eventService.create(event);
+    event = eventService.saveEvent(event);
     model.put("event", event);
 
     mapStateToModel(model, event);

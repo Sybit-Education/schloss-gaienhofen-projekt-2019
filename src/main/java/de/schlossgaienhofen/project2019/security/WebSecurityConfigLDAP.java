@@ -7,25 +7,26 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 import org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-//TODO: Profile anpassen / erstellen
-@Profile({"production"})
 @Configuration
 public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
-  //TODO: Domain anpassen
-  @Value("${ldap.domain:springframework.org}")
+  @Value("${ldap.domain:schloss-gaienhofen.email}")
   private String domain;
 
-  @Value("${ldap.url:ldap://10.0.1.21}")
+  @Value("${ldap.url:ldap://localhost}")
   private String url;
 
   @Value("${ldap.port:389}")
   private int port;
+
+  @Value("${ldap.root:dc=schloss-gaienhofen,dc=email}")
+  private String root;
 
   @Autowired
   private AuthenticationSuccessHandler successHandler;
@@ -49,20 +50,20 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
-
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider = new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
-    authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
     authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
     authManagerBuilder.ldapAuthentication()
+      .userDnPatterns("uid={0},ou=people")
       .groupSearchBase("ou=groups")
-      .userSearchFilter("(&(objectClass=user)(userPrincipalName={0}))")
       .contextSource()
-      .url(url).port(port).root("dc=schloss-gaienhofen,dc=de")
-      .managerDn("managerDn").managerPassword("managerPassword")
+      .url(url).port(port).root(root)
       .and()
-      .userDetailsContextMapper(new InetOrgPersonContextMapper()).authoritiesMapper(new AuthoritiesMapper())
+      .passwordCompare()
+      .passwordEncoder(new LdapShaPasswordEncoder())
+      .passwordAttribute("userPassword")
       .and()
-      .authenticationProvider(authenticationProvider);
+      .authoritiesMapper(new AuthoritiesMapper());
   }
 }
+

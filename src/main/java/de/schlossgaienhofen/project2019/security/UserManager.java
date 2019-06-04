@@ -28,8 +28,8 @@ public abstract class UserManager {
     return user;
   }
 
-  public User getCurrentUserExtend() {
-    LOGGER.debug("--> getCurrentUserExtend");
+  public User getCurrentUserReplacement() {
+    LOGGER.debug("--> getCurrentUserReplacement");
     final SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
     String email;
@@ -44,7 +44,7 @@ public abstract class UserManager {
     } else {
       throw new UserAuthenticationFailed("Unhandled principal type");
     }
-    LOGGER.debug("<-- getCurrentUserExtend");
+    LOGGER.debug("<-- getCurrentUserReplacement");
     return userService.findUserByEmail(email);
   }
 

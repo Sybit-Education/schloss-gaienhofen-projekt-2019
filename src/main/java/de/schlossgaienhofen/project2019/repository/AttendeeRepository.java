@@ -14,4 +14,6 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
   Attendee findByEventAndAttendee(Event event, User user);
 
   List<Attendee> findByEventId(Long id);
+
+  void deleteByAttendeeIdAndEventId(Long attendeeId, Long eventId);
 }

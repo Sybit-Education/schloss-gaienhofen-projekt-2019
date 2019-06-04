@@ -96,7 +96,7 @@ public class EventServiceImpl implements EventService {
       attendee = new Attendee();
       attendee.setEvent(ag);
       attendee.setAttendee(user);
-      attendee.setAssignemtDate(LocalDate.now());
+      attendee.setAssignmentDate(LocalDate.now());
 
       if (!ag.getAttendees().contains(attendee)) {
         LOGGER.debug("add attendee");

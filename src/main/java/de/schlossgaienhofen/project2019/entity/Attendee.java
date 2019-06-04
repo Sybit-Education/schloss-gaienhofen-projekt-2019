@@ -27,7 +27,7 @@ public class Attendee implements Serializable {
   private Event event;
 
   @CreatedDate
-  private LocalDate assignemtDate;
+  private LocalDate assignmentDate;
 
   public Long getId() {
     return id;
@@ -54,12 +54,12 @@ public class Attendee implements Serializable {
   }
 
 
-  public LocalDate getAssignemtDate() {
-    return assignemtDate;
+  public LocalDate getAssignmentDate() {
+    return assignmentDate;
   }
 
-  public void setAssignemtDate(LocalDate assignemtDate) {
-    this.assignemtDate = assignemtDate;
+  public void setAssignmentDate(LocalDate assignmentDate) {
+    this.assignmentDate = assignmentDate;
   }
 
   @Override
@@ -68,7 +68,7 @@ public class Attendee implements Serializable {
     hash = 53 * hash + Objects.hashCode(this.id);
     hash = 53 * hash + Objects.hashCode(this.attendee);
     hash = 53 * hash + Objects.hashCode(this.event);
-    hash = 53 * hash + Objects.hashCode(this.assignemtDate);
+    hash = 53 * hash + Objects.hashCode(this.assignmentDate);
     return hash;
   }
 
@@ -93,7 +93,7 @@ public class Attendee implements Serializable {
     if (!Objects.equals(this.event, other.event)) {
       return false;
     }
-    if (!Objects.equals(this.assignemtDate, other.assignemtDate)) {
+    if (!Objects.equals(this.assignmentDate, other.assignmentDate)) {
       return false;
     }
     return true;

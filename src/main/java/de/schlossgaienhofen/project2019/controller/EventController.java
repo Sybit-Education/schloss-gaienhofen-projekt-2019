@@ -2,14 +2,11 @@ package de.schlossgaienhofen.project2019.controller;
 
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.EventService;
-import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,15 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class EventController {
+public class EventController extends UserManager {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventController.class);
 
   @Autowired
   private EventService eventService;
-
-  @Autowired
-  private UserService userService;
 
   /**
    * List all ActivityGroups.
@@ -61,14 +55,12 @@ public class EventController {
     LOGGER.debug("-> get id={}", id);
 
     Event event = eventService.get(id);
+
     if (event != null) {
+      User agLeader = event.getLeader();
       model.put("event", event);
+      model.put("agLeader", agLeader);
     }
-
-
-    User agLeader = event.getLeader();
-
-    model.put("agLeader", agLeader);
 
     LOGGER.debug("<- get");
     return "ag-detail";
@@ -84,11 +76,7 @@ public class EventController {
   public String assign(@PathVariable(name = "id") Long id) {
     LOGGER.debug("-> assign id={}", id);
 
-    final SecurityContext context = SecurityContextHolder.getContext();
-    Authentication authentication = context.getAuthentication();
-
-    LOGGER.debug("assign current user= {} to AG with id= {}", authentication.getName(), id);
-    User user = this.userService.findUserByEmail(authentication.getName());
+    User user = getCurrentUser();
     eventService.assignUser(id, user);
 
     LOGGER.debug("<- assign");

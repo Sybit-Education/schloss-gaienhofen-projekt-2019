@@ -17,7 +17,7 @@
       <appender-ref ref="FILE" />
     </logger>
 
-    <!-- LOG "de.sybit.berichtsheft2018*" at TRACE level -->
+    <!-- LOG "de.sybit.schlossgaienhofen*" at TRACE level -->
     <logger name="de.schlossgaienhofen" level="TRACE" additivity="false">
       <appender-ref ref="FILE"/>
       <appender-ref ref="CONSOLE"/>

@@ -122,8 +122,8 @@ public class EventController extends UserManager {
     LOGGER.debug("<- getEventById");
     return "redirect:/";
   }
-  
-  @GetMapping (value="/edit/{id}/delete")
+
+  @GetMapping(value = "/update/{id}/delete")
   public String deleteEvent (@PathVariable (name ="id") Long id) {
     eventService.deleteEventById(id);
 	  return "redirect:/";

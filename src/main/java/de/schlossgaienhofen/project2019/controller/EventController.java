@@ -94,7 +94,7 @@ public class EventController extends UserManager {
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
-    event = eventService.create(event);
+    event = eventService.saveEvent(event);
     model.put("event", event);
 
     LOGGER.debug("<-- saveForm");

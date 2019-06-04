@@ -45,7 +45,7 @@ public class EventServiceImplTest {
     int sizeBefore = eventService.getAllEvents().size();
 
     Assert.assertNull(ag.getId());
-    ag = eventService.create(ag);
+    ag = eventService.saveEvent(ag);
 
     Assert.assertNotNull(ag);
     Assert.assertNotNull(ag.getId());
@@ -65,7 +65,7 @@ public class EventServiceImplTest {
     ag.setId(2L);
     ag.setTitle("Titel");
     ag.setLeader(leader);
-    eventService.create(ag);
+    eventService.saveEvent(ag);
   }
 
   @Test

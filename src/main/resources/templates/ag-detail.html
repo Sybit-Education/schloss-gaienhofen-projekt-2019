@@ -10,8 +10,7 @@
 
 <div class="container">
 
-  <h1 class="">AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
-  <h5><span th:utext="${event.summary}"></span></h5>
+  <h1>AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
 
   <table class="table">
     <tr>
@@ -30,11 +29,12 @@
       <td class="col-3"><span><b>End Datum</b></span></td>
       <td><span th:text="${event.endDate}"></span></td>
     </tr>
-    <tr>
-      <td class="col-3"><span><b>Maximale Teilnehmerzahl</b></span></td>
-      <td><span th:text="${event.maxParticipants}"></span></td>
-    </tr>
   </table>
+  <form th:action="@{/event/update/{id}(id=${event.id})}">
+    <button class="btn btn-primary">bearbeiten</button>
+  </form>
+
+
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

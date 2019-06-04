@@ -61,7 +61,7 @@ public class EventController extends UserManager {
     }
 
     LOGGER.debug("<- getEventById");
-    return "ag-detail";
+    return "event-detail";
   }
 
   /**
@@ -121,5 +121,11 @@ public class EventController extends UserManager {
 
     LOGGER.debug("<- getEventById");
     return "redirect:/";
+  }
+
+  @GetMapping(value = "/update/{id}/delete")
+  public String deleteEvent (@PathVariable (name ="id") Long id) {
+    eventService.deleteEventById(id);
+	  return "redirect:/";
   }
 }

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -112,10 +113,13 @@ public class EventController extends UserManager {
     LOGGER.debug("<-- saveForm");
     return "redirect:/ag/" + event.getId();
   }
+
   @GetMapping(value = "/attendeelist")
-  public ModelAndView showAttendees(ModelAndView modelAndView) {
+  public String showAttendees(Map<String, Object> model) {
+
     List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(1L);
-    modelAndView.setViewName("attendeelist");
-    return modelAndView;
+    model.put("allattendeesbyAgId", allattendeesbyAgId);
+    Map<Long, Boolean> assignment = new HashMap<>();
+    return "attendeelist";
   }
 }

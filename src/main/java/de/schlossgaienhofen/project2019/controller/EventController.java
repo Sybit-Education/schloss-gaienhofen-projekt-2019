@@ -101,12 +101,11 @@ public class EventController extends UserManager {
     Attendee attendee = assignmentService.getAttendee(id);
 
     Long attendeeId = attendee.getAttendee().getId();
-    Long eventId = attendee.getEvent().getId();
 
-    eventService.removeUserfromEventId(attendeeId, eventId);
+    eventService.removeUserfromEventId(attendeeId);
 
     LOGGER.debug("<- remove");
-    return "redirect: attendeelist";
+    return "redirect:/event/{id}";
   }
 
   @GetMapping(value = "/create")

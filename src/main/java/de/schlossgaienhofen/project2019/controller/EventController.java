@@ -108,6 +108,12 @@ public class EventController {
     return new ModelAndView("create", stringObjectMap);
   }
 
+  /**
+   * creates an event
+   * @param event
+   * @param model
+   * @return
+   */
   @PostMapping(value = "/ag/create")
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());

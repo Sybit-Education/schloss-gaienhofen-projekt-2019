@@ -35,5 +35,5 @@ public interface EventService {
 
   Event saveEvent(@NotNull Event event);
 
-  Event edit(Event event);
+  Event updateEvent(Event event);
 }

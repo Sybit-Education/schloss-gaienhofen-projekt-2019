@@ -16,14 +16,13 @@
 
   <h1> Event bearbeiten </h1>
 
-  <form action="#" th:action = " ${#request.requestURI}" th:object="${event}" method="post">
+  <form action="#" th:action=" ${#request.requestURI}" th:object="${event}" method="post">
 
 
-    
-          <div class="row">
+    <div class="row">
       <div class="col-md-3 form-group">
         <label for="type"> Typ des Events</label>
-       <input id="type" type="text" class="form-control" th:field="*{type}" required> 
+        <input id="type" type="text" class="form-control" th:field="*{type}" required>
       </div>
 
       <div class="col-md-9 form-group">
@@ -39,16 +38,17 @@
 
     <div class="form-group">
       <label for="description">Ausführliche Beschreibung</label>
-      <textarea id="description" class="form-control summernote" th:field="*{description}" rows="5" maxlength="2048"></textarea>
+      <textarea id="description" class="form-control summernote" th:field="*{description}" rows="5"
+                maxlength="2048"></textarea>
     </div>
-    
-	    <div class="row">
-	        
-          <div class="col-md-6 form-group">
+
+    <div class="row">
+
+      <div class="col-md-6 form-group">
         <label for="leaderId">Leiter </label>
         <input id="leaderId" type="text" class="form-control" th:field="*{leader}" required/>
-      </div>	
-    
+      </div>
+
       <div class="col-md-6 form-group">
         <label for="location">Treffpunkt/Ort</label>
         <input id="location" type="text" class="form-control" th:field="*{location}" required/>
@@ -73,7 +73,7 @@
         <button type="submit" class="btn btn-outline-success">Speichern</button>
       </div>
       <div class="col-md-3">
-      <button type="reset" class="btn btn-outline-danger">Event löschen</button>
+        <button type="reset" class="btn btn-outline-danger">Event löschen</button>
       </div>
       <div class="col-md-3">
         <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>

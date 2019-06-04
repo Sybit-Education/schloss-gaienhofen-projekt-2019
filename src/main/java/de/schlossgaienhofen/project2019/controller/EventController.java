@@ -24,14 +24,14 @@ public class EventController extends UserManager {
   private EventService eventService;
 
   /**
-   * List all ActivityGroups.
+   * List viewAll ActivityGroups.
    *
    * @param modelAndView
    * @param model
    * @return
    */
   @GetMapping(value = "/")
-  public ModelAndView all(ModelAndView modelAndView, Map<String, Object> model) {
+  public ModelAndView viewAll(ModelAndView modelAndView, Map<String, Object> model) {
     List<Event> allEvents = eventService.getAllEvents();
 
     model.put("allActivitiesList", allEvents);
@@ -49,7 +49,7 @@ public class EventController extends UserManager {
    * @return
    */
   @GetMapping(value = "/{id}")
-  public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
+  public String getEventById(@PathVariable(name = "id") Long id, Map<String, Object> model) {
     LOGGER.debug("-> getEventById id={}", id);
 
     Event event = eventService.getEventById(id);
@@ -84,7 +84,7 @@ public class EventController extends UserManager {
   @GetMapping(value = "/create")
   public ModelAndView showForm(ModelAndView modelAndView) {
     modelAndView.addObject("event", new Event());
-    modelAndView.setViewName("edit_event");
+    modelAndView.setViewName("update_event");
     return modelAndView;
   }
 
@@ -99,27 +99,27 @@ public class EventController extends UserManager {
     return "redirect:/event/" + event.getId();
   }
 
-  @GetMapping(value = "/edit/{id}")
-  public ModelAndView edit(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
-    LOGGER.debug("-> get id={}", id);
+  @GetMapping(value = "/update/{id}")
+  public ModelAndView update(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
+    LOGGER.debug("-> getEventById id={}", id);
 
-    Event event = eventService.get(id);
+    Event event = eventService.getEventById(id);
     model.put("event", event);
-    modelAndView.setViewName("edit_event");
+    modelAndView.setViewName("update_event");
 
-    LOGGER.debug("<- get");
+    LOGGER.debug("<- getEventById");
     return modelAndView;
   }
-  
-  @PostMapping(value = "/edit/{id}")
-  public String updateevent(@ModelAttribute Event event, @PathVariable(name="id") Long id) {
-    LOGGER.debug("-> get id={}", id);
 
-    Event oldEvent = eventService.get(id);
+  @PostMapping(value = "/update/{id}")
+  public String updateEvent(@ModelAttribute Event event, @PathVariable(name = "id") Long id) {
+    LOGGER.debug("-> getEventById id={}", id);
+
+    Event oldEvent = eventService.getEventById(id);
     event.setId(oldEvent.getId());
-    event = eventService.edit(event);
+    eventService.updateEvent(event);
 
-    LOGGER.debug("<- get");
+    LOGGER.debug("<- getEventById");
     return "redirect:/";
   }
 }

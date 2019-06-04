@@ -83,15 +83,14 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public Event edit(Event event) throws IllegalArgumentException {
-	  Event updatedEvent = event;
-	  if (event.getId()!= null) {
-		updatedEvent =  eventRepository.save(event);
-	  }
-	  else {
-		throw new IllegalArgumentException("Dieses Event hat keine Id.");
-	  }
-	  return updatedEvent;
+  public Event updateEvent(Event event) throws IllegalArgumentException {
+    Event updatedEvent;
+    if (event.getId() != null) {
+      updatedEvent = eventRepository.save(event);
+    } else {
+      throw new IllegalArgumentException("Event doesn't have an id");
+    }
+    return updatedEvent;
   }
 
   @Override
@@ -127,6 +126,7 @@ public class EventServiceImpl implements EventService {
     if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
+    assert event != null;
     return eventRepository.saveAndFlush(event);
   }
 }

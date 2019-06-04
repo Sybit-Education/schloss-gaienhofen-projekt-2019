@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 //TODO: Profile anpassen / erstellen
-@Profile({"prod"})
+@Profile({"production"})
 @Configuration
 public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 

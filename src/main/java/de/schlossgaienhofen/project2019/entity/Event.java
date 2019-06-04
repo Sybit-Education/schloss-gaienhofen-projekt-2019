@@ -21,7 +21,10 @@ public class Event implements Serializable {
 
   private String title;
 
-  private String creator;
+  private String leader;
+  
+  
+  private User creator;
 
   
   private String summary;
@@ -58,11 +61,19 @@ public class Event implements Serializable {
     this.title = title;
   }
   
-  public String getCreator () {
+  public String getLeader () {
+	  return leader;
+  }
+  
+  public void setLeader (String leader) {
+	  this.leader=leader;
+  }
+  
+  public User getCreator () {
 	  return creator;
   }
   
-  public void setCreator(String creator) {
+  public void setCreator(User creator) {
 	  this.creator =creator;
   }
 

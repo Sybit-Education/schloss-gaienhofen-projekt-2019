@@ -43,6 +43,9 @@ public class HomeController {
     List<Event> allEventsActive = eventService.getAllActiveEvents();
     model.put("allEventsActive", allEventsActive);
 
+    List<Event> allEventsInactive = eventService.getAllInactiveEvents();
+    model.put("allEventsInactive", allEventsInactive);
+
     List<Event> allEvents = eventService.getAllEvents();
     model.put("allEvents", allEvents);
 

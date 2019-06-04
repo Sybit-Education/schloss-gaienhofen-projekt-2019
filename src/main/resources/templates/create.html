@@ -33,7 +33,7 @@
 
     <div class="col-md-8">
       <label for="leaderId">Name des Leiters</label>
-      <input id="leaderId" type="text" class="form-control" th:field="*{leaderId}" required/>
+      <input id="leaderId" type="text" class="form-control" th:field="*{leader}" required/>
       <br>
     </div>
 
@@ -74,7 +74,7 @@
     <div class="col-md-8">
     <div class="dropdown">
       <select class="form-control defaultSettingsSelect"
-              th:field="${activityGroup.agState}" id="areaSelect" type="text" required>
+              th:field="${event.eventState}" id="areaSelect" type="text" required>
         <option class="link_dropdown_white"
                 th:each="selectOption: ${allStates}"
                 th:value="${selectOption.value}"

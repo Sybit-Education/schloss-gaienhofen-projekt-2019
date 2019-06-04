@@ -12,6 +12,8 @@ public interface EventService {
 
   List<Event> getAllActiveEvents();
 
+  List<Event> getAllInactiveEvents();
+
   /**
    * Get List of Events which are assigned to given user.
    *

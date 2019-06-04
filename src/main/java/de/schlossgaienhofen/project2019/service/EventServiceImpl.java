@@ -93,6 +93,12 @@ public class EventServiceImpl implements EventService {
 	  }
 	  return updatedEvent;
   }
+  
+  @Override 
+  public void delete (Long id) {
+	  Event event = get(id);
+	  eventRepository.delete(event);
+  }
 
   @Override
   public Event assignUser(Long id, User user) {

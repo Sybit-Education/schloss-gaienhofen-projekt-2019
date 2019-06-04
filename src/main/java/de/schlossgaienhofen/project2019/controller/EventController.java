@@ -134,4 +134,10 @@ public class EventController {
     LOGGER.debug("<- get");
     return "redirect:/";
   }
+  
+  @GetMapping (value="/edit/{id}/delete")
+  public String deleteEvent (@PathVariable (name ="id") Long id) {
+	  eventService.delete(id);
+	  return "redirect:/";
+  }
 }

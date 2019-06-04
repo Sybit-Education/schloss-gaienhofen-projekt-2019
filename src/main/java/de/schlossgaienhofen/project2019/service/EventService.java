@@ -36,4 +36,6 @@ public interface EventService {
   Event create(@NotNull Event event);
   
   Event edit(Event event);
+  
+  void delete (Long id);
 }

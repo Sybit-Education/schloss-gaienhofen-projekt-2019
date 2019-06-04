@@ -19,8 +19,8 @@
 
     <!-- LOG "de.sybit.berichtsheft2018*" at TRACE level -->
     <logger name="de.schlossgaienhofen" level="TRACE" additivity="false">
-      <appender-ref ref="RollingFile" />
-      <appender-ref ref="Console" />
+      <appender-ref ref="FILE"/>
+      <appender-ref ref="CONSOLE"/>
     </logger>
   </springProfile>
 

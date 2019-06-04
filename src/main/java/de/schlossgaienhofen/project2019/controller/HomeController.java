@@ -34,20 +34,17 @@ public class HomeController extends UserManager {
   @GetMapping(value = "/")
   public String viewHome(Map<String, Object> model) {
     LOGGER.debug("-> viewHome");
-    List<Event> allEventsActiveList = eventService.getAllEvents();
-    model.put("allEventsActive", allEventsActiveList);
-    List<Event> allEventsActive = eventService.getAllActiveEvents();
-    model.put("allEventsActive", allEventsActive);
-
-    User user = getCurrentUser();
-    List<Event> allEventsInactive = eventService.getAllInactiveEvents();
-    model.put("allEventsInactive", allEventsInactive);
-
     List<Event> allEvents = eventService.getAllEvents();
     model.put("allEvents", allEvents);
+    List<Event> allActiveEvents = eventService.getAllActiveEvents();
+    model.put("allActiveEvents", allActiveEvents);
+
+    User user = getCurrentUser();
+    List<Event> allInactiveEvents = eventService.getAllInactiveEvents();
+    model.put("allInactiveEvents", allInactiveEvents);
 
     Map<Long, Boolean> assignment = new HashMap<>();
-    for (Event eachEvent : allEventsActiveList) {
+    for (Event eachEvent : allActiveEvents) {
       if (eventService.isUserAssignedWithEvent(user, eachEvent)) {
         assignment.put(eachEvent.getId(), true);
       } else {

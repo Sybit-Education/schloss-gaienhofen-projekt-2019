@@ -28,7 +28,7 @@
     <th>Auswählen</th>
     </thead>
     <tbody>
-    <tr th:each="oneEvent : ${allEventsActive}">
+    <tr th:each="oneEvent : ${allActiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
       <td><span th:utext="${oneEvent.summary}"></span></td>
       <td><span th:utext="${oneEvent.location}"></span></td>
@@ -60,7 +60,7 @@
     <th>Auswählen</th>
     </thead>
     <tbody>
-    <tr th:each="oneActivity : ${allEventsInactive}">
+    <tr th:each="oneActivity : ${allInactiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
       <td><span th:utext="${oneActivity.summary}"></span></td>
       <td><span th:utext="${oneActivity.location}"></span></td>

@@ -120,8 +120,8 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public Event create(@NotNull Event event) {
-    if (event.getId() != null) {
+  public Event saveEvent(@NotNull Event event) {
+    if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
     return eventRepository.saveAndFlush(event);

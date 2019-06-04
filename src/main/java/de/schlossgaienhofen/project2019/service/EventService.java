@@ -35,5 +35,5 @@ public interface EventService {
 
   boolean isUserAssignedWithEvent(User user, Event ag);
 
-  Event create(@NotNull Event event);
+  Event saveEvent(@NotNull Event event);
 }

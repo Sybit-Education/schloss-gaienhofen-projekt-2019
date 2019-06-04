@@ -59,7 +59,7 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
 
     authManagerBuilder.ldapAuthentication()
       .groupSearchBase("ou=groups")
-      .userSearchFilter("(&(objectClass=user)(userPrincipalName={0}))")
+      .userSearchFilter("(&(objectClass=user)(mail={0}))")
       .contextSource()
       .url(url).port(port).root(root)
       .managerDn("managerDn").managerPassword("managerPassword")

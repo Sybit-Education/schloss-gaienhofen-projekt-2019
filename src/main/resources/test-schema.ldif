@@ -23,7 +23,8 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Max
 sn: Schüler
-uid: max.schueler@schloss-gaienhofen.email
+uid: max.schueler
+mail: max.schueler@schloss-gaienhofen.email
 sAMAccountName: max.schueler
 userPassword: test
 
@@ -34,7 +35,8 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Jenny
 sn: Johnson
-uid: jenny.johnson@schloss-gaienhofen.email
+uid: jenny.johnson
+mail: jenny.johnson@schloss-gaienhofen.email
 sAMAccountName: jenny.johnson
 userPassword: test
 
@@ -47,7 +49,8 @@ objectclass: organizationalPerson
 objectclass: inetOrgPerson
 cn: Heinz
 sn: Leher
-uid: heinz.lehrer@schloss-gaienhofen.info
+uid: heinz.lehrer
+mail: heinz.lehrer@schloss-gaienhofen.info
 sAMAccountName: heinz.lehrer
 userPassword: test
 

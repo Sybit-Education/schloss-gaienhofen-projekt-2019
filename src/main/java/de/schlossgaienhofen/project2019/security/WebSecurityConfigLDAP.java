@@ -56,7 +56,7 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
     authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
     authManagerBuilder.ldapAuthentication()
-      .userDnPatterns("uid={0},ou=people")
+      .userDnPatterns("mail={0},ou=people")
       .groupSearchBase("ou=people")
       .contextSource()
       .url(url).port(port).root(root)

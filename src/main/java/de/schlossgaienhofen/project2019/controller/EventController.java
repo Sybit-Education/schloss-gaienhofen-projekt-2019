@@ -1,7 +1,9 @@
 package de.schlossgaienhofen.project2019.controller;
 
+import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.service.AssignmentService;
 import de.schlossgaienhofen.project2019.service.EventService;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
@@ -30,6 +32,9 @@ public class EventController {
 
   @Autowired
   private UserService userService;
+
+ @Autowired
+ private AssignmentService assignmentService;
 
   /**
    * List all ActivityGroups.
@@ -114,6 +119,7 @@ public class EventController {
   }
   @GetMapping(value = "/attendeelist")
   public ModelAndView showAttendees(ModelAndView modelAndView) {
+    List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(1L);
     modelAndView.setViewName("attendeelist");
     return modelAndView;
   }

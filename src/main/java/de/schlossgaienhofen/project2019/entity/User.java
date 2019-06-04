@@ -26,8 +26,6 @@ public class User implements Serializable {
   @OneToMany(mappedBy = "id")
   private Set<Attendee> attendee;
   
-  @OneToMany(mappedBy= "user")
-  private Set<Event> event;
 
   public String getEmail() {
     return email;

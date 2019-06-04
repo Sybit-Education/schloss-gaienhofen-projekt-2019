@@ -55,7 +55,7 @@ public class EventController extends UserManager {
     Event event = eventService.getEventById(id);
 
     if (event != null) {
-      String agLeader = event.getLeader();
+      String agLeader = event.getCreator();
       model.put("event", event);
       model.put("agLeader", agLeader);
     }

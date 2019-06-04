@@ -136,7 +136,6 @@ public class EventServiceImpl extends UserManager implements EventService {
     if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
-    event.setCreator(getCurrentUser());
     return eventRepository.saveAndFlush(event);
   }
 }

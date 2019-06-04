@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+<html lang="de" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta th:replace="includes/dependencies :: dependencies"/>
+
+
+  <title>Event bearbeiten</title>
+
+</head>
+
+<body>
+<div th:replace="includes/navigationbar :: navigationbar"></div>
+
+<div class="container">
+
+  <h1> Event bearbeiten </h1>
+
+  <form action="#" th:action=" ${#request.requestURI}" th:object="${event}" method="post">
+
+
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="type"> Typ des Events</label>
+        <input id="type" type="text" class="form-control" th:field="*{type}" required>
+      </div>
+
+      <div class="col-md-9 form-group">
+        <label for="title">Name des Events</label>
+        <input id="title" type="text" class="form-control" th:field="*{title}" required/>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="summary">Kurzbeschreibung</label>
+      <input id="summary" type="text" maxlength="256" class="form-control" th:field="*{summary}"/>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Ausführliche Beschreibung</label>
+      <textarea id="description" class="form-control summernote" th:field="*{description}" rows="5"
+                maxlength="2048"></textarea>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6 form-group">
+        <label for="leaderId">Leiter </label>
+        <input id="leaderId" type="text" class="form-control" th:field="*{leader}" required/>
+      </div>
+
+      <div class="col-md-6 form-group">
+        <label for="location">Treffpunkt/Ort</label>
+        <input id="location" type="text" class="form-control" th:field="*{location}" required/>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-3 form-group">
+        <label for="startDate">Startdatum: (jjjj-mm-tt)</label>
+        <input id="startDate" type="text" class="form-control" th:field="*{startDate}" required/>
+      </div>
+
+      <div class="col-md-3 form-group">
+        <label for="endDate">Enddatum: (jjjj-mm-tt)</label>
+        <input id="endDate" type="text" class="form-control" th:field="*{endDate}" required/>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <button type="submit" class="btn btn-outline-success">Speichern</button>
+      </div>
+      <div class="col-md-3">
+        <a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">Event löschen</a>
+      </div>
+      <div class="col-md-3">
+        <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
+      </div>
+
+      <a target="_blank" rel="noopener noreferrer" th:href="@{/event/attendeelist}"> Teilnehmerliste drucken und bearbeiten</a>
+    </div>
+  </form>
+
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+
+
+<script>
+
+  $(document).ready(function () {
+    $(".summernote").summernote({
+      height: 300, // set editor height
+      minHeight: 200, // set minimum height of editor
+      // maxHeight: null, // set maximum height of editor
+      focus: false,
+      lang: 'de-DE',
+      toolbar: [
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['para', ['ul', 'ol']],
+        ['insert', ['link']],
+        ['misc', ['undo', 'redo']]
+      ],
+      hint: {
+        match: /:([\-+\w]+)$/,
+        search: function (keyword, callback) {
+          callback($.grep(emojis, function (item) {
+            return item.indexOf(keyword) === 0;
+          }));
+        },
+        template: function (item) {
+          var content = emojiUrls[item];
+          return '<img src="' + content + '" width="20" /> :' + item + ':';
+        },
+        content: function (item) {
+          var url = emojiUrls[item];
+          if (url) {
+            return $('<img />').attr('src', url).css('width', 20)[0];
+          }
+          return '';
+        }
+      },
+      callbacks: {
+        onInit: function () {
+          $('body > .note-popover').hide();
+        }
+      }
+    });
+
+    $.ajax({
+      url: 'https://api.github.com/emojis',
+      async: false
+    }).then(function (data) {
+      window.emojis = Object.keys(data);
+      window.emojiUrls = data;
+    });
+  });
+
+  $(function () {
+    $("#datepickerstart").datepicker();
+  });
+
+  $(function () {
+    $("#datepickerend").datepicker();
+  });
+</script>
+</body>
+</html>

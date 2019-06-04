@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/dependencies :: dependencies">
+  <title>AG</title>
+</head>
+<body>
+
+<div th:replace="includes/navigationbar :: navigationbar"></div>
+
+<div class="container">
+
+  <h1>AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
+
+  <table class="table">
+    <tr>
+      <td><b>Leiter</b></td>
+      <td><span th:text="${agLeader.firstName}"></span> <span th:text="${agLeader.name}"></span></td>
+    </tr>
+    <tr>
+      <td><span><b>Typ</b></span></td>
+      <td><span th:utext="${event.type}"></span></td>
+    </tr>
+    <tr>
+      <td><span><b>Beschreibung</b></span></td>
+      <td><span th:utext="${event.description}"></span></td>
+    </tr>
+    <tr>
+      <td><span><b>Ort</b></span></td>
+      <td><span th:utext="${event.location}"></span></td>
+    </tr>
+    <tr>
+      <td><span><b>Start Datum</b></span></td>
+      <td><span th:text="${event.startDate}"></span></td>
+    </tr>
+    <tr>
+      <td><span><b>End Datum</b></span></td>
+      <td><span th:text="${event.endDate}"></span></td>
+    </tr>
+
+  </table>
+  <form th:action="@{/event/update/{id}(id=${event.id})}">
+    <button class="btn btn-primary">bearbeiten</button>
+  </form>
+
+
+</div>
+
+<div th:replace="includes/footer :: footer"></div>
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+</body>
+</html>

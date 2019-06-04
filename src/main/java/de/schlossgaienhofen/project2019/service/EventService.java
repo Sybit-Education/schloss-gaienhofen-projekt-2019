@@ -31,6 +31,8 @@ public interface EventService {
 
   Event assignEventIdWithUser(Long id, User user);
 
+  void removeUserfromEventId (Long attendeeId, Long eventId);
+
   boolean isUserAssignedWithEvent(User user, Event ag);
 
   Event create(@NotNull Event event);

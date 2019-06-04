@@ -33,16 +33,16 @@
     <td><span th:utext="${oneAttendee.getAttendee().getFirstName()}"></span></td>
     <td></td>
     <td><span th:utext="${oneAttendee.getAttendee().getEmail()}"></span></td>
- <!--   <td class="d-print-none">
-      <div th:if="!${assignments.get(oneAttendee.id)}">
+  <td class="d-print-none">
+      <div th:if="!${oneAttendee.id}">
       ✔️ abgemeldet
       </div>
-      <div th:if="${assignments.get(oneAttendee.id)}">
+      <div th:if="${oneAttendee.id}">
         <form th:action="@{/ag/{id}/remove(id=${oneAttendee.id})}" th:method="post">
           <button class="btn btn-primary">abmelden</button>
         </form>
       </div>
-   </td> -->
+   </td>
   </tr>
   </tbody>
 </table>

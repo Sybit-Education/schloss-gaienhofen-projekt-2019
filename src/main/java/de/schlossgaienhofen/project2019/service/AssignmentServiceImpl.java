@@ -20,4 +20,17 @@ public class AssignmentServiceImpl implements AssignmentService{
     return allAttendees;
   }
 
+  @Override
+  public Attendee getAttendee(Long id){
+
+    if (id == null){
+      throw new IllegalArgumentException("Id can not be null");
+    }
+
+    Attendee attendee = attendeeRepository.findByAttendeeId(id);
+
+    return attendee;
+
+  }
+
 }

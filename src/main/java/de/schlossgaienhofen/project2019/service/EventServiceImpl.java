@@ -105,6 +105,15 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
+  public void removeUserfromEventId (Long attendeeId, Long eventId) {
+
+    if (attendeeId == null || eventId == null) {
+      throw new IllegalArgumentException("AttendeeId or EventId can not be null!");
+    }
+    attendeeRepository.deleteByAttendeeIdAndEventId(attendeeId, eventId);
+  }
+
+  @Override
   public boolean isUserAssignedWithEvent(User user, Event event) {
     Attendee attendee = attendeeRepository.findByEventAndAttendee(event, user);
     return attendee != null;

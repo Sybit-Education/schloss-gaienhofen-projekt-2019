@@ -8,4 +8,6 @@ public interface AssignmentService {
 
     List<Attendee> getAllattendeesbyAgId(long id);
 
+    Attendee getAttendee(Long attendeId);
+
 }

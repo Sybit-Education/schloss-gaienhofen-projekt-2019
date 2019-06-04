@@ -96,6 +96,21 @@ public class EventController extends UserManager {
     return "redirect:/";
   }
 
+  @PostMapping(value = "/ag/{id}/remove")
+  public String remove(@PathVariable(name = "id") Long id) {
+    LOGGER.debug("-> remove id={}", id);
+
+    Attendee attendee = assignmentService.getAttendee(id);
+
+    Long attendeeId = attendee.getAttendee().getId();
+    Long eventId = attendee.getEvent().getId();
+
+    eventService.removeUserfromEventId(attendeeId, eventId);
+
+    LOGGER.debug("<- remove");
+    return "redirect: attendeelist";
+  }
+
   @GetMapping(value = "/ag/create")
   public ModelAndView showForm(ModelAndView modelAndView) {
     modelAndView.addObject("event", new Event());
@@ -119,7 +134,7 @@ public class EventController extends UserManager {
 
     List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(1L);
     model.put("allattendeesbyAgId", allattendeesbyAgId);
-    Map<Long, Boolean> assignment = new HashMap<>();
+
     return "attendeelist";
   }
 }

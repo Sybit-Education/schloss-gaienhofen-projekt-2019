@@ -17,8 +17,6 @@ import java.util.Set;
  */
 public class AuthoritiesMapper implements GrantedAuthoritiesMapper {
 
-   private static final String LDAP_GROUP_PUPIL = "Schueler-Gruppe";
-
    private static final String LDAP_GROUP_TEACHER = "Lehrer-Gruppe";
 
    private static final Logger LOGGER = LoggerFactory.getLogger(AuthoritiesMapper.class);

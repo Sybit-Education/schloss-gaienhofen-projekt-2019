@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
   @Override
   public List<Event> getAllEvents() {
     LOGGER.debug("-> getAllEvents");
-    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
 
     LOGGER.debug("<- getAllEvents size={}", allEvents.size());
     return allEvents;
@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
   @Override
   public List<Event> getAllActiveEvents() {
     LOGGER.debug("-> getAllEvents");
-    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
     List<Event> allActiveEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
@@ -56,12 +56,12 @@ public class EventServiceImpl implements EventService {
   @Override
   public List<Event> getEventsOfUser(User user) {
     LOGGER.debug("-> getEventsOfUser user={}", user.getEmail());
-    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
 
     List<Event> myEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
-      if (isAssigned(user, event)) {
+      if (isUserAssignedWithEvent(user, event)) {
         myEvents.add(event);
       }
     }
@@ -71,17 +71,17 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public Event get(Long id) {
-    LOGGER.debug("-> get id={}", id);
+  public Event getEventById(Long id) {
+    LOGGER.debug("-> getEventById id={}", id);
     Event event = null;
     Optional<Event> eventOptional = eventRepository.findById(id);
     if (eventOptional.isPresent()) {
       event = eventOptional.get();
     }
-    LOGGER.debug("<- get event={}", event);
+    LOGGER.debug("<- getEventById");
     return event;
   }
-  
+
   @Override
   public Event edit(Event event) throws IllegalArgumentException {
 	  Event updatedEvent = event;
@@ -89,49 +89,42 @@ public class EventServiceImpl implements EventService {
 		updatedEvent =  eventRepository.save(event);
 	  }
 	  else {
-		throw new IllegalArgumentException("Dieses Event hat keine Id."); 
+		throw new IllegalArgumentException("Dieses Event hat keine Id.");
 	  }
 	  return updatedEvent;
   }
 
   @Override
-  public Event assignUser(Long id, User user) {
-    LOGGER.debug("-> assignUser id={} user={}", id, user.getEmail());
+  public Event assignEventIdWithUser(Long eventId, User user) {
+    LOGGER.debug("-> assignEventIdWithUser id={} user={}", eventId, user.getEmail());
 
-    Event ag = get(id);
-    if (ag == null) {
-      throw new IllegalArgumentException("Couldn't fetch agData properly");
+    Event event = getEventById(eventId);
+    if (event == null) {
+      throw new IllegalArgumentException("Couldn't fetch event data properly");
     }
-    Attendee attendee = attendeeRepository.findByIdAndAttendeeId(id, user.getId());
+    Attendee attendee = attendeeRepository.findByEventAndAttendee(event, user);
     if (attendee == null) {
 
       attendee = new Attendee();
-      attendee.setEvent(ag);
+      attendee.setEvent(event);
       attendee.setAttendee(user);
-      attendee.setAssignemtDate(LocalDate.now());
-
-      if (!ag.getAttendees().contains(attendee)) {
-        LOGGER.debug("add attendee");
-        ag.getAttendees().add(attendee);
-      }
+      attendee.setAssignmentDate(LocalDate.now());
     }
 
-    ag = eventRepository.saveAndFlush(ag);
     attendeeRepository.saveAndFlush(attendee);
-
-    LOGGER.debug("<- assignUser");
-    return ag;
+    LOGGER.debug("<- assignEventIdWithUser");
+    return event;
   }
 
   @Override
-  public boolean isAssigned(User user, Event ag) {
-    Attendee attendee = attendeeRepository.findByIdAndAttendeeId(ag.getId(), user.getId());
+  public boolean isUserAssignedWithEvent(User user, Event event) {
+    Attendee attendee = attendeeRepository.findByEventAndAttendee(event, user);
     return attendee != null;
   }
 
   @Override
-  public Event create(@NotNull Event event) {
-    if (event.getId() != null) {
+  public Event saveEvent(@NotNull Event event) {
+    if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
     return eventRepository.saveAndFlush(event);

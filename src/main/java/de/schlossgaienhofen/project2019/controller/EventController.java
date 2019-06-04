@@ -122,5 +122,16 @@ public class EventController {
     LOGGER.debug("<- get");
     return modelAndView;
   }
+  
+  @PostMapping(value = "/edit/{id}")
+  public String updateevent(@ModelAttribute Event event, @PathVariable(name="id") Long id) {
+    LOGGER.debug("-> get id={}", id);
 
+    Event oldEvent = eventService.get(id);
+    event.setId(oldEvent.getId());
+    event = eventService.edit(event);
+
+    LOGGER.debug("<- get");
+    return "redirect:/";
+  }
 }

@@ -16,7 +16,7 @@
 
   <h1> Event bearbeiten </h1>
 
-  <form action="#" th:action="@{/event/create}" th:object="${event}" method="post">
+  <form action="#" th:action = " ${#request.requestURI}" th:object="${event}" method="post">
 
 
     

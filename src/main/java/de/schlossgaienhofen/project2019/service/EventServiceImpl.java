@@ -81,6 +81,18 @@ public class EventServiceImpl implements EventService {
     LOGGER.debug("<- get event={}", event);
     return event;
   }
+  
+  @Override
+  public Event edit(Event event) throws IllegalArgumentException {
+	  Event updatedEvent = event;
+	  if (event.getId()!= null) {
+		updatedEvent =  eventRepository.save(event);
+	  }
+	  else {
+		throw new IllegalArgumentException("Dieses Event hat keine Id."); 
+	  }
+	  return updatedEvent;
+  }
 
   @Override
   public Event assignUser(Long id, User user) {

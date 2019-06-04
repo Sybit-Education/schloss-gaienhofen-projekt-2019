@@ -17,10 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
+  //TODO: Domain anpassen
   @Value("${ldap.domain:springframework.org}")
   private String domain;
 
-  @Value("${ldap.url:ldap://localhost}")
+  @Value("${ldap.url:ldap://10.0.1.21}")
   private String url;
 
   @Value("${ldap.port:389}")
@@ -57,8 +58,8 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
       .groupSearchBase("ou=groups")
       .userSearchFilter("(&(objectClass=user)(userPrincipalName={0}))")
       .contextSource()
-      .url(url).port(port).root("dc=sybit,dc=de")
-      .managerDn("jira").managerPassword("IssueS6788")
+      .url(url).port(port).root("dc=schloss-gaienhofen,dc=de")
+      .managerDn("managerDn").managerPassword("managerPassword")
       .and()
       .userDetailsContextMapper(new InetOrgPersonContextMapper()).authoritiesMapper(new AuthoritiesMapper())
       .and()

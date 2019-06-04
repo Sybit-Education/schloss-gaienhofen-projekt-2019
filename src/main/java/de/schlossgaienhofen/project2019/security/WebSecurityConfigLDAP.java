@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
-import org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -25,7 +25,7 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
   @Value("#{environment.getProperty('port')}")
   private int port;
 
-  @Value("${ldap.root:dc=schloss-gaienhofen,dc=email}")
+  @Value("#{environment.getProperty('root')}")
   private String root;
 
   @Autowired

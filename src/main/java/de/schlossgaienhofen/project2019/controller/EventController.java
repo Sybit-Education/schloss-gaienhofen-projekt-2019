@@ -6,7 +6,6 @@ import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.EventService;
 import de.schlossgaienhofen.project2019.service.StateService;
-import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,6 @@ public class EventController extends UserManager {
 
   @Autowired
   private EventService eventService;
-
-  @Autowired
-  private UserService userService;
 
   @Autowired
   private StateService stateService;

@@ -37,6 +37,10 @@
       <td><span><b>End Datum</b></span></td>
       <td><span th:text="${event.endDate}"></span></td>
     </tr>
+   <!--  <tr>
+    	<td><span><b>Erstellt von:</b></span></td>
+    	<td><span th:text="${event.creator}>"></span></td>
+    </tr> -->
 
   </table>
   <form th:action="@{/event/update/{id}(id=${event.id})}">

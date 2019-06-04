@@ -5,6 +5,8 @@ import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
 import de.schlossgaienhofen.project2019.repository.EventRepository;
+import de.schlossgaienhofen.project2019.security.UserManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EventServiceImpl implements EventService {
+public class EventServiceImpl extends UserManager implements EventService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventServiceImpl.class);
 
@@ -134,7 +136,7 @@ public class EventServiceImpl implements EventService {
     if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
-    assert event != null;
+    event.setCreator(getCurrentUser());
     return eventRepository.saveAndFlush(event);
   }
 }

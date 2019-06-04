@@ -1,7 +1,7 @@
 CREATE TABLE event (
     id bigint NOT NULL AUTO_INCREMENT,
     title varchar(50),
-    leader_id varchar(40),
+    leader varchar(40),
     summary varchar(256),
     description varchar(2048),
     start_date DATE ,
@@ -10,13 +10,14 @@ CREATE TABLE event (
     event_state varchar(10),
     location varchar(50),
     type varchar(50),
+  	creator varchar (50),
 );
 
-INSERT INTO event (id, title, leader_id, summary, description, start_date, end_date, max_participants, event_state, location, type)
-VALUES (1, 'Lerntierchen-Zucht', '1', 'Lerntierchen züchten!', 'Wir werden in der AG im 14-tägigen Turnus kleine Lerntierchen züchten. Wichtig ist, dass du eine Streichholzschachtel für deine Zucht hast und dich regelmässig um die Tiere kümmern kannst. Sie brauchen regelmässigen Lernstoff.', '2019-09-01', '2020-09-01', 30, 'online', 'E2', 'AG');
+INSERT INTO event (id, title, leader, summary, description, start_date, end_date, max_participants, event_state, location, type, creator)
+VALUES (1, 'Lerntierchen-Zucht', '1', 'Lerntierchen züchten!', 'Wir werden in der AG im 14-tägigen Turnus kleine Lerntierchen züchten. Wichtig ist, dass du eine Streichholzschachtel für deine Zucht hast und dich regelmässig um die Tiere kümmern kannst. Sie brauchen regelmässigen Lernstoff.', '2019-09-01', '2020-09-01', 30, 'online', 'E2', 'AG', 'Lehrer');
 
-INSERT INTO event (id, title, leader_id,  summary, description, start_date, end_date, max_participants, event_state, location, type)
-VALUES (2, 'AG2', '2', 'Summary 2', 'AG2 Herzlich Willkommen', '2019-09-01', '2020-09-01', 20, 'online', 'E2', 'AG');
+INSERT INTO event (id, title, leader,  summary, description, start_date, end_date, max_participants, event_state, location, type, creator)
+VALUES (2, 'AG2', '2', 'Summary 2', 'AG2 Herzlich Willkommen', '2019-09-01', '2020-09-01', 20, 'online', 'E2', 'AG', 'Lehrer');
 
-INSERT INTO event (id, title, leader_id,  summary, description, start_date, end_date, max_participants, event_state, location, type)
-VALUES (3, 'AG3', '2', 'Summary 3', 'AG3 Herzlich Willkommen', '2019-09-01', '2020-09-01', 80, 'draft', 'E2', 'AG');
+INSERT INTO event (id, title, leader,  summary, description, start_date, end_date, max_participants, event_state, location, type, creator)
+VALUES (3, 'AG3', '2', 'Summary 3', 'AG3 Herzlich Willkommen', '2019-09-01', '2020-09-01', 80, 'draft', 'E2', 'AG', 'Lehrer');

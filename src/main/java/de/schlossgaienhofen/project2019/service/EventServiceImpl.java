@@ -45,7 +45,7 @@ public class EventServiceImpl implements EventService {
     List<Event> allActiveEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
-      if (event.getEventState().equals("1")) {
+      if (event.getEventState().equals("online")) {
         allActiveEvents.add(event);
       }
 
@@ -61,7 +61,7 @@ public class EventServiceImpl implements EventService {
     List<Event> allInactiveEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
-      if (event.getEventState().equals("2")) {
+      if (event.getEventState().equals("offline")) {
         allInactiveEvents.add(event);
       }
 

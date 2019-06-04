@@ -31,7 +31,7 @@ public class StateServiceImpl implements StateService {
     LOGGER.debug("<-- getSelectOptionFactory");
     return factory.getSelectOptions(
       event.getEventState(),
-      e -> SelectOption.create("" + e.getId(), e.getStateName()));
+      e -> SelectOption.create("" + e.getStateName(), e.getStateName()));
   }
 
 }

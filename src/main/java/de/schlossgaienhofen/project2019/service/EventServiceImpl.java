@@ -55,6 +55,22 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
+  public List<Event> getAllInactiveEvents() {
+    LOGGER.debug("-> getAllEvents");
+    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allInactiveEvents = new ArrayList<>();
+
+    for (Event event : allEvents) {
+      if (event.getEventState().equals("offline")) {
+        allInactiveEvents.add(event);
+      }
+
+    }
+    LOGGER.debug("<- getAllEvents size={}", allEvents.size());
+    return allInactiveEvents;
+  }
+
+  @Override
   public List<Event> getEventsOfUser(User user) {
     LOGGER.debug("-> getEventsOfUser user={}", user.getEmail());
     List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));

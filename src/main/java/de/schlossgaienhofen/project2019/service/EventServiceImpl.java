@@ -31,7 +31,7 @@ public class EventServiceImpl implements EventService {
   @Override
   public List<Event> getAllEvents() {
     LOGGER.debug("-> getAllEvents");
-    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC,"startDate"));
 
     LOGGER.debug("<- getAllEvents size={}", allEvents.size());
     return allEvents;
@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
   @Override
   public List<Event> getAllActiveEvents() {
     LOGGER.debug("-> getAllEvents");
-    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC,"startDate"));
     List<Event> allActiveEvents = new ArrayList<>();
 
     for (Event event : allEvents) {
@@ -96,7 +96,7 @@ public class EventServiceImpl implements EventService {
       attendee = new Attendee();
       attendee.setEvent(ag);
       attendee.setAttendee(user);
-      attendee.setAssignemtDate(LocalDate.now());
+      attendee.setAssignmentDate(LocalDate.now());
 
       if (!ag.getAttendees().contains(attendee)) {
         LOGGER.debug("add attendee");

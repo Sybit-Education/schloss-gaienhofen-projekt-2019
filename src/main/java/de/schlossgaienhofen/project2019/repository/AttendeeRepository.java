@@ -10,6 +10,5 @@ import java.util.List;
 public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
 
   Attendee findByIdAndAttendeeId(Long ag, Long user);
-
-
+  List<Attendee> findByEvent(long id);
 }

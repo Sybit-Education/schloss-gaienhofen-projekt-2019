@@ -16,7 +16,7 @@ public class AssignmentServiceImpl implements AssignmentService{
   @Override
   public List<Attendee> getAllattendeesbyAgId (long id){
 
-    List<Attendee> allAttendees = attendeeRepository.findByEvent(id);
+    List<Attendee> allAttendees = attendeeRepository.findByEventId(id);
     return allAttendees;
   }
 

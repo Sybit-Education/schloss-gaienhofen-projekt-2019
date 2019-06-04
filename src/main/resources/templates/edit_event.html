@@ -58,13 +58,13 @@
 
     <div class="row">
       <div class="col-md-3 form-group">
-        <label for="startdate">Startdatum</label>
-        <input id="startdate" type="text" class="form-control" th:field="*{startDate}" required/>
+        <label for="startDate">Startdatum: (jjjj-mm-tt)</label>
+        <input id="startDate" type="text" class="form-control" th:field="*{startDate}" required/>
       </div>
 
       <div class="col-md-3 form-group">
-        <label for="enddate">Enddatum</label>
-        <input id="enddate" type="text" class="form-control" th:field="*{endDate}" required/>
+        <label for="endDate">Enddatum: (jjjj-mm-tt)</label>
+        <input id="endDate" type="text" class="form-control" th:field="*{endDate}" required/>
       </div>
     </div>
 
@@ -136,7 +136,6 @@
       window.emojiUrls = data;
     });
   });
-
 
   $(function () {
     $("#datepickerstart").datepicker();

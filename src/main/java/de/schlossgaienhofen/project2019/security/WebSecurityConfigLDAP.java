@@ -16,16 +16,16 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
-  @Value("#{environment.getProperty('domain')}")
+  @Value("${ldap.domain:schloss-gaienhofen.email}")
   private String domain;
 
-  @Value("#{environment.getProperty('url')}")
+  @Value("${ldap.url:ldap://localhost}")
   private String url;
 
-  @Value("#{environment.getProperty('port')}")
+  @Value("${ldap.port:389}")
   private int port;
 
-  @Value("#{environment.getProperty('root')}")
+  @Value("${ldap.root:dc=schloss-gaienhofen,dc=email}")
   private String root;
 
   @Autowired

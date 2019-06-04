@@ -1,0 +1,11 @@
+FROM java:8
+
+RUN mkdir /app
+
+VOLUME /app/log
+
+COPY target/project2019-0.0.1-SNAPSHOT.jar app/app.jar
+
+WORKDIR /app
+
+ENTRYPOINT ["java", "-jar", "app.jar"]

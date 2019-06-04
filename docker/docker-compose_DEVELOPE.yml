@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    ports:
+      - "8183:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: berichtsheft
+      TZ: Europe/Berlin

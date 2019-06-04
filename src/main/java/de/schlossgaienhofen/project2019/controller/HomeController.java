@@ -41,7 +41,7 @@ public class HomeController extends UserManager {
 
     Map<Long, Boolean> assignment = new HashMap<>();
     for (Event next : allEventsActive) {
-      if (eventService.isAssigned(user, next)) {
+      if (eventService.isUserAssignedWithEvent(user, next)) {
         assignment.put(next.getId(), true);
       } else {
         assignment.put(next.getId(), false);

@@ -52,9 +52,9 @@ public class EventController extends UserManager {
    */
   @GetMapping(value = "/ag/{id}")
   public String get(@PathVariable(name = "id") Long id, Map<String, Object> model) {
-    LOGGER.debug("-> get id={}", id);
+    LOGGER.debug("-> getEventById id={}", id);
 
-    Event event = eventService.get(id);
+    Event event = eventService.getEventById(id);
 
     if (event != null) {
       User agLeader = event.getLeader();
@@ -62,7 +62,7 @@ public class EventController extends UserManager {
       model.put("agLeader", agLeader);
     }
 
-    LOGGER.debug("<- get");
+    LOGGER.debug("<- getEventById");
     return "ag-detail";
   }
 
@@ -77,7 +77,7 @@ public class EventController extends UserManager {
     LOGGER.debug("-> assign id={}", id);
 
     User user = getCurrentUser();
-    eventService.assignUser(id, user);
+    eventService.assignEventIdWithUser(id, user);
 
     LOGGER.debug("<- assign");
     return "redirect:/";

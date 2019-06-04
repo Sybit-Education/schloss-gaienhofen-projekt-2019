@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.transaction.Transactional;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -95,6 +96,7 @@ public class EventServiceImpl implements EventService {
   }
   
   @Override 
+  @Transactional
   public void delete (Long id) {
 	  Event event = get(id);
 	  eventRepository.delete(event);

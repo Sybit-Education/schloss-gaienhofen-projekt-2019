@@ -61,7 +61,7 @@ public class EventController extends UserManager {
     }
 
     LOGGER.debug("<- getEventById");
-    return "ag-detail";
+    return "event-detail";
   }
 
   /**

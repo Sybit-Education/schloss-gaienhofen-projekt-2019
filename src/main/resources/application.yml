@@ -8,19 +8,6 @@ spring:
     url: jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
     username: root
     password: ""
-  mail:
-    host: smtp.web.de
-    port: 587
-    username: gainhofentestmail@web.de
-    password: testMail1234
-    protocol: smtp
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls.enable: true
-          ssl.trust: smtp.web.de
-          tls: true
 
   h2:
     console:
@@ -34,5 +21,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+
+  profiles:
+   include: email
 
 

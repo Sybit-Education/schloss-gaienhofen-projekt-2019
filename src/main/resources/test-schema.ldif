@@ -53,7 +53,7 @@ userPassword: test
 
 
 
-dn: cn=Lehrer-Gruppe,ou=groups,dc=schloss-gaienhofen,dc=info
+dn: cn=Lehrer-Gruppe,ou=groups,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: groupOfUniqueNames
 cn: Lehrer-Gruppe

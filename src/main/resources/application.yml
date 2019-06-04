@@ -9,6 +9,7 @@ spring:
 
   ldap:
     embedded:
+      base-dn: dc=schloss-gaienhofen,dc=email
       ldif: classpath:test-schema.ldif
       port: 389
       validation:

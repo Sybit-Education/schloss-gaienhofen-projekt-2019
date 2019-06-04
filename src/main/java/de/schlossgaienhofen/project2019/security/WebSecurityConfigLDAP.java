@@ -13,6 +13,7 @@ import org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+@Profile({"default"})
 @Configuration
 public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
@@ -48,6 +49,7 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
       .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider = new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
@@ -55,7 +57,7 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
 
     authManagerBuilder.ldapAuthentication()
       .userDnPatterns("uid={0},ou=people")
-      .groupSearchBase("ou=groups")
+      .groupSearchBase("ou=people")
       .contextSource()
       .url(url).port(port).root(root)
       .and()

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -83,6 +84,24 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
+  public Event updateEvent(Event event) throws IllegalArgumentException {
+    Event updatedEvent;
+    if (event.getId() != null) {
+      updatedEvent = eventRepository.save(event);
+    } else {
+      throw new IllegalArgumentException("Event doesn't have an id");
+    }
+    return updatedEvent;
+  }
+
+  @Override
+  @Transactional
+  public void deleteEventById(Long id) {
+    Event event = getEventById(id);
+    eventRepository.delete(event);
+  }
+
+  @Override
   public Event assignEventIdWithUser(Long eventId, User user) {
     LOGGER.debug("-> assignEventIdWithUser id={} user={}", eventId, user.getEmail());
 
@@ -111,10 +130,11 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public Event create(@NotNull Event event) {
-    if (event.getId() != null) {
+  public Event saveEvent(@NotNull Event event) {
+    if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
+    assert event != null;
     return eventRepository.saveAndFlush(event);
   }
 }

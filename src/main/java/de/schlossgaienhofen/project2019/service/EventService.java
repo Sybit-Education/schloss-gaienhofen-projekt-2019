@@ -37,5 +37,5 @@ public interface EventService {
 
   Event updateEvent(Event event);
 
-  void delete(Long id);
+  void deleteEventById(Long id);
 }

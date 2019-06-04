@@ -11,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import javax.transaction.Transactional;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -93,12 +93,12 @@ public class EventServiceImpl implements EventService {
     }
     return updatedEvent;
   }
-  
-  @Override 
+
+  @Override
   @Transactional
-  public void delete (Long id) {
-	  Event event = get(id);
-	  eventRepository.delete(event);
+  public void deleteEventById(Long id) {
+    Event event = getEventById(id);
+    eventRepository.delete(event);
   }
 
   @Override

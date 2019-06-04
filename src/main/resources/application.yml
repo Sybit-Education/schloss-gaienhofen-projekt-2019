@@ -4,8 +4,8 @@ spring:
     name: Projekt 2019
 
   datasource:
-    driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:8183/gaienhofen?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Berlin&useLegacyDatetimeCode=false
     username: root
     password: ""
 

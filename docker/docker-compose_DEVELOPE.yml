@@ -8,5 +8,5 @@ services:
       - "8183:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: berichtsheft
+      MYSQL_DATABASE: gaienhofen
       TZ: Europe/Berlin

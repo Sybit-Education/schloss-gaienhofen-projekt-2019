@@ -36,4 +36,6 @@ public interface EventService {
   Event saveEvent(@NotNull Event event);
 
   Event updateEvent(Event event);
+
+  void deleteEventById(Long id);
 }

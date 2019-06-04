@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -91,6 +92,13 @@ public class EventServiceImpl implements EventService {
       throw new IllegalArgumentException("Event doesn't have an id");
     }
     return updatedEvent;
+  }
+
+  @Override
+  @Transactional
+  public void deleteEventById(Long id) {
+    Event event = getEventById(id);
+    eventRepository.delete(event);
   }
 
   @Override

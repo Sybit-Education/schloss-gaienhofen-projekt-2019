@@ -14,26 +14,32 @@
   <h5><span th:utext="${event.summary}"></span></h5>
 
   <table class="table">
-    <tr>
-      <td class="col-3"><span><b>Leiter</b></span></td>
-      <td><span th:text="${agLeader.firstName}"></span> <span th:text="${agLeader.name}"></span></td>
+    <tr class="">
+      <td class=""><b>Leiter</b></td>
+      <td class=""><span th:text="${agLeader.firstName}"></span> <span th:text="${agLeader.name}"></span></td>
     </tr>
     <tr>
-      <td class="col-3"><span><b>Beschreibung</b></span></td>
+      <td class=""><span><b>Typ</b></span></td>
+      <td><span th:utext="${event.type}"></span></td>
+    </tr>
+    <tr>
+      <td class=""><span><b>Beschreibung</b></span></td>
       <td><span th:utext="${event.description}"></span></td>
     </tr>
     <tr>
-      <td class="col-3"><span><b>Start Datum</b></span></td>
+      <td class=""><span><b>Ort</b></span></td>
+      <td><span th:utext="${event.location}"></span></td>
+    </tr>
+    <tr>
+      <td class=""><span><b>Start Datum</b></span></td>
       <td><span th:text="${event.startDate}"></span></td>
     </tr>
     <tr>
-      <td class="col-3"><span><b>End Datum</b></span></td>
+      <td class=""><span><b>End Datum</b></span></td>
       <td><span th:text="${event.endDate}"></span></td>
     </tr>
-    <tr>
-      <td class="col-3"><span><b>Maximale Teilnehmerzahl</b></span></td>
-      <td><span th:text="${event.maxParticipants}"></span></td>
-    </tr>
+
+
   </table>
 </div>
 

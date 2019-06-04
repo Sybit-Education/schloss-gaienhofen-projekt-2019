@@ -156,11 +156,12 @@ public class EventController extends UserManager {
 	  return "redirect:/";
   }
 
-  @GetMapping(value = "/attendeelist")
-  public String showAttendees(Map<String, Object> model) {
+  @GetMapping(value = "/{id}/attendeelist")
+  public String showAttendees(@PathVariable(name ="id") Long id, Map<String, Object> model) {
 
-    List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(1L);
+    List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(id);
     model.put("allattendeesbyAgId", allattendeesbyAgId);
+    model.put("id", id);
 
     return "attendeelist";
   }

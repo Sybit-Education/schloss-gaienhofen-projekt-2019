@@ -79,7 +79,7 @@
         <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
       </div>
 
-      <a target="_blank" rel="noopener noreferrer" th:href="@{/event/attendeelist}"> Teilnehmerliste drucken und bearbeiten</a>
+      <a target="_blank" rel="noopener noreferrer" th:href="@{/event/{id}/attendeelist(id=${id})}"> Teilnehmerliste drucken und bearbeiten</a>
     </div>
   </form>
 

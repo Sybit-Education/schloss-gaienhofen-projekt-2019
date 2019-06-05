@@ -87,7 +87,7 @@
         <button type="submit" class="btn btn-outline-success">Speichern</button>
       </div>
       <div class="col-md-3">
-       <span th:if="${event.id != null)"></span> <a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">Event löschen</a> 
+        <a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">Event löschen</a> 
       </div>
       <div class="col-md-3">
         <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>

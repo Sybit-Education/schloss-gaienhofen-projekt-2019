@@ -5,6 +5,8 @@ import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
 import de.schlossgaienhofen.project2019.repository.EventRepository;
+import de.schlossgaienhofen.project2019.security.UserManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +54,22 @@ public class EventServiceImpl implements EventService {
     }
     LOGGER.debug("<- getAllEvents size={}", allEvents.size());
     return allActiveEvents;
+  }
+
+  @Override
+  public List<Event> getAllInactiveEvents() {
+    LOGGER.debug("-> getAllEvents");
+    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allInactiveEvents = new ArrayList<>();
+
+    for (Event event : allEvents) {
+      if (event.getEventState().equals("offline")) {
+        allInactiveEvents.add(event);
+      }
+
+    }
+    LOGGER.debug("<- getAllEvents size={}", allEvents.size());
+    return allInactiveEvents;
   }
 
   @Override
@@ -149,7 +167,7 @@ public class EventServiceImpl implements EventService {
     if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
-    assert event != null;
+    
     return eventRepository.saveAndFlush(event);
   }
 }

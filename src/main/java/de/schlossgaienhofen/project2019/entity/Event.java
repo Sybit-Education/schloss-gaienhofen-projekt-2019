@@ -21,9 +21,11 @@ public class Event implements Serializable {
 
   private String title;
 
-  @ManyToOne
-  private User leader;
+  private String leader;
+  
 
+
+  
   private String summary;
   private String description;
 
@@ -57,15 +59,15 @@ public class Event implements Serializable {
   public void setTitle(String title) {
     this.title = title;
   }
-
-  public User getLeader() {
-    return leader;
+  
+  public String getLeader () {
+	  return leader;
   }
-
-  public void setLeader(User leader) {
-    this.leader = leader;
+  
+  public void setLeader (String leader) {
+	  this.leader=leader;
   }
-
+  
   public String getSummary() {
     return summary;
   }

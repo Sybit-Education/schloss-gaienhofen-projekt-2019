@@ -40,7 +40,6 @@ public class EventServiceImplTest {
 
     Event ag = new Event();
     ag.setTitle("Titel");
-    ag.setLeader(leader);
 
     int sizeBefore = eventService.getAllEvents().size();
 
@@ -64,7 +63,6 @@ public class EventServiceImplTest {
     Event ag = new Event();
     ag.setId(2L);
     ag.setTitle("Titel");
-    ag.setLeader(leader);
     eventService.saveEvent(ag);
   }
 

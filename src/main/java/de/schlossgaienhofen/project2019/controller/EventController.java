@@ -1,10 +1,12 @@
 package de.schlossgaienhofen.project2019.controller;
 
+import de.schlossgaienhofen.project2019.data.SelectOption;
 import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.EventService;
+import de.schlossgaienhofen.project2019.service.StateService;
 import de.schlossgaienhofen.project2019.service.AssignmentService;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
@@ -31,10 +33,13 @@ public class EventController extends UserManager {
   private EventService eventService;
 
   @Autowired
+  private StateService stateService;
+
+  @Autowired
   private UserService userService;
 
- @Autowired
- private AssignmentService assignmentService;
+  @Autowired
+  private AssignmentService assignmentService;
 
   /**
    * List viewAll ActivityGroups.
@@ -68,7 +73,7 @@ public class EventController extends UserManager {
     Event event = eventService.getEventById(id);
 
     if (event != null) {
-      User agLeader = event.getLeader();
+      String agLeader = event.getLeader();
       model.put("event", event);
       model.put("agLeader", agLeader);
     }
@@ -97,33 +102,43 @@ public class EventController extends UserManager {
   @PostMapping(value = "/{eventId}/remove/{attendeeId}")
   public String remove(@PathVariable(name = "eventId") Long eventId, @PathVariable(name="attendeeId") Long attendeeId, Map<String, Object> model) {
     LOGGER.debug("-> remove attendeeId={}", attendeeId);
-
-    //Attendee attendee = assignmentService.getAttendee(attendeeId);
     eventService.removeUserfromEventId(attendeeId);
     model.put("id", eventId);
     LOGGER.debug("<- remove");
     return "redirect:/event/{eventId}";
   }
 
-  @GetMapping(value = "/create")
-  public ModelAndView showForm(ModelAndView modelAndView) {
+  @GetMapping(value = "/create")        /** Nur für Lehrer/Sekretariat möglich */
+  public ModelAndView showForm(ModelAndView modelAndView, Map<String, Object> model, Event event) {
     modelAndView.addObject("event", new Event());
     modelAndView.setViewName("update_event");
-    return modelAndView;
-  }
+    Map<String, Object> stringObjectMap = mapStateToModel(model, event);
 
-  @PostMapping(value = "/create")
+    return new ModelAndView("update_event", stringObjectMap);
+    }
+
+
+  /**
+   * creates an event
+   *
+   * @param event
+   * @param model
+   * @return
+   */
+  @PostMapping(value = "/create")             /** Nur für Lehrer/Sekretariat möglich */
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
     event = eventService.saveEvent(event);
     model.put("event", event);
 
+    mapStateToModel(model, event);
+
     LOGGER.debug("<-- saveForm");
     return "redirect:/event/" + event.getId();
   }
 
-  @GetMapping(value = "/update/{id}")
+  @GetMapping(value = "/update/{id}")          /** Nur für Lehrer/Sekretariat möglich */
   public ModelAndView update(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
     LOGGER.debug("-> getEventById id={}", id);
 
@@ -132,10 +147,11 @@ public class EventController extends UserManager {
     modelAndView.setViewName("update_event");
 
     LOGGER.debug("<- getEventById");
-    return modelAndView;
+    Map<String, Object> stringObjectMap = mapStateToModel(model, event);
+    return new ModelAndView("update_event", stringObjectMap);
   }
 
-  @PostMapping(value = "/update/{id}")
+  @PostMapping(value = "/update/{id}")         /** Nur für Lehrer/Sekretariat möglich */
   public String updateEvent(@ModelAttribute Event event, @PathVariable(name = "id") Long id) {
     LOGGER.debug("-> getEventById id={}", id);
 
@@ -147,10 +163,25 @@ public class EventController extends UserManager {
     return "redirect:/";
   }
 
-  @GetMapping(value = "/update/{id}/delete")
+  @GetMapping(value = "/update/{id}/delete")         /** Nur für Lehrer/Sekretariat möglich */
   public String deleteEvent (@PathVariable (name ="id") Long id) {
     eventService.deleteEventById(id);
 	  return "redirect:/";
+  }
+
+  private Map<String, Object> mapStateToModel(Map<String, Object> model, Event event) {
+
+    LOGGER.debug("--> mapStateToModel");
+
+    LOGGER.trace("event = {}", event);
+    model.put("event", event);
+
+    List<SelectOption> selectStateList = stateService.getSelectOptionFactory(event);
+    model.put("allStates", selectStateList);
+
+    LOGGER.debug("<-- mapStateToModel");
+
+    return model;
   }
 
   @GetMapping(value = "/{eventId}/attendeelist")
@@ -163,4 +194,5 @@ public class EventController extends UserManager {
 
     return "attendeelist";
   }
+
 }

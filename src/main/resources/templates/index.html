@@ -47,6 +47,38 @@
     </tr>
     </tbody>
   </table>
+  
+   <h2>Entwürfe</h2>
+
+  <table class="table">
+    <thead>
+    <th>Name</th>
+    <th>Beschreibung</th>
+    <th>Treffpunkt</th>
+    <th>Startdatum</th>
+    <th>Enddatum</th>
+    <th>Auswählen</th>
+    </thead>
+    <tbody>
+    <tr th:each="oneActivity : ${allInactiveEvents}">
+      <td><a th:href="@{/event/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
+      <td><span th:utext="${oneActivity.summary}"></span></td>
+      <td><span th:utext="${oneActivity.location}"></span></td>
+      <td><span th:utext="${oneActivity.startDate}"></span></td>
+      <td><span th:utext="${oneActivity.endDate}"></span></td>
+      <td>
+        <div th:if="${assignments.get(oneActivity.id)}">
+          ✔️ angemeldet
+        </div>
+        <div th:if="!${assignments.get(oneActivity.id)}">
+          <form th:action="@{/event/{id}/assign(id=${oneActivity.id})}" th:method="post">
+            <button class="btn btn-primary">anmelden</button>
+          </form>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 
   <a th:href="@{/event/create}"> Neue Veranstaltung oder AG anlegen</a>
 </div>

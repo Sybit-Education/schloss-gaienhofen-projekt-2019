@@ -68,8 +68,6 @@
       </div>
     </div>
 
-
-
       <div class="dropdown">
         <select class="form-control defaultSettingsSelect"
                 th:field="${event.eventState}" id="areaSelect" type="text" required>
@@ -87,10 +85,11 @@
         <button type="submit" class="btn btn-outline-success">Speichern</button>
       </div>
       <div class="col-md-3">
-        <a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">Event löschen</a> 
-      </div>
+       <span th:if="${event.id != null}"> <a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">Event löschen</a></span>
+       <span th:unless="${event.id != null}"> </span>
+       </div>
       <div class="col-md-3">
-        <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
+      <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
       </div>
     </div>
     <br>

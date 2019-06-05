@@ -10,7 +10,7 @@
 
 <div class="container">
 
-  <h1> <span th:if="${event != null}" th:text="${event.type}"></span>: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
+  <h1> <span th:if="${event != null}" th:text="${event.type}"></span> <span th:if="${event != null}" th:text="${event.title}"></span></h1>
 
   <table class="table">
     <tr>
@@ -30,11 +30,11 @@
       <td><span th:utext="${event.location}"></span></td>
     </tr>
     <tr>
-      <td><span><b>Start Datum</b></span></td>
+      <td><span><b>Startdatum</b></span></td>
       <td><span th:text="${event.startDate}"></span></td>
     </tr>
     <tr>
-      <td><span><b>End Datum</b></span></td>
+      <td><span><b>Enddatum</b></span></td>
       <td><span th:text="${event.endDate}"></span></td>
     </tr>
 

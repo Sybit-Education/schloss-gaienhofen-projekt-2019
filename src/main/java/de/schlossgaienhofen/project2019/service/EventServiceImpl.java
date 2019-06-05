@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EventServiceImpl extends UserManager implements EventService {
+public class EventServiceImpl implements EventService {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EventServiceImpl.class);
 
@@ -152,7 +152,6 @@ public class EventServiceImpl extends UserManager implements EventService {
     if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
-    
     
     return eventRepository.saveAndFlush(event);
   }

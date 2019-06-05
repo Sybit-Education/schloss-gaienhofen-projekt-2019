@@ -23,8 +23,7 @@ public class Event implements Serializable {
 
   private String leader;
   
-  
-  private User creator;
+
 
   
   private String summary;
@@ -69,14 +68,6 @@ public class Event implements Serializable {
 	  this.leader=leader;
   }
   
-  public User getCreator () {
-	  return creator;
-  }
-  
-  public void setCreator(User creator) {
-	  this.creator =creator;
-  }
-
   public String getSummary() {
     return summary;
   }
@@ -146,7 +137,7 @@ public class Event implements Serializable {
     int hash = 7;
     hash = 97 * hash + Objects.hashCode(this.id);
     hash = 97 * hash + Objects.hashCode(this.title);
-    hash = 97 * hash + Objects.hashCode(this.creator);
+    hash = 97 * hash + Objects.hashCode(this.leader);
     hash = 97 * hash + Objects.hashCode(this.summary);
     hash = 97 * hash + Objects.hashCode(this.description);
     hash = 97 * hash + Objects.hashCode(this.startDate);
@@ -169,7 +160,7 @@ public class Event implements Serializable {
     if (!Objects.equals(this.title, other.title)) {
       return false;
     }
-    if (!Objects.equals(this.creator, other.creator)) {
+    if (!Objects.equals(this.leader, other.leader)) {
       return false;
     }
     if (!Objects.equals(this.summary, other.summary)) {

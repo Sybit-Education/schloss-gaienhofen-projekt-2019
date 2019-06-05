@@ -74,16 +74,6 @@
       <td><span th:utext="${oneActivity.location}"></span></td>
       <td><span th:utext="${oneActivity.startDate}"></span></td>
       <td><span th:utext="${oneActivity.endDate}"></span></td>
-      <td>
-        <div th:if="${assignments.get(oneActivity.id)}">
-          ✔️ angemeldet
-        </div>
-        <div th:if="!${assignments.get(oneActivity.id)}">
-          <form th:action="@{/event/{id}/assign(id=${oneActivity.id})}" th:method="post">
-            <button class="btn btn-primary">anmelden</button>
-          </form>
-        </div>
-      </td>
     </tr>
     </tbody>
   </table>

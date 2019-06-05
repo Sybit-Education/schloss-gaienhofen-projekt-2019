@@ -38,7 +38,7 @@
       ✔️ abgemeldet
       </div>
       <div th:if="${oneAttendee.id}">
-        <form th:action="@{/event/{id}/remove(id=${oneAttendee.id})}" th:method="post">
+        <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}" th:method="post">
           <button class="btn btn-primary">abmelden</button>
         </form>
       </div>

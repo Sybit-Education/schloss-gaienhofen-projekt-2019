@@ -94,18 +94,15 @@ public class EventController extends UserManager {
     return "redirect:/";
   }
 
-  @PostMapping(value = "/{id}/remove")
-  public String remove(@PathVariable(name = "id") Long id) {
-    LOGGER.debug("-> remove id={}", id);
+  @PostMapping(value = "/{eventId}/remove/{attendeeId}")
+  public String remove(@PathVariable(name = "eventId") Long eventId, @PathVariable(name="attendeeId") Long attendeeId, Map<String, Object> model) {
+    LOGGER.debug("-> remove attendeeId={}", attendeeId);
 
-    Attendee attendee = assignmentService.getAttendee(id);
-
-    Long attendeeId = attendee.getAttendee().getId();
-
+    //Attendee attendee = assignmentService.getAttendee(attendeeId);
     eventService.removeUserfromEventId(attendeeId);
-
+    model.put("id", eventId);
     LOGGER.debug("<- remove");
-    return "redirect:/event/{id}";
+    return "redirect:/event/{eventId}";
   }
 
   @GetMapping(value = "/create")
@@ -156,12 +153,13 @@ public class EventController extends UserManager {
 	  return "redirect:/";
   }
 
-  @GetMapping(value = "/{id}/attendeelist")
-  public String showAttendees(@PathVariable(name ="id") Long id, Map<String, Object> model) {
+  @GetMapping(value = "/{eventId}/attendeelist")
+  public String showAttendees(@PathVariable(name ="eventId") Long eventId, Map<String, Object> model) {
 
-    List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(id);
+    List<Attendee> allattendeesbyAgId = assignmentService.getAllattendeesbyAgId(eventId);
     model.put("allattendeesbyAgId", allattendeesbyAgId);
-    model.put("id", id);
+    model.put("eventId", eventId);
+    model.put("id", eventId);
 
     return "attendeelist";
   }

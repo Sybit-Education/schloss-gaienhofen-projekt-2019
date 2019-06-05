@@ -105,7 +105,7 @@ public class EventController extends UserManager {
     eventService.removeUserfromEventId(attendeeId);
     model.put("id", eventId);
     LOGGER.debug("<- remove");
-    return "redirect:/event/{eventId}";
+    return "redirect:/event/{eventId}/attendeelist";
   }
 
   @GetMapping(value = "/create")        /** Nur für Lehrer/Sekretariat möglich */

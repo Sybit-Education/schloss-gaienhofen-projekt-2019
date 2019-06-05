@@ -86,7 +86,7 @@ public class EventController extends UserManager {
     return "redirect:/";
   }
 
-  @GetMapping(value = "/create")
+  @GetMapping(value = "/create")        /** Nur für Lehrer/Sekretariat möglich */
   public ModelAndView showForm(ModelAndView modelAndView, Map<String, Object> model, Event event) {
     modelAndView.addObject("event", new Event());
     modelAndView.setViewName("update_event");
@@ -102,7 +102,7 @@ public class EventController extends UserManager {
    * @param model
    * @return
    */
-  @PostMapping(value = "/create")
+  @PostMapping(value = "/create")             /** Nur für Lehrer/Sekretariat möglich */
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
@@ -115,7 +115,7 @@ public class EventController extends UserManager {
     return "redirect:/event/" + event.getId();
   }
 
-  @GetMapping(value = "/update/{id}")
+  @GetMapping(value = "/update/{id}")          /** Nur für Lehrer/Sekretariat möglich */
   public ModelAndView update(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
     LOGGER.debug("-> getEventById id={}", id);
 
@@ -128,7 +128,7 @@ public class EventController extends UserManager {
     return new ModelAndView("update_event", stringObjectMap);
   }
 
-  @PostMapping(value = "/update/{id}")
+  @PostMapping(value = "/update/{id}")         /** Nur für Lehrer/Sekretariat möglich */
   public String updateEvent(@ModelAttribute Event event, @PathVariable(name = "id") Long id) {
     LOGGER.debug("-> getEventById id={}", id);
 
@@ -140,7 +140,7 @@ public class EventController extends UserManager {
     return "redirect:/";
   }
 
-  @GetMapping(value = "/update/{id}/delete")
+  @GetMapping(value = "/update/{id}/delete")         /** Nur für Lehrer/Sekretariat möglich */
   public String deleteEvent (@PathVariable (name ="id") Long id) {
     eventService.deleteEventById(id);
 	  return "redirect:/";

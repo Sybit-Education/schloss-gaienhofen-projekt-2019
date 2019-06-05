@@ -12,7 +12,7 @@ public interface EventService {
 
   List<Event> getAllActiveEvents();
 
-  List<Event> getAllInactiveEvents();
+  List<Event> getAllInactiveEvents();     /** Nur für Lehrer/Sekretariat möglich */
 
   /**
    * Get List of Events which are assigned to given user.

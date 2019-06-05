@@ -129,10 +129,10 @@ public class EventServiceImpl implements EventService {
       throw new IllegalArgumentException("AttendeeId  can not be null!");
     }
 
-    Attendee attendee = attendeeRepository.findByAttendeeId(attendeeId);
-    if(attendee != null) {
+    Optional<Attendee> attendee = attendeeRepository.findById(attendeeId);
+    if(attendee.isPresent()) {
 
-      attendeeRepository.delete(attendee);
+      attendeeRepository.delete(attendee.get());
     } else {
       LOGGER.debug("Attendee not found!");
     }

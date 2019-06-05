@@ -22,7 +22,7 @@
     <thead>
     <th>Name</th>
     <th><div class="d-none d-md-block">Beschreibung</div></th>
-    <th>Treffpunkt</th>
+    <th><div class="d-none d-md-block">Treffpunkt</div></th>
     <th><div class="d-none d-md-block">Startdatum</div></th>
     <th><div class="d-none d-md-block">Enddatum</div></th>
     <th>Auswählen</th>
@@ -31,7 +31,7 @@
     <tr th:each="oneEvent : ${allActiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
       <td><div class="d-none d-md-block"><span th:utext="${oneEvent.summary}"></span></div></td>
-      <td><span th:utext="${oneEvent.location}"></span></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.location}"></span></div></td>
       <td><div class="d-none d-md-block"><span th:utext="${oneEvent.startDate}"></span></div></td>
       <td><div class="d-none d-md-block"><span th:utext="${oneEvent.endDate}"></span></div></td>
       <td>
@@ -61,7 +61,7 @@
     <thead>
     <th>Name</th>
     <th><div class="d-none d-md-block">Beschreibung</div></th>
-    <th>Treffpunkt</th>
+    <th><div class="d-none d-md-block">Treffpunkt</div></th>
     <th><div class="d-none d-md-block">Startdatum</div></th>
     <th><div class="d-none d-md-block">Enddatum</div></th>
     </thead>
@@ -69,7 +69,7 @@
     <tr th:each="oneActivity : ${allInactiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
       <td><div class="d-none d-md-block"><span th:utext="${oneActivity.summary}"></span></div></td>
-      <td><span th:utext="${oneActivity.location}"></span></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.location}"></span></div></td>
       <td><div class="d-none d-md-block"><span th:utext="${oneActivity.startDate}"></span></div></td>
       <td><div class="d-none d-md-block"><span th:utext="${oneActivity.endDate}"></span></div></td>
     </tr>

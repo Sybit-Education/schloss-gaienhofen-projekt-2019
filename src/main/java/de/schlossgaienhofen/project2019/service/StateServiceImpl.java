@@ -17,10 +17,12 @@ public class StateServiceImpl implements StateService {
   private static final Logger LOGGER = LoggerFactory.getLogger(StateServiceImpl.class);
 
   @Autowired
-  StateRepository stateRepository;
+  private StateRepository stateRepository;
 
   @Override
   public List<State> getAllStates() {
+    LOGGER.debug("--> getAllStates");
+    LOGGER.debug("<-- getAllStates");
     return stateRepository.findAll();
   }
 

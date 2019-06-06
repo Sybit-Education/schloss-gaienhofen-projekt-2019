@@ -24,7 +24,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
+    LOGGER.debug("--> authenticate");
     String email = authentication.getName();
     String password = authentication.getCredentials().toString();
 
@@ -36,21 +36,24 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     } catch (NoSuchAlgorithmException e) {
       LOGGER.error("NoSuchAlgorithmException " + e);
     }
-
+    LOGGER.debug("<-- authenticate");
     return result;
   }
 
   private UsernamePasswordAuthenticationToken getUserNamePasswordAuthenticationToken(User existingUser, String email, String password) throws NoSuchAlgorithmException {
+    LOGGER.debug("--> getUserNamePasswordAuthenticationToken");
     String encryptedPassword = userService.getSHA(password);
     UsernamePasswordAuthenticationToken result = null;
     if (existingUser != null && existingUser.getPassword().equals(encryptedPassword)) {
       result = new UsernamePasswordAuthenticationToken(email, password, new ArrayList<>());
     }
+    LOGGER.debug("<-- getUserNamePasswordAuthenticationToken");
     return result;
   }
 
 
   private User getExistingUser(String email) {
+    LOGGER.debug("--> getExistingUser");
     User user;
     try {
       user = userService.findUserByEmail(email);
@@ -58,11 +61,14 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       LOGGER.error("getExistingUser: UserReturnValue null: " + iae);
       user = null;
     }
+    LOGGER.debug("<-- getExistingUser");
     return user;
   }
 
   @Override
   public boolean supports(Class<?> authentication) {
+    LOGGER.debug("--> supports");
+    LOGGER.debug("<-- supports");
     return authentication.equals(UsernamePasswordAuthenticationToken.class);
   }
 }

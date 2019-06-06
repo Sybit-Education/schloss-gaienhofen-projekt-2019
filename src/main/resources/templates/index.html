@@ -21,19 +21,19 @@
   <table class="table">
     <thead>
     <th>Name</th>
-    <th>Beschreibung</th>
-    <th>Treffpunkt</th>
-    <th>Startdatum</th>
-    <th>Enddatum</th>
+    <th><div class="d-none d-md-block">Beschreibung</div></th>
+    <th><div class="d-none d-md-block">Treffpunkt</div></th>
+    <th><div class="d-none d-md-block">Startdatum</div></th>
+    <th><div class="d-none d-md-block">Enddatum</div></th>
     <th>Auswählen</th>
     </thead>
     <tbody>
     <tr th:each="oneEvent : ${allActiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
-      <td><span th:utext="${oneEvent.summary}"></span></td>
-      <td><span th:utext="${oneEvent.location}"></span></td>
-      <td><span th:utext="${oneEvent.startDate}"></span></td>
-      <td><span th:utext="${oneEvent.endDate}"></span></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.summary}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.location}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.startDate}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.endDate}"></span></div></td>
       <td>
         <div th:if="${assignments.get(oneEvent.id)}">
           ✔️ angemeldet
@@ -57,23 +57,21 @@
   </table>
 
    <h2>Entwürfe</h2>
-
   <table class="table">
     <thead>
     <th>Name</th>
-    <th>Beschreibung</th>
-    <th>Treffpunkt</th>
-    <th>Startdatum</th>
-    <th>Enddatum</th>
-    <th>Auswählen</th>
+    <th><div class="d-none d-md-block">Beschreibung</div></th>
+    <th><div class="d-none d-md-block">Treffpunkt</div></th>
+    <th><div class="d-none d-md-block">Startdatum</div></th>
+    <th><div class="d-none d-md-block">Enddatum</div></th>
     </thead>
     <tbody>
     <tr th:each="oneActivity : ${allInactiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
-      <td><span th:utext="${oneActivity.summary}"></span></td>
-      <td><span th:utext="${oneActivity.location}"></span></td>
-      <td><span th:utext="${oneActivity.startDate}"></span></td>
-      <td><span th:utext="${oneActivity.endDate}"></span></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.summary}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.location}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.startDate}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.endDate}"></span></div></td>
     </tr>
     </tbody>
   </table>

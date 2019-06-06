@@ -3,7 +3,7 @@ spring:
     host: smtp.web.de
     port: 587
     username: gainhofentestmail@web.de
-    password: ${passwordEmail:defaultPassword}
+    password: ${passwordEmail:testMail1234}
     protocol: smtp
     properties:
       mail:

@@ -5,8 +5,6 @@ import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
 import de.schlossgaienhofen.project2019.repository.EventRepository;
-import de.schlossgaienhofen.project2019.security.UserManager;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -142,6 +140,20 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
+  @Transactional
+  public void removeUserFromEventId(Long attendeeId) {
+    if (attendeeId == null) {
+      throw new IllegalArgumentException("AttendeeId  can not be null!");
+    }
+    Optional<Attendee> attendee = attendeeRepository.findById(attendeeId);
+    if (attendee.isPresent()) {
+      attendeeRepository.delete(attendee.get());
+    } else {
+      LOGGER.debug("Attendee not found!");
+    }
+  }
+
+  @Override
   public boolean isUserAssignedWithEvent(User user, Event event) {
     Attendee attendee = attendeeRepository.findByEventAndAttendee(event, user);
     return attendee != null;
@@ -152,7 +164,7 @@ public class EventServiceImpl implements EventService {
     if (event != null && event.getId() != null) {
       throw new IllegalArgumentException("Newly created object does not have an id.");
     }
-    
+    assert event != null;
     return eventRepository.saveAndFlush(event);
   }
 }

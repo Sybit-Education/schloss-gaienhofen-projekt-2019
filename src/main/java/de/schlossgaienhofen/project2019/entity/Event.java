@@ -22,10 +22,8 @@ public class Event implements Serializable {
   private String title;
 
   private String leader;
-  
 
 
-  
   private String summary;
   private String description;
 
@@ -59,15 +57,15 @@ public class Event implements Serializable {
   public void setTitle(String title) {
     this.title = title;
   }
-  
-  public String getLeader () {
-	  return leader;
+
+  public String getLeader() {
+    return leader;
   }
-  
-  public void setLeader (String leader) {
-	  this.leader=leader;
+
+  public void setLeader(String leader) {
+    this.leader = leader;
   }
-  
+
   public String getSummary() {
     return summary;
   }

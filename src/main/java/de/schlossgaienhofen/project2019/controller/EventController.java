@@ -27,7 +27,7 @@ public class EventController extends UserManager {
   private EventService eventService;
 
   @Autowired
-  MailServiceImpl mailService;
+  private MailServiceImpl mailService;
 
   @Autowired
   private StateService stateService;

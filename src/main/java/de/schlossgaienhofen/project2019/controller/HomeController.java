@@ -39,7 +39,8 @@ public class HomeController extends UserManager {
     List<Event> allActiveEvents = eventService.getAllActiveEvents();
     model.put("allActiveEvents", allActiveEvents);
 
-    User user = getCurrentUser();                            /**  Nur für Lehrer/Sekretateriat sichtbar **/
+    User user = getCurrentUser();
+    /*  Nur für Lehrer/Sekretateriat sichtbar **/
     List<Event> allInactiveEvents = eventService.getAllInactiveEvents();
     model.put("allInactiveEvents", allInactiveEvents);
 

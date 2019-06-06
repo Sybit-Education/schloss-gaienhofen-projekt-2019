@@ -91,19 +91,7 @@ public class EventController extends UserManager {
     User user = getCurrentUser();
     eventService.assignEventIdWithUser(id, user);
 
-    //Senden einer Bestätigungsmail
-    Event event = eventService.getEventById(id);
-    String eventName = event.getTitle();
-
-    String userName = user.getFirstName();
-
-
-    String to = user.getEmail();
-    String content = "Hallo " + userName + ",\n Hier die Bestätigung, dass Sie sich zur AG " + eventName + " angemeldet haben";
-    String subject = "Anmeldung zur AG " + eventName;
-
-    mailService.sendSimpleMessage(to, subject, content);
-
+    mailService.sendEmailByEventIdAndUser(id, user);
 
     LOGGER.debug("<- assign");
     return "redirect:/";
@@ -119,7 +107,7 @@ public class EventController extends UserManager {
   }
 
   @GetMapping(value = "/create")
-  /** Nur für Lehrer/Sekretariat möglich */
+  /* Nur für Lehrer/Sekretariat möglich */
   public ModelAndView showForm(ModelAndView modelAndView, Map<String, Object> model, Event event) {
     modelAndView.addObject("event", new Event());
     modelAndView.setViewName("update_event");
@@ -136,7 +124,7 @@ public class EventController extends UserManager {
    * @return
    */
   @PostMapping(value = "/create")
-  /** Nur für Lehrer/Sekretariat möglich */
+  /* Nur für Lehrer/Sekretariat möglich */
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
     LOGGER.debug("--> saveForm title={}", event.getTitle());
 
@@ -150,7 +138,7 @@ public class EventController extends UserManager {
   }
 
   @GetMapping(value = "/update/{id}")
-  /** Nur für Lehrer/Sekretariat möglich */
+  /* Nur für Lehrer/Sekretariat möglich */
   public ModelAndView update(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
     LOGGER.debug("-> getEventById id={}", id);
 
@@ -164,7 +152,7 @@ public class EventController extends UserManager {
   }
 
   @PostMapping(value = "/update/{id}")
-  /** Nur für Lehrer/Sekretariat möglich */
+  /* Nur für Lehrer/Sekretariat möglich */
   public String updateEvent(@ModelAttribute Event event, @PathVariable(name = "id") Long id) {
     LOGGER.debug("-> getEventById id={}", id);
 
@@ -177,7 +165,7 @@ public class EventController extends UserManager {
   }
 
   @GetMapping(value = "/update/{id}/delete")
-  /** Nur für Lehrer/Sekretariat möglich */
+  /* Nur für Lehrer/Sekretariat möglich */
   public String deleteEvent(@PathVariable(name = "id") Long id) {
     eventService.deleteEventById(id);
     return "redirect:/";

@@ -10,12 +10,14 @@ public interface StateService {
 
   /**
    * Returns the states
+   *
    * @return
    */
   List<State> getAllStates();
 
   /**
    * Returns the select option factory
+   *
    * @param event
    * @return
    */

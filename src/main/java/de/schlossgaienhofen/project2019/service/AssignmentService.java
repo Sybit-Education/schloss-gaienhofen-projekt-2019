@@ -6,8 +6,18 @@ import java.util.List;
 
 public interface AssignmentService {
 
-    List<Attendee> getAllattendeesbyAgId(long id);
+  /**
+   * @param id
+   * @return
+   */
 
-    Attendee getAttendee(Long attendeId);
+  List<Attendee> getAllAttendeesByAgId(long id);
+
+  /**
+   * @param attendeeId
+   * @return
+   */
+
+  Attendee getAttendeeById(Long attendeeId);
 
 }

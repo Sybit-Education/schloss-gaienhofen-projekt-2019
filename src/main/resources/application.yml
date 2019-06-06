@@ -25,12 +25,6 @@ spring:
           auth: false
           starttls:
             enable: true
-  h2:
-    console:
-      enabled: true
-      path: /h2
-      settings:
-        web-allow-others: true
 
   jpa:
     open-in-view: true

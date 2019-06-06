@@ -21,24 +21,30 @@ objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Max
+cn: Max Schüler
+givenName: Max
+displayName: Max Schüler
 sn: Schüler
 uid: max.schueler
 mail: max.schueler@schloss-gaienhofen.email
 sAMAccountName: max.schueler
-userPassword: test
+userPrincipalName: max.schueler@schloss-gaienhofen.email
+userPassword: {noop}test
 
 dn: uid=jenny.schueler,ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
 objectclass: inetOrgPerson
-cn: Jenny
+cn: Jenny Johnson
+givenName: Jenny
+displayName: Jenny Johnson
 sn: Johnson
 uid: jenny.johnson
 mail: jenny.johnson@schloss-gaienhofen.email
 sAMAccountName: jenny.johnson
-userPassword: test
+userPrincipalName: jenny.johnson@schloss-gaienhofen.email
+userPassword: {noop}test
 
 
 
@@ -46,13 +52,17 @@ dn: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=email
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson
+objectClass: user
 objectclass: inetOrgPerson
-cn: Heinz
-sn: Leher
+cn: Heinz Lehrer
+givenName: Heinz
+displayName: Heinz Lehrer
+sn: Lehrer
 uid: heinz.lehrer
 mail: heinz.lehrer@schloss-gaienhofen.info
 sAMAccountName: heinz.lehrer
-userPassword: test
+userPrincipalName: heinz.lehrer@schloss-gaienhofen.info
+userPassword: {noop}test
 
 
 

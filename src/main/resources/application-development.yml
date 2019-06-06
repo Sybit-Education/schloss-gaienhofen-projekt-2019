@@ -16,14 +16,18 @@ spring:
     url: jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
     username: root
     password: ""
-  mail:
-    host: localhost
-    port: 2525
-    username:
-    password:
-    properties:
-      mail:
-        smtp:
-          auth: false
-          starttls:
-            enable: true
+
+  ldap:
+    embedded:
+      ldif: classpath:test-schema.ldif
+      port: 389
+      validation:
+        enabled: false
+      base-dn: dc=schloss-gaienhofen,dc=email
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: true

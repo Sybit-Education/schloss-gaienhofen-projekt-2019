@@ -28,6 +28,12 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   @Value("#{environment.getProperty('root')}")
   private String root;
 
+  @Value("#{environment.getProperty('managerDN')}")
+  private String managerDn;
+
+  @Value("#{environment.getProperty('managerPassword')}")
+  private String managerPassword;
+
   @Autowired
   private AuthenticationSuccessHandler successHandler;
 
@@ -61,7 +67,7 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
       .userSearchFilter("(&(objectClass=user)(mail={0}))")
       .contextSource()
       .url(url).port(port).root(root)
-      .managerDn("managerDn").managerPassword("managerPassword")
+      .managerDn(managerDn).managerPassword(managerPassword)
       .and()
       .userDetailsContextMapper(new InetOrgPersonContextMapper()).authoritiesMapper(new AuthoritiesMapper())
       .and()

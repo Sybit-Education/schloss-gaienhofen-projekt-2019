@@ -1,0 +1,14 @@
+spring:
+  mail:
+    host: smtp.web.de
+    port: 587
+    username: gainhofentestmail@web.de
+    password: ${passwordEmail:testMail1234}
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+          ssl.trust: smtp.web.de
+          tls: true

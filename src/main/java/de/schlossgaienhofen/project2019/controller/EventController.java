@@ -7,6 +7,7 @@ import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.AssignmentService;
 import de.schlossgaienhofen.project2019.service.EventService;
+import de.schlossgaienhofen.project2019.service.MailService;
 import de.schlossgaienhofen.project2019.service.StateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,9 @@ public class EventController extends UserManager {
 
   @Autowired
   private EventService eventService;
+
+  @Autowired
+  private MailService mailService;
 
   @Autowired
   private StateService stateService;
@@ -87,6 +91,20 @@ public class EventController extends UserManager {
     User user = getCurrentUser();
     eventService.assignEventIdWithUser(id, user);
 
+    //Senden einer Bestätigungsmail
+    Event event = eventService.getEventById(id);
+    String eventName = event.getTitle();
+
+    String userName = user.getFirstName();
+
+
+    String to = user.getEmail();
+    String content = "Hallo " + userName + ",\n Hier die Bestätigung, dass Sie sich zur AG " + eventName + " angemeldet haben";
+    String subject = "Anmeldung zur AG " + eventName;
+
+    mailService.sendSimpleMessage(to, subject, content);
+
+
     LOGGER.debug("<- assign");
     return "redirect:/";
   }
@@ -109,7 +127,6 @@ public class EventController extends UserManager {
 
     return new ModelAndView("update_event", stringObjectMap);
   }
-
 
   /**
    * creates an event

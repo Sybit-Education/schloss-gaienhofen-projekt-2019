@@ -1,9 +1,11 @@
 package de.schlossgaienhofen.project2019.controller;
 
 import de.schlossgaienhofen.project2019.data.SelectOption;
+import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
 import de.schlossgaienhofen.project2019.security.UserManager;
+import de.schlossgaienhofen.project2019.service.AssignmentService;
 import de.schlossgaienhofen.project2019.service.EventService;
 import de.schlossgaienhofen.project2019.service.MailService;
 import de.schlossgaienhofen.project2019.service.StateService;
@@ -31,6 +33,9 @@ public class EventController extends UserManager {
 
   @Autowired
   private StateService stateService;
+
+  @Autowired
+  private AssignmentService assignmentService;
 
   /**
    * List viewAll ActivityGroups.
@@ -102,6 +107,15 @@ public class EventController extends UserManager {
 
     LOGGER.debug("<- assign");
     return "redirect:/";
+  }
+
+  @PostMapping(value = "/{eventId}/remove/{attendeeId}")
+  public String remove(@PathVariable(name = "eventId") Long eventId, @PathVariable(name = "attendeeId") Long attendeeId, Map<String, Object> model) {
+    LOGGER.debug("-> remove attendeeId={}", attendeeId);
+    eventService.removeUserFromEventId(attendeeId);
+    model.put("id", eventId);
+    LOGGER.debug("<- remove");
+    return "redirect:/event/{eventId}/attendeelist";
   }
 
   @GetMapping(value = "/create")
@@ -182,6 +196,17 @@ public class EventController extends UserManager {
     LOGGER.debug("<-- mapStateToModel");
 
     return model;
+  }
+
+  @GetMapping(value = "/{eventId}/attendeelist")
+  public String showAttendees(@PathVariable(name = "eventId") Long eventId, Map<String, Object> model) {
+
+    List<Attendee> allattendeesbyAgId = assignmentService.getAllAttendeesByAgId(eventId);
+    model.put("allattendeesbyAgId", allattendeesbyAgId);
+    model.put("eventId", eventId);
+    model.put("id", eventId);
+
+    return "attendeelist";
   }
 
 }

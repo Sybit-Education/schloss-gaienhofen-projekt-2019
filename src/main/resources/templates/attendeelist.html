@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="includes/dependencies :: dependencies">
+  <title>Teilnehmerliste</title>
+</head>
+<body>
+<table class="table">
+  <thead>
+  <th>Name</th>
+  <th>Vorname</th>
+  <th>Klasse</th>
+  <th>Email</th>
+  <th class="d-print-none">Schüler Abmelden</th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  <th></th>
+  </thead>
+  <tbody>
+  <tr th:each="oneAttendee : ${allattendeesbyAgId}">
+    <td><span th:utext="${oneAttendee.getAttendee().getName()}"></span></td>
+    <td><span th:utext="${oneAttendee.getAttendee().getFirstName()}"></span></td>
+    <td></td>
+    <td><span th:utext="${oneAttendee.getAttendee().getEmail()}"></span></td>
+  <td class="d-print-none">
+      <div th:if="!${oneAttendee.id}">
+      ✔️ abgemeldet
+      </div>
+      <div th:if="${oneAttendee.id}">
+        <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}" th:method="post">
+          <button class="btn btn-primary">abmelden</button>
+        </form>
+      </div>
+   </td>
+  </tr>
+  </tbody>
+</table>
+
+
+</body>
+</html>

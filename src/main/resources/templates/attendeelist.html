@@ -2,6 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="includes/dependencies :: dependencies">
+ <link th:href="styles.css" rel="stylesheet"/>
   <title>Teilnehmerliste</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
   <th>Vorname</th>
   <th>Klasse</th>
   <th>Email</th>
-  <th class="d-print-none">Schüler Abmelden</th>
+  <th class="d-print-none">Teilnehmer abmelden</th>
   <th></th>
   <th></th>
   <th></th>
@@ -38,15 +39,21 @@
       ✔️ abgemeldet
       </div>
       <div th:if="${oneAttendee.id}">
-        <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}" th:method="post">
-          <button class="btn btn-primary">abmelden</button>
-        </form>
+      	<div class="popup btn btn-primary" th:onclick="|openPopup(${oneAttendee.id})|">abmelden
+              <span class="popuptext" th:id="${oneAttendee.id}">
+                 Schließen<br /> <br /><br />Sicher, dass dieser Teilnehmer abgemeldet werden soll?
+       				 <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}" th:method="post">
+          				<button class="btn btn-primary">abmelden</button>
+        			 </form>
+        	  </span>
+        </div>
       </div>
    </td>
   </tr>
   </tbody>
 </table>
 
+<script th:src="@{/js/delete.js}"></script>
 
 </body>
 </html>

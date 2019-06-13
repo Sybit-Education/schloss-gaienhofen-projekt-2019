@@ -45,7 +45,7 @@
                <span class="popuptext" th:id="${oneEvent.id}">
                  Schließen<br /> <br /><br />Sicher, dass du dich anmelden möchtest ?
               <form th:action="@{/event/{id}/assign(id=${oneEvent.id})}" th:method="post">
-                   <button class="btn btn-primary">
+                   <button class="btn btn-success">
                      anmelden
                    </button>
                 </form>

@@ -2,7 +2,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="includes/dependencies :: dependencies">
- <link th:href="styles.css" rel="stylesheet"/>
+  <link th:href="styles.css" rel="stylesheet"/>
   <title>Teilnehmerliste</title>
 </head>
 <body>
@@ -13,20 +13,6 @@
   <th>Klasse</th>
   <th>Email</th>
   <th class="d-print-none">Teilnehmer abmelden</th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
   </thead>
   <tbody>
   <tr th:each="oneAttendee : ${allattendeesbyAgId}">
@@ -34,21 +20,23 @@
     <td><span th:utext="${oneAttendee.getAttendee().getFirstName()}"></span></td>
     <td></td>
     <td><span th:utext="${oneAttendee.getAttendee().getEmail()}"></span></td>
-  <td class="d-print-none">
+    <td class="d-print-none">
       <div th:if="!${oneAttendee.id}">
-      ✔️ abgemeldet
+        ✔️ abgemeldet
       </div>
       <div th:if="${oneAttendee.id}">
-      	<div class="popup btn btn-primary" th:onclick="|openPopup(${oneAttendee.id})|">abmelden
-              <span class="popuptext" th:id="${oneAttendee.id}">
-                 Schließen<br /> <br /><br />Sicher, dass dieser Teilnehmer abgemeldet werden soll?
-       				 <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}" th:method="post">
+        <div class="popup btn btn-primary" th:onclick="|openPopup(${oneAttendee.id})|">abmelden
+          <span class="popuptext" th:id="${oneAttendee.id}">
+                 Schließen<br/> <br/><br/>Sicher, dass dieser Teilnehmer abgemeldet werden soll?
+       				 <form
+                 th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}"
+                 th:method="post">
           				<button class="btn btn-primary">abmelden</button>
         			 </form>
         	  </span>
         </div>
       </div>
-   </td>
+    </td>
   </tr>
   </tbody>
 </table>

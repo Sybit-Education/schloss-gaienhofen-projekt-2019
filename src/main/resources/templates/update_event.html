@@ -21,10 +21,16 @@
 
     <div class="row">
       <div class="col-md-3 form-group">
-        <label for="type"> Typ (Veranstaltung oder AG)</label>
-        <input id="type" type="text" class="form-control" th:field="*{type}" required>
+        <label for="type"> Typ</label>
+        <div class="dropdown">
+        <select class="form-control defaultSettingsSelect"
+                th:field="*{type}" id="typeSelect"  required>
+          <option class="link_dropdown_white" th:value="'AG'" th:text="AG">AG</option>
+          <option class="link_dropdown_white" th:value="'Veranstaltung'" th:text="Veranstaltung"> Veranstaltung</option>
+        </select>
       </div>
-
+      </div>
+      
       <div class="col-md-9 form-group">
         <label for="title">Name</label>
         <input id="title" type="text" class="form-control" th:field="*{title}" required/>
@@ -51,7 +57,7 @@
 
       <div class="col-md-6 form-group">
         <label for="location">Treffpunkt/Ort</label>
-        <input id="location" type="text" class="form-control" th:field="*{location}" required/>
+        <input id="location" type="text" class="form-control" th:field="*{location}"/>
       </div>
     </div>
 
@@ -59,18 +65,18 @@
     <div class="row">
       <div class="col-md-3 form-group">
         <label for="startDate">Startdatum: (jjjj-mm-tt)</label>
-        <input id="startDate" type="text" class="form-control" th:field="*{startDate}" required/>
+        <input id="startDate" type="text" class="form-control" th:field="*{startDate}"/>
       </div>
 
       <div class="col-md-3 form-group">
         <label for="endDate">Enddatum: (jjjj-mm-tt)</label>
-        <input id="endDate" type="text" class="form-control" th:field="*{endDate}" required/>
+        <input id="endDate" type="text" class="form-control" th:field="*{endDate}"/>
       </div>
     </div>
 
       <div class="dropdown">
         <select class="form-control defaultSettingsSelect"
-                th:field="${event.eventState}" id="areaSelect" type="text" required>
+                th:field="${event.eventState}" id="areaSelect"  required>
           <option class="link_dropdown_white"
                   th:each="selectOption: ${allStates}"
                   th:value="${selectOption.value}"

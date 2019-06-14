@@ -1,0 +1,14 @@
+  .popup .popuptext {
+    bottom: -390%;
+  }
+
+  /* Toggle this class - hide and show the popup */
+  .popup .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+  }
+   /* Popup arrow */
+  .popup .popuptext::after {
+  visibility: hidden;
+}

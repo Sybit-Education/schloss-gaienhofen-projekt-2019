@@ -3,8 +3,6 @@
 <html lang="de" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta th:replace="includes/dependencies :: dependencies"/>
-
-
   <title>Bearbeiten</title>
 
 </head>
@@ -90,10 +88,17 @@
       <div class="col-md-3">
         <button type="submit" class="btn btn-outline-success">Speichern</button>
       </div>
-      <div class="col-md-3">
-       <span th:if="${event.id != null}"> <a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">Event löschen</a></span>
-       <span th:unless="${event.id != null}"> </span>
-       </div>
+      
+      	<div class="col-md-3" th:if="${event.id != null}">
+       		<div class="popup btn btn-outline-danger" th:onclick="|openPopup(${event.id})|">Event löschen
+      			<span class="popuptext" th:id="${event.id}">
+     				 Schließen<br /> <br /><br />Sicher, dass Sie dieses Event löschen möchten?
+       				<a th:href="@{${event.id + '/delete'}}" class="btn btn-outline-danger">  Löschen </a>
+       			</span>
+       		</div>
+     	</div>
+      
+       
       <div class="col-md-3">
       <a th:href="@{/}" class="btn btn-outline-secondary">Abbrechen</a>
       </div>
@@ -104,67 +109,9 @@
 
 </div>
 
+
 <div th:replace="includes/footer :: footer"></div>
 <div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
 
-
-<script>
-
-  $(document).ready(function () {
-    $(".summernote").summernote({
-      height: 300, // set editor height
-      minHeight: 200, // set minimum height of editor
-      // maxHeight: null, // set maximum height of editor
-      focus: false,
-      lang: 'de-DE',
-      toolbar: [
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['para', ['ul', 'ol']],
-        ['insert', ['link']],
-        ['misc', ['undo', 'redo']]
-      ],
-      hint: {
-        match: /:([\-+\w]+)$/,
-        search: function (keyword, callback) {
-          callback($.grep(emojis, function (item) {
-            return item.indexOf(keyword) === 0;
-          }));
-        },
-        template: function (item) {
-          var content = emojiUrls[item];
-          return '<img src="' + content + '" width="20" /> :' + item + ':';
-        },
-        content: function (item) {
-          var url = emojiUrls[item];
-          if (url) {
-            return $('<img />').attr('src', url).css('width', 20)[0];
-          }
-          return '';
-        }
-      },
-      callbacks: {
-        onInit: function () {
-          $('body > .note-popover').hide();
-        }
-      }
-    });
-
-    $.ajax({
-      url: 'https://api.github.com/emojis',
-      async: false
-    }).then(function (data) {
-      window.emojis = Object.keys(data);
-      window.emojiUrls = data;
-    });
-  });
-
-  $(function () {
-    $("#datepickerstart").datepicker();
-  });
-
-  $(function () {
-    $("#datepickerend").datepicker();
-  });
-</script>
 </body>
 </html>

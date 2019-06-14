@@ -11,21 +11,7 @@
   <th>Vorname</th>
   <th>Klasse</th>
   <th>Email</th>
-  <th class="d-print-none">Schüler Abmelden</th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
-  <th></th>
+  <th class="d-print-none">Teilnehmer abmelden</th>
   </thead>
   <tbody>
   <tr th:each="oneAttendee : ${allattendeesbyAgId}">
@@ -33,20 +19,29 @@
     <td><span th:utext="${oneAttendee.getAttendee().getFirstName()}"></span></td>
     <td></td>
     <td><span th:utext="${oneAttendee.getAttendee().getEmail()}"></span></td>
-  <td class="d-print-none">
+    <td class="d-print-none">
       <div th:if="!${oneAttendee.id}">
-      ✔️ abgemeldet
+        ✔️ abgemeldet
       </div>
       <div th:if="${oneAttendee.id}">
-        <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}" th:method="post">
-          <button class="btn btn-primary">abmelden</button>
-        </form>
+        <div class="popup btn btn-primary" th:onclick="|openPopup(${oneAttendee.id})|">Abmelden
+          <span class="popuptext" th:id="${oneAttendee.id}">
+                 <button class="btn btn-outline-danger">Schließen</button><br/> Diesen Teilnehmer abmelden?
+       				 <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}"
+                 		   th:method="post">
+                 		   <button class="btn btn-primary">Abmelden</button>
+                 	 </form>	    
+        	  </span>
+        </div>
       </div>
-   </td>
+    </td>
   </tr>
   </tbody>
 </table>
 
+<div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+
+<link th:href="@{/css/attendeeliststyle.css}" rel="stylesheet" />
 
 </body>
 </html>

@@ -25,7 +25,6 @@
       </div>
       <div th:if="${oneAttendee.id}">
         <div class="popup btn btn-primary" th:onclick="|openPopup(${oneAttendee.id})|">Abmelden
-        <link th:href="@{/css/attendeeliststyle.css}" rel="stylesheet" />
           <span class="popuptext" th:id="${oneAttendee.id}">
                  <button class="btn btn-outline-danger">Schließen</button><br/> Diesen Teilnehmer abmelden?
        				 <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}"
@@ -41,6 +40,7 @@
 </table>
 
 <script th:src="@{/js/popup.js}"></script>
+<link th:href="@{/css/attendeeliststyle.css}" rel="stylesheet" />
 
 </body>
 </html>

@@ -9,49 +9,80 @@
 <div th:replace="includes/navigationbar :: navigationbar"></div>
 
 <div class="container">
-
-  <h1>Startseite</h1>
-
-  <p>Willkommen bei der Verwaltung aller Veranstaltungen und AGs unserer Schule.</p>
-  <p>Wir sind sicher, es ist auch für Dich etwas interessantes dabei.</p>
+	<br>
+  <h2>Verfügbare Arbeitsgemeinschaften und Veranstaltungen</h2>
+<br>
+  <p>Willkommen auf der Anmeldeseite für alle AGs und Veranstaltungen unserer Schule.</p>
+  <p>Wir sind sicher, es ist auch für Dich etwas Interessantes dabei.</p>
   <br>
 
-  <h2>Verfügbare Veranstaltungen und Arbeitsgemeinschaften</h2>
+
 
   <table class="table">
     <thead>
     <th>Name</th>
-    <th>Beschreibung</th>
-    <th>Treffpunkt</th>
-    <th>Startdatum</th>
-    <th>Enddatum</th>
+    <th><div class="d-none d-md-block">Beschreibung</div></th>
+    <th><div class="d-none d-md-block">Treffpunkt</div></th>
+    <th><div class="d-none d-md-block">Startdatum</div></th>
+    <th><div class="d-none d-md-block">Enddatum</div></th>
     <th>Auswählen</th>
     </thead>
     <tbody>
-    <tr th:each="oneEvent : ${allEventsActive}">
+    <tr th:each="oneEvent : ${allActiveEvents}">
       <td><a th:href="@{/event/{id}(id=${oneEvent.id})}"><b th:text="${oneEvent.title}"></b></a></td>
-      <td><span th:utext="${oneEvent.summary}"></span></td>
-      <td><span th:utext="${oneEvent.location}"></span></td>
-      <td><span th:utext="${oneEvent.startDate}"></span></td>
-      <td><span th:utext="${oneEvent.endDate}"></span></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.summary}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.location}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.startDate}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneEvent.endDate}"></span></div></td>
       <td>
         <div th:if="${assignments.get(oneEvent.id)}">
           ✔️ angemeldet
         </div>
+
         <div th:if="!${assignments.get(oneEvent.id)}">
-          <form th:action="@{/event/{id}/assign(id=${oneEvent.id})}" th:method="post">
-            <button class="btn btn-primary">anmelden</button>
-          </form>
-        </div>
-      </td>
+             <div class="popup btn btn-primary" th:onclick="|openPopup(${oneEvent.id})|">anmelden
+               <span class="popuptext" th:id="${oneEvent.id}">
+                 Schließen<br /> <br /><br />Sicher, dass du dich anmelden möchtest ?
+              <form th:action="@{/event/{id}/assign(id=${oneEvent.id})}" th:method="post">
+                   <button class="btn btn-success">
+                     anmelden
+                   </button>
+                </form>
+               </span>
+             </div>
+             </div>
+
+
+
+  </table>
+
+   <h2>Entwürfe</h2>
+  <table class="table">
+    <thead>
+    <th>Name</th>
+    <th><div class="d-none d-md-block">Beschreibung</div></th>
+    <th><div class="d-none d-md-block">Treffpunkt</div></th>
+    <th><div class="d-none d-md-block">Startdatum</div></th>
+    <th><div class="d-none d-md-block">Enddatum</div></th>
+    </thead>
+    <tbody>
+    <tr th:each="oneActivity : ${allInactiveEvents}">
+      <td><a th:href="@{/event/{id}(id=${oneActivity.id})}"><b th:text="${oneActivity.title}"></b></a></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.summary}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.location}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.startDate}"></span></div></td>
+      <td><div class="d-none d-md-block"><span th:utext="${oneActivity.endDate}"></span></div></td>
     </tr>
     </tbody>
   </table>
 
-  <a th:href="@{/event/create}"> Neue AG anlegen</a>
+  <a th:href="@{/event/create}"> Neue Veranstaltung oder AG anlegen</a>     <!--- Nur für Lehrer/Sekretariat sichtbar ---->
 </div>
 
 <div th:replace="includes/footer :: footer"></div>
 <div th:replace="includes/dependenciesfooter :: dependenciesfooter"></div>
+
+
+
 </body>
 </html>

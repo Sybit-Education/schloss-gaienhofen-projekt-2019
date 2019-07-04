@@ -10,12 +10,12 @@
 
 <div class="container">
 
-  <h1>AG: <span th:if="${event != null}" th:text="${event.title}"></span></h1>
+  <h1> <span th:if="${event != null}" th:text="${event.type}"></span> <span th:if="${event != null}" th:text="${event.title}"></span></h1>
 
   <table class="table">
     <tr>
       <td><b>Leiter</b></td>
-      <td><span th:text="${agLeader.firstName}"></span> <span th:text="${agLeader.name}"></span></td>
+      <td><span th:text="${event.leader}"></span></td>
     </tr>
     <tr>
       <td><span><b>Typ</b></span></td>
@@ -30,20 +30,23 @@
       <td><span th:utext="${event.location}"></span></td>
     </tr>
     <tr>
-      <td><span><b>Start Datum</b></span></td>
+      <td><span><b>Startdatum</b></span></td>
       <td><span th:text="${event.startDate}"></span></td>
     </tr>
     <tr>
-      <td><span><b>End Datum</b></span></td>
+      <td><span><b>Enddatum</b></span></td>
       <td><span th:text="${event.endDate}"></span></td>
     </tr>
 
   </table>
+  <div class="row">
   <form th:action="@{/event/update/{id}(id=${event.id})}">
-    <button class="btn btn-primary">bearbeiten</button>
+    <button class="btn btn-primary">Beschreibung bearbeiten</button>
   </form>
-
-
+    <div class="col-sm">
+    <a target="_blank" rel="noopener noreferrer" th:href="@{/event/{id}/attendeelist(id=${id})}"> Teilnehmerliste drucken und bearbeiten</a>
+    </div>
+  </div>
 </div>
 
 <div th:replace="includes/footer :: footer"></div>

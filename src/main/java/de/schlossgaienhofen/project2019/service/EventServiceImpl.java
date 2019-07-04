@@ -55,6 +55,22 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
+  public List<Event> getAllInactiveEvents() {
+    LOGGER.debug("-> getAllEvents");
+    List<Event> allEvents = eventRepository.findAll(Sort.by("title"));
+    List<Event> allInactiveEvents = new ArrayList<>();
+
+    for (Event event : allEvents) {
+      if (event.getEventState().equals("offline")) {
+        allInactiveEvents.add(event);
+      }
+
+    }
+    LOGGER.debug("<- getAllEvents size={}", allEvents.size());
+    return allInactiveEvents;
+  }
+
+  @Override
   public List<Event> getEventsOfUser(User user) {
     LOGGER.debug("-> getEventsOfUser user={}", user.getEmail());
     List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
@@ -121,6 +137,20 @@ public class EventServiceImpl implements EventService {
     attendeeRepository.saveAndFlush(attendee);
     LOGGER.debug("<- assignEventIdWithUser");
     return event;
+  }
+
+  @Override
+  @Transactional
+  public void removeUserFromEventId(Long attendeeId) {
+    if (attendeeId == null) {
+      throw new IllegalArgumentException("AttendeeId  can not be null!");
+    }
+    Optional<Attendee> attendee = attendeeRepository.findById(attendeeId);
+    if (attendee.isPresent()) {
+      attendeeRepository.delete(attendee.get());
+    } else {
+      LOGGER.debug("Attendee not found!");
+    }
   }
 
   @Override

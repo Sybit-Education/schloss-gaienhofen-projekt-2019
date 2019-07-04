@@ -12,6 +12,8 @@ public interface EventService {
 
   List<Event> getAllActiveEvents();
 
+  List<Event> getAllInactiveEvents();     /** Nur für Lehrer/Sekretariat möglich */
+
   /**
    * Get List of Events which are assigned to given user.
    *
@@ -30,6 +32,8 @@ public interface EventService {
    */
 
   Event assignEventIdWithUser(Long id, User user);
+
+  void removeUserFromEventId(Long attendeeId);
 
   boolean isUserAssignedWithEvent(User user, Event ag);
 

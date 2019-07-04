@@ -43,32 +43,4 @@ public class UserServiceImplTest {
     Assert.assertEquals("testName", user.getName());
   }
 
-  @Test
-  public void getSha() throws NoSuchAlgorithmException {
-
-    String input = "Sybit2019Gaienhofen";
-    String output = "e07de83e6058810e2bf9e6fafe86237d7b903f889c667b84e0639989dfceebb6";
-
-    Assert.assertEquals(output, userService.getSHA(input));
-
-  }
-
-  @Test
-  public void getSHA_EmptyInput() throws NoSuchAlgorithmException {
-
-    Assert.assertNotNull(userService.getSHA(""));
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void getSHA_Null() throws NoSuchAlgorithmException {
-    userService.getSHA(null);
-  }
-
-  @Test(expected = IllegalArgumentException.class)
-  public void addNewUser_InvalidEmail() {
-    User user = userObject();
-    user.setEmail("test");
-
-    userService.addNewUser(user);
-  }
 }

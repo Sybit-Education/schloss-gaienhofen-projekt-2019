@@ -32,20 +32,31 @@ public abstract class UserManager {
     LOGGER.debug("--> getCurrentUserReplacement");
     final SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
-    String email;
+    User loggedInUser;
+
     if (authentication.getPrincipal() instanceof InetOrgPerson) {
       //productive ActiveDirectory
       InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
-      email = principal.getUsername();
+      loggedInUser = new User();
+      loggedInUser.setEmail(principal.getUsername());
+      loggedInUser.setFirstName(principal.getGivenName());
+      loggedInUser.setName(principal.getSn());
+
     } else if (authentication.getPrincipal() instanceof LdapUserDetailsImpl) {
       //local file based LDAP
       LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
-      email = principal.getUsername();
+      loggedInUser = new User();
+      loggedInUser.setEmail(principal.getUsername());
+      loggedInUser.setName(principal.getUsername());
     } else {
       throw new UserAuthenticationFailed("Unhandled principal type");
     }
+
+    User user = userService.update(loggedInUser);
+
+
     LOGGER.debug("<-- getCurrentUserReplacement");
-    return userService.findUserByEmail(email);
+    return user;
   }
 
 }

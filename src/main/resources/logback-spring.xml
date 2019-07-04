@@ -16,6 +16,7 @@
       <appender-ref ref="CONSOLE" />
       <appender-ref ref="FILE" />
     </logger>
+
     <logger name="org.springframework.security" level="TRACE" additivity="false">
       <appender-ref ref="CONSOLE" />
       <appender-ref ref="FILE" />
@@ -30,8 +31,13 @@
 
   <springProfile name="production">
 
-    <logger name="de.schlossgaienhofen" level="INFO" additivity="false">
+    <logger name="de.schlossgaienhofen" level="TRACE" additivity="false">
       <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework.security" level="TRACE" additivity="false">
+      <appender-ref ref="CONSOLE" />
+      <appender-ref ref="FILE" />
     </logger>
 
     <root level="WARN">

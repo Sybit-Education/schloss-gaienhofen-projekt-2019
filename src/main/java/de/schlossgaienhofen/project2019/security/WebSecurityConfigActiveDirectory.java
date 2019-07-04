@@ -1,5 +1,7 @@
 package de.schlossgaienhofen.project2019.security;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -16,23 +18,31 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapter {
 
-  @Value("#{environment.getProperty('domain')}")
+  private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfigActiveDirectory.class);
+
+
+  //@Value("#{environment.getProperty('domain')}")
+  @Value("${ldap.domain:schloss-gaienhofen.email}")
   private String domain;
 
-  @Value("#{environment.getProperty('url')}")
+  //@Value("#{environment.getProperty('url')}")
+  @Value("${ldap.url}")
   private String url;
 
-  @Value("#{environment.getProperty('port')}")
+  //@Value("#{environment.getProperty('port')}")
+  @Value("${ldap.port}")
   private int port;
 
-  @Value("#{environment.getProperty('root')}")
-  private String root;
-
-  @Value("#{environment.getProperty('managerDN')}")
+  //@Value("#{environment.getProperty('managerDN')}")
+  @Value("${ldap.managerDn}")
   private String managerDn;
 
-  @Value("#{environment.getProperty('managerPassword')}")
+  //@Value("#{environment.getProperty('managerPassword')}")
+  @Value("${ldap.managerPassword}")
   private String managerPassword;
+
+  @Value("${ldap.root:dc=schloss-gaienhofen,dc=email}")
+  private String root;
 
   @Autowired
   private AuthenticationSuccessHandler successHandler;
@@ -49,13 +59,13 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
       .successHandler(successHandler)
       .permitAll()
       .and()
-      .csrf().ignoringAntMatchers("/h2/**")
-      .and()
       .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
   }
 
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
+
+    LOGGER.debug("domain={}, url={}, port= {}, manager={}", domain, url, port, managerDn);
 
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
       new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
@@ -63,8 +73,9 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
     authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
     authManagerBuilder.ldapAuthentication()
+      .userSearchBase("dc=schloss-gaienhofen,dc=email")
+      .userSearchFilter("(mail={0})")
       .groupSearchBase("ou=groups")
-      .userSearchFilter("(&(objectClass=user)(mail={0}))")
       .contextSource()
       .url(url).port(port).root(root)
       .managerDn(managerDn).managerPassword(managerPassword)

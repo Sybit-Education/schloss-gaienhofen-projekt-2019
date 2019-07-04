@@ -61,41 +61,18 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
       .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
   }
 
-  @SuppressWarnings("deprecation")
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
 
     LOGGER.debug("domain={}, url={}, port= {}, root={}", domain, url, port, root);
-    /*
-    ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
-      new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
-    authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
-    authManagerBuilder
-      .ldapAuthentication()
-      .userDnPatterns("mail={0},ou=people")
-      .groupSearchBase("ou=groups")
-      .contextSource()
-      .url(url).port(port).root(root)
-      .and()
-      .passwordCompare().passwordEncoder(new LdapShaPasswordEncoder()).passwordAttribute("userPassword")
-      .and()
-      .authoritiesMapper(new AuthoritiesMapper());
-*/
-
-/*
-    domain = "";
-    ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
-      new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
-    authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
-    authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
-*/
     PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     authManagerBuilder.ldapAuthentication()
       .userSearchBase("dc=schloss-gaienhofen,dc=email")
-      .userSearchFilter("(&(ou=people)(mail={0}))")
+      .userSearchFilter("(mail={0})")
       .groupSearchBase("ou=groups")
+      //.groupSearchFilter("uniqueMember={0}")
       .contextSource()
       .url("ldap://127.0.0.1:" + port )
       .ldif("classpath:test-schema.ldif")
@@ -103,8 +80,6 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
       .passwordCompare().passwordEncoder(passwordEncoder).passwordAttribute(PASSWORD_ATTRIBUTE_NAME)
       .and()
       .userDetailsContextMapper(getUserDetailsContextMapper()).authoritiesMapper(new AuthoritiesMapper());
-      /*.and()
-      .authenticationProvider(authenticationProvider);*/
 
   }
 

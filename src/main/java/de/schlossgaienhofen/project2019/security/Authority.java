@@ -12,7 +12,6 @@ public enum Authority implements GrantedAuthority {
    /* Role of Administrator */
    ROLE_TEACHER,
    /* Role of common Azubi */
-   ROLE_SECRETARY,
    ROLE_PUPIL;
 
 

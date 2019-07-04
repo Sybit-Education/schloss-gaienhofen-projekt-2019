@@ -31,60 +31,6 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
    @Autowired
    private UserService userService;
 
-
-   /**
-    * Handler calls the determineTargetUrl method and returns the redirect strategy
-    *
-    * @param request
-    * @param response
-    * @param authentication
-    * @throws IOException
-    */
-
-   @Override
-   protected void handle(HttpServletRequest request,
-                         HttpServletResponse response, Authentication authentication)
-      throws IOException {
-
-      String targetUrl = determineTargetUrl(authentication);
-
-      if (response.isCommitted()) {
-         LOGGER.debug(
-            "Response has already been committed. Unable to redirect to "
-               + targetUrl);
-         return;
-      }
-
-      redirectStrategy.sendRedirect(request, response, targetUrl);
-   }
-
-   /**
-    * Decides whether the given user has the right admin or azubi
-    *
-    * @param authentication
-    * @return
-    */
-
-   private String determineTargetUrl(Authentication authentication) {
-      String targetUrl;
-
-      User currentUser = convert2User(authentication);
-      User existingUser = userService.findUserByEmail(currentUser.getEmail());
-
-      Collection<? extends GrantedAuthority> authorities
-         = authentication.getAuthorities();
-
-      if (true)  { //TODO: check role
-         targetUrl = "/";
-
-      } else {
-         SecurityContextHolder.clearContext();
-         targetUrl = "/login";
-      }
-
-      return targetUrl;
-   }
-
    /**
     * This method will call when the user logs in successful
     *
@@ -97,12 +43,14 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
    @Override
    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                        Authentication authentication) throws IOException, ServletException {
-      LOGGER.debug("--> onAuthenticationSuccess");
+     LOGGER.debug("--> onAuthenticationSuccess");
 
+     User currentUser = convert2User(authentication);
+     userService.update(currentUser);
 
-      super.onAuthenticationSuccess(request, response, authentication);
+     super.onAuthenticationSuccess(request, response, authentication);
 
-      LOGGER.debug("<-- onAuthenticationSuccess");
+     LOGGER.debug("<-- onAuthenticationSuccess");
    }
 
    private User convert2User(Authentication authentication) {
@@ -110,13 +58,11 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 
       if (authentication.getPrincipal() instanceof InetOrgPerson) {
          InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
-         String[] fullNameCut = principal.getDisplayName().split(",");
-         String subFirst = fullNameCut[1];
-         String subLast = fullNameCut[0];
 
          user.setEmail(principal.getMail());
-         user.setFirstName(subFirst);
-         user.setName(subLast);
+         user.setFirstName(principal.getGivenName());
+         user.setName(principal.getSn());
+
       } else if (authentication.getPrincipal() instanceof LdapUserDetailsImpl) {
 
          //should be just in case of testing by using ldap-file `test-schema.ldif`

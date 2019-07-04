@@ -2,7 +2,7 @@ server:
   port: 8080
 
 ldap:
-  url: ldap://localhost
+  url: ldap://gpd-srv-dc01.schloss-gaienhofen.email
   port: 389
   domain: schloss-gaienhofen.email
   root: dc=schloss-gaienhofen,dc=email

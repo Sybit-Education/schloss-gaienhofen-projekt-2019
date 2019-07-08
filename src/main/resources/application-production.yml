@@ -14,7 +14,7 @@ spring:
     driverClassName: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/eventapp
     username: eventapp-admin
-    password: user@2019!
+    password: admin@2019!
   mail:
     host: localhost
     port: 2525

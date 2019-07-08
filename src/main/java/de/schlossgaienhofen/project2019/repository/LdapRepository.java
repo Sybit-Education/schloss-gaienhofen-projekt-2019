@@ -1,6 +1,6 @@
 package de.schlossgaienhofen.project2019.repository;
 
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import org.springframework.ldap.core.AttributesMapper;
 import org.springframework.ldap.core.LdapTemplate;
 import org.springframework.ldap.query.LdapQuery;
@@ -28,13 +28,13 @@ public class LdapRepository {
    }
 
    /**
-    * Get User of LDAP by given token.
+    * Get EventUser of LDAP by given token.
     * The Token is mapped in LDAP to uid.
     *
     * @param token
     * @return
     */
-   public User getUserByToken(String token) {
+   public EventUser getUserByToken(String token) {
 
       LdapQuery query = query()
          .searchScope(SearchScope.SUBTREE)
@@ -45,9 +45,9 @@ public class LdapRepository {
          .where("objectclass").is("person")
          .and("sAMAccountName").is(token);
 
-      List<User> userList = ldapTemplate.search(query, new UserAttributesMapper());
+      List<EventUser> userList = ldapTemplate.search(query, new UserAttributesMapper());
 
-      User result;
+      EventUser result;
       if (userList.size() > 1) {
          throw new InternalError("Result should be just one!");
       } else if (userList.size() == 0) {
@@ -62,10 +62,10 @@ public class LdapRepository {
    /**
     * Custom user attributes mapper, maps the attributes to the user vo.
     */
-   private class UserAttributesMapper implements AttributesMapper<User> {
+   private class UserAttributesMapper implements AttributesMapper<EventUser> {
 
-      public User mapFromAttributes(final Attributes attrs) throws NamingException {
-         final User user = new User();
+      public EventUser mapFromAttributes(final Attributes attrs) throws NamingException {
+         final EventUser user = new EventUser();
          //TODO: user.setUserToken((String) attrs.get("sAMAccountName").get());
          //TODO: user.setFullName((String) attrs.get("cn").get());
 

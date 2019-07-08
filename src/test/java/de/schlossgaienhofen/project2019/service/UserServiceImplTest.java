@@ -1,6 +1,6 @@
 package de.schlossgaienhofen.project2019.service;
 
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.repository.UserRepository;
 import org.junit.After;
 import org.junit.Assert;
@@ -9,8 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.security.NoSuchAlgorithmException;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,8 +25,8 @@ public class UserServiceImplTest {
     userRepository.deleteAll();
   }
 
-  private User userObject() {
-    User user = new User();
+  private EventUser userObject() {
+    EventUser user = new EventUser();
     user.setEmail("test@test.com");
     user.setName("testName");
     user.setFirstName("testFirstName");
@@ -39,7 +37,7 @@ public class UserServiceImplTest {
   @Test
   public void addNewUser() {
     userService.addNewUser(userObject());
-    User user = userService.findUserByEmail("test@test.com");
+    EventUser user = userService.findUserByEmail("test@test.com");
     Assert.assertEquals("testName", user.getName());
   }
 

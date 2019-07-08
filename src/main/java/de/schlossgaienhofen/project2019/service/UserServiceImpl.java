@@ -1,8 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.repository.UserRepository;
-import org.apache.commons.validator.routines.EmailValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +19,7 @@ public class UserServiceImpl implements UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
   @Override
-  public User addNewUser(User user) {
+  public EventUser addNewUser(EventUser user) {
     LOGGER.debug("--> addNewUser");
 
     userRepository.saveAndFlush(user);
@@ -34,18 +29,18 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User findUserByEmail(@NotEmpty String email) {
+  public EventUser findUserByEmail(@NotEmpty String email) {
     LOGGER.debug("--> findUserByEmail");
-    User user = userRepository.findByEmail(email);
+    EventUser user = userRepository.findByEmail(email);
 
     LOGGER.debug("<-- findUserByEmail");
     return user;
   }
 
   @Override
-  public User update(@NotNull User loggedInUser) {
+  public EventUser update(@NotNull EventUser loggedInUser) {
     LOGGER.debug("--> update");
-    User user = findUserByEmail(loggedInUser.getEmail());
+    EventUser user = findUserByEmail(loggedInUser.getEmail());
     if(user != null) {
       //maybe name has changed -> update them
       user.setFirstName(loggedInUser.getFirstName());

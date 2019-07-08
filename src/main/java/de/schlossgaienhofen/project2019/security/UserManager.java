@@ -1,6 +1,6 @@
 package de.schlossgaienhofen.project2019.security;
 
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.exception.UserAuthenticationFailed;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
@@ -19,25 +19,25 @@ public abstract class UserManager {
   @Autowired
   private UserService userService;
 
-  protected User getCurrentUser() {
+  protected EventUser getCurrentUser() {
     LOGGER.debug("--> getCurrentUser");
     SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
-    User user = userService.findUserByEmail(authentication.getName());
+    EventUser user = userService.findUserByEmail(authentication.getName());
     LOGGER.debug("<-- getCurrentUser");
     return user;
   }
 
-  public User getCurrentUserReplacement() {
+  public EventUser getCurrentUserReplacement() {
     LOGGER.debug("--> getCurrentUserReplacement");
     final SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
-    User loggedInUser;
+    EventUser loggedInUser;
 
     if (authentication.getPrincipal() instanceof InetOrgPerson) {
       //productive ActiveDirectory
       InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
-      loggedInUser = new User();
+      loggedInUser = new EventUser();
       loggedInUser.setEmail(principal.getUsername());
       loggedInUser.setFirstName(principal.getGivenName());
       loggedInUser.setName(principal.getSn());
@@ -45,14 +45,14 @@ public abstract class UserManager {
     } else if (authentication.getPrincipal() instanceof LdapUserDetailsImpl) {
       //local file based LDAP
       LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
-      loggedInUser = new User();
+      loggedInUser = new EventUser();
       loggedInUser.setEmail(principal.getUsername());
       loggedInUser.setName(principal.getUsername());
     } else {
       throw new UserAuthenticationFailed("Unhandled principal type");
     }
 
-    User user = userService.update(loggedInUser);
+    EventUser user = userService.update(loggedInUser);
 
 
     LOGGER.debug("<-- getCurrentUserReplacement");

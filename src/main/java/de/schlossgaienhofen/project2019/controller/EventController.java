@@ -3,8 +3,7 @@ package de.schlossgaienhofen.project2019.controller;
 import de.schlossgaienhofen.project2019.data.SelectOption;
 import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.Event;
-import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.security.Authority;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.AssignmentService;
 import de.schlossgaienhofen.project2019.service.EventService;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Map;
 
@@ -91,7 +89,7 @@ public class EventController extends UserManager {
   public String assign(@PathVariable(name = "id") Long id) {
     LOGGER.debug("-> assign id={}", id);
 
-    User user = getCurrentUser();
+    EventUser user = getCurrentUser();
     eventService.assignEventIdWithUser(id, user);
 
     mailService.sendEmailByEventIdAndUser(id, user);

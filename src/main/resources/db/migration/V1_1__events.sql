@@ -9,7 +9,7 @@ CREATE TABLE event (
     max_participants tinyint,
     event_state varchar(10),
     location varchar(50),
-    type varchar(50),
+    type varchar(50)
 );
 
 INSERT INTO event (id, title, leader, summary, description, start_date, end_date, max_participants, event_state, location, type)

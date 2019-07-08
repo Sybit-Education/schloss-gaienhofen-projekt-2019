@@ -1,7 +1,7 @@
 CREATE TABLE state (
     id bigint NOT NULL AUTO_INCREMENT,
     state_name varchar(10),
-    PRIMARY KEY (id)
+    primary key (id)
 );
 
 INSERT INTO state (id, state_name) VALUES (1, 'online');

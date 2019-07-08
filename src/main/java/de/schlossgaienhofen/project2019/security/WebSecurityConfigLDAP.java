@@ -8,19 +8,32 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.ldap.core.DirContextOperations;
+import org.springframework.ldap.core.DistinguishedName;
 import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.GlobalAuthenticationConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.LdapShaPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.ldap.authentication.LdapAuthenticationProvider;
+import org.springframework.security.ldap.authentication.LdapAuthenticator;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
+import org.springframework.security.ldap.userdetails.DefaultLdapAuthoritiesPopulator;
 import org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsMapper;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 @Profile("development")
 @Configuration
@@ -71,8 +84,8 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
     authManagerBuilder.ldapAuthentication()
       .userSearchBase("dc=schloss-gaienhofen,dc=email")
       .userSearchFilter("(mail={0})")
-      .groupSearchBase("ou=groups")
-      //.groupSearchFilter("uniqueMember={0}")
+      .groupSearchBase("dc=schloss-gaienhofen,dc=email")
+      .groupSearchFilter("uniqueMember={0}")
       .contextSource()
       .url("ldap://127.0.0.1:" + port )
       .ldif("classpath:test-schema.ldif")
@@ -86,9 +99,12 @@ public class WebSecurityConfigLDAP extends WebSecurityConfigurerAdapter {
   @Bean
   public LdapUserDetailsMapper getUserDetailsContextMapper() {
     LdapUserDetailsMapper userDetailsMapper = new LdapUserDetailsMapper();
+    String[] roles = {"memberOf"};
+    userDetailsMapper.setRoleAttributes(roles);
     userDetailsMapper.setPasswordAttributeName(PASSWORD_ATTRIBUTE_NAME);
     return userDetailsMapper;
   }
+
 
 }
 

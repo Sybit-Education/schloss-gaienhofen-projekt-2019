@@ -35,6 +35,10 @@
       <appender-ref ref="FILE"/>
     </logger>
 
+    <logger name="org.springframework.security.ldap.authentication.ad" level="TRACE" additivity="false">
+      <appender-ref ref="FILE"/>
+    </logger>
+
     <root level="WARN">
       <appender-ref ref="FILE"/>
     </root>

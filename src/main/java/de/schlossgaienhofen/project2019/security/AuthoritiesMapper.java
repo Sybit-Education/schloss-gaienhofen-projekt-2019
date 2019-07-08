@@ -38,12 +38,9 @@ public class AuthoritiesMapper implements GrantedAuthoritiesMapper {
          // when using test-schema.ldif or ActiveDirectory.
          String authority = grantedAuthority.getAuthority();
          LOGGER.debug("Authority: " + authority);
-         authority = authority.replaceFirst("ROLE_", "");
 
-         if (LDAP_GROUP_TEACHER.equalsIgnoreCase(authority)) {
+         if (authority.toUpperCase().contains(LDAP_GROUP_TEACHER.toUpperCase())) {
             roles.add(Authority.ROLE_TEACHER);
-         } else {
-           roles.add(Authority.ROLE_PUPIL);
          }
       }
 

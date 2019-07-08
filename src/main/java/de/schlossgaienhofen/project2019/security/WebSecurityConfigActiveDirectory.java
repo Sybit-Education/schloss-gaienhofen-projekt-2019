@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -47,6 +48,26 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   @Autowired
   private AuthenticationSuccessHandler successHandler;
 
+  @Bean
+  public AuthoritiesMapper grantedAuthoritiesMapper() {
+    return new AuthoritiesMapper();
+  }
+
+  @Bean
+  public InetOrgPersonContextMapper getUserDetailsContextMapper() {
+    return new InetOrgPersonContextMapper();
+  }
+
+  @Bean
+  public ActiveDirectoryLdapAuthenticationProvider getAuthenticationProvider() {
+    ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
+      new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
+    authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
+    authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
+
+    return authenticationProvider;
+  }
+
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
@@ -67,21 +88,18 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
 
     LOGGER.debug("domain={}, url={}, port= {}, manager={}", domain, url, port, managerDn);
 
-    ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
-      new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
-    authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
-    authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
-
     authManagerBuilder.ldapAuthentication()
       .userSearchBase("dc=schloss-gaienhofen,dc=email")
       .userSearchFilter("(mail={0})")
-      .groupSearchBase("ou=groups")
+      //.groupSearchBase("ou=groups")
       .contextSource()
       .url(url).port(port).root(root)
       .managerDn(managerDn).managerPassword(managerPassword)
       .and()
-      .userDetailsContextMapper(new InetOrgPersonContextMapper()).authoritiesMapper(new AuthoritiesMapper())
+      .userDetailsContextMapper(getUserDetailsContextMapper())
+      .authoritiesMapper(grantedAuthoritiesMapper())
       .and()
-      .authenticationProvider(authenticationProvider);
+      .authenticationProvider(getAuthenticationProvider());
   }
+
 }

@@ -1,7 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.Event;
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.repository.EventRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -34,7 +34,7 @@ public class EventServiceImplTest {
 
   @Test
   public void testCreateActivityGroup() {
-    User leader = new User();
+    EventUser leader = new EventUser();
     leader.setId(2L);
     leader.setEmail("test@mail.com");
 
@@ -56,7 +56,7 @@ public class EventServiceImplTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testCreateActivityGroup_withId() {
-    User leader = new User();
+    EventUser leader = new EventUser();
     leader.setId(12L);
     leader.setEmail("test@mail.com");
 
@@ -68,7 +68,7 @@ public class EventServiceImplTest {
 
   @Test
   public void testGetAllActivityGroupsOfUser() {
-    User user = new User();
+    EventUser user = new EventUser();
     user.setId(1L);
 
     List<Event> events = eventService.getEventsOfUser(user);

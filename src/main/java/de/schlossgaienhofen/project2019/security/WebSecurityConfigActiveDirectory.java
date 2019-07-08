@@ -22,10 +22,6 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfigActiveDirectory.class);
 
 
-  //@Value("#{environment.getProperty('domain')}")
-  @Value("${ldap.domain:schloss-gaienhofen.email}")
-  private String domain;
-
   //@Value("#{environment.getProperty('url')}")
   @Value("${ldap.url}")
   private String url;
@@ -61,7 +57,7 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   @Bean
   public ActiveDirectoryLdapAuthenticationProvider getAuthenticationProvider() {
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
-      new ActiveDirectoryLdapAuthenticationProvider(domain, url + ":" + port);
+      new ActiveDirectoryLdapAuthenticationProvider("", url + ":" + port);
     authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
     authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
 
@@ -86,14 +82,14 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   @Override
   protected void configure(AuthenticationManagerBuilder authManagerBuilder) throws Exception {
 
-    LOGGER.debug("domain={}, url={}, port= {}, manager={}", domain, url, port, managerDn);
+    LOGGER.debug("url={}, port= {}, manager={}", url, port, managerDn);
 
     authManagerBuilder.ldapAuthentication()
-      .userSearchBase("dc=schloss-gaienhofen,dc=email")
+      //.userSearchBase(root)
       .userSearchFilter("(mail={0})")
       //.groupSearchBase("ou=groups")
       .contextSource()
-      .url(url).port(port).root(root)
+      .url(url).port(port)//.root(root)
       .managerDn(managerDn).managerPassword(managerPassword)
       .and()
       .userDetailsContextMapper(getUserDetailsContextMapper())

@@ -4,6 +4,7 @@ import de.schlossgaienhofen.project2019.data.SelectOption;
 import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.Event;
 import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.security.Authority;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.AssignmentService;
 import de.schlossgaienhofen.project2019.service.EventService;
@@ -12,10 +13,12 @@ import de.schlossgaienhofen.project2019.service.StateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Map;
 
@@ -106,6 +109,7 @@ public class EventController extends UserManager {
     return "redirect:/event/{eventId}/attendeelist";
   }
 
+  @PreAuthorize("hasRole('ROLE_TEACHER')")
   @GetMapping(value = "/create")
   /* Nur für Lehrer/Sekretariat möglich */
   public ModelAndView showForm(ModelAndView modelAndView, Map<String, Object> model, Event event) {
@@ -123,6 +127,7 @@ public class EventController extends UserManager {
    * @param model
    * @return
    */
+  @PreAuthorize("hasRole('ROLE_TEACHER')")
   @PostMapping(value = "/create")
   /* Nur für Lehrer/Sekretariat möglich */
   public String saveForm(@ModelAttribute Event event, Map<String, Object> model) {
@@ -137,6 +142,7 @@ public class EventController extends UserManager {
     return "redirect:/event/" + event.getId();
   }
 
+  @PreAuthorize("hasRole('ROLE_TEACHER')")
   @GetMapping(value = "/update/{id}")
   /* Nur für Lehrer/Sekretariat möglich */
   public ModelAndView update(@PathVariable(name = "id") Long id, Map<String, Object> model, ModelAndView modelAndView) {
@@ -151,6 +157,7 @@ public class EventController extends UserManager {
     return new ModelAndView("update_event", stringObjectMap);
   }
 
+  @PreAuthorize("hasRole('ROLE_TEACHER')")
   @PostMapping(value = "/update/{id}")
   /* Nur für Lehrer/Sekretariat möglich */
   public String updateEvent(@ModelAttribute Event event, @PathVariable(name = "id") Long id) {
@@ -164,6 +171,7 @@ public class EventController extends UserManager {
     return "redirect:/";
   }
 
+  @PreAuthorize("hasRole('ROLE_TEACHER')")
   @GetMapping(value = "/update/{id}/delete")
   /* Nur für Lehrer/Sekretariat möglich */
   public String deleteEvent(@PathVariable(name = "id") Long id) {

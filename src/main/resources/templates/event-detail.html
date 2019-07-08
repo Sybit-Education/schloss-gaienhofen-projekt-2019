@@ -39,7 +39,7 @@
     </tr>
 
   </table>
-  <div class="row">
+  <div class="row" sec:authorize="hasRole('ROLE_TEACHER')">
   <form th:action="@{/event/update/{id}(id=${event.id})}">
     <button class="btn btn-primary">Beschreibung bearbeiten</button>
   </form>

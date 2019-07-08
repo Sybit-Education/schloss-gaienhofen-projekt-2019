@@ -13,7 +13,7 @@ public interface UserService {
    * @param user
    */
 
-  void addNewUser(User user);
+  User addNewUser(User user);
 
   /**
    * Returns a userObject by given email
@@ -25,20 +25,10 @@ public interface UserService {
   User findUserByEmail(@NotEmpty String email);
 
   /**
-   * Hashes password using sha256 by given password
+   * Update or create given user.
    *
-   * @param input
+   * @param loggedInUser
    * @return
    */
-
-  String getSHA(String input) throws NoSuchAlgorithmException;
-
-  /**
-   * Returns a userObject by given id
-   *
-   * @param id
-   * @return user
-   */
-
-  User findUserById(@NotEmpty long id);
+  User update(User loggedInUser);
 }

@@ -1,15 +1,15 @@
-
+server:
+  port: 8080
 
 ldap:
   url: ldap://localhost
   port: 389
   domain: schloss-gaienhofen.email
   root: dc=schloss-gaienhofen,dc=email
-
+  managerDn: event-manager@schloss-gaienhofen.email
+  managerPassword: Gai-EM-9268%
 
 spring:
-  application:
-    name: Projekt 2019
 
   datasource:
     driverClassName: org.h2.Driver
@@ -17,20 +17,17 @@ spring:
     username: root
     password: ""
 
+  ldap:
+    embedded:
+      ldif: classpath:test-schema.ldif
+      port: 389
+      validation:
+        enabled: false
+      base-dn: dc=schloss-gaienhofen,dc=email
+
   h2:
     console:
       enabled: true
       path: /h2
       settings:
         web-allow-others: true
-
-  jpa:
-    open-in-view: true
-    show-sql: true
-    hibernate:
-      ddl-auto: none
-
-  profiles:
-   include: email
-
-

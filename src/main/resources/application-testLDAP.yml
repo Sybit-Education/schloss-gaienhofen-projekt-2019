@@ -1,0 +1,8 @@
+spring:
+  ldap:
+    embedded:
+      ldif: classpath:test-schema.ldif
+      port: 389
+      validation:
+        enabled: false
+      base-dn: dc=schloss-gaienhofen,dc=email

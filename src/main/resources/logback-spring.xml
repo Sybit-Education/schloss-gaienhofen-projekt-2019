@@ -4,7 +4,7 @@
   <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
 
-  <springProfile name="default, develop, test">
+  <springProfile name="default, development, test">
 
     <!-- LOG everything at INFO level -->
     <root level="INFO">
@@ -12,13 +12,18 @@
       <appender-ref ref="FILE" />
     </root>
 
-    <logger name="org.springframework" level="DEBUG" additivity="false">
+    <logger name="org.springframework" level="INFO" additivity="false">
       <appender-ref ref="CONSOLE" />
       <appender-ref ref="FILE" />
     </logger>
 
-    <!-- LOG "de.schlossgaienhofen.project2019" at TRACE level -->
-    <logger name="de.schlossgaienhofen" level="trace" additivity="false">
+    <logger name="org.springframework.security" level="TRACE" additivity="false">
+      <appender-ref ref="CONSOLE" />
+      <appender-ref ref="FILE" />
+    </logger>
+
+    <!-- LOG "de.sybit.schlossgaienhofen*" at TRACE level -->
+    <logger name="de.schlossgaienhofen" level="TRACE" additivity="false">
       <appender-ref ref="FILE"/>
       <appender-ref ref="CONSOLE"/>
     </logger>
@@ -26,7 +31,11 @@
 
   <springProfile name="production">
 
-    <logger name="de.schlossgaienhofen" level="INFO" additivity="false">
+    <logger name="de.schlossgaienhofen" level="TRACE" additivity="false">
+      <appender-ref ref="FILE"/>
+    </logger>
+
+    <logger name="org.springframework.security.ldap.authentication.ad" level="TRACE" additivity="false">
       <appender-ref ref="FILE"/>
     </logger>
 

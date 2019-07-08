@@ -1,0 +1,80 @@
+
+dn: dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: schloss-gaienhofen
+
+dn: ou=groups,dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=people,dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+
+dn: cn=Max Schueler,dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Max Schüler
+title: Schueler
+givenName: Max
+displayName: Max Schüler
+memberOf: CN=J1,CN=Users,DC=schloss-gaienhofen,DC=email
+sn: Schüler
+uid: max.schueler
+mail: max.schueler@schloss-gaienhofen.email
+sAMAccountName: max.schueler
+userPrincipalName: max.schueler@schloss-gaienhofen.email
+userPassword: {noop}test
+
+dn: cn=Jenny Schueler,dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Jenny Johnson
+title: Schueler
+givenName: Jenny
+displayName: Jenny Johnson
+memberOf: CN=J1,CN=Users,DC=schloss-gaienhofen,DC=email
+sn: Johnson
+uid: jenny.johnson
+mail: jenny.johnson@schloss-gaienhofen.email
+sAMAccountName: jenny.johnson
+userPrincipalName: jenny.johnson@schloss-gaienhofen.email
+userPassword: {noop}test
+
+
+
+dn: cn=Heinz Lehrer,dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectClass: user
+objectclass: inetOrgPerson
+cn: Heinz Lehrer
+title: Lehrer
+givenName: Heinz
+displayName: Heinz Lehrer
+memberOf: CN=Lehrer-Gruppe,CN=Users,DC=schloss-gaienhofen,DC=email
+sn: Lehrer
+uid: heinz.lehrer
+mail: heinz.lehrer@schloss-gaienhofen.info
+sAMAccountName: heinz.lehrer
+userPrincipalName: heinz.lehrer@schloss-gaienhofen.info
+userPassword: {noop}test
+
+
+
+dn: cn=Lehrer-Gruppe,ou=groups,dc=schloss-gaienhofen,dc=email
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: Lehrer-Gruppe
+ou: Lehrer-Gruppe
+uniqueMember: uid=heinz.lehrer,ou=people,dc=schloss-gaienhofen,dc=email

@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+ldap:
+  url: ldap://gpd-srv-dc01.schloss-gaienhofen.email
+  port: 389
+  root: dc=schloss-gaienhofen,dc=email
+  managerDn: event-manager@schloss-gaienhofen.email
+  managerPassword: Gai-EM-9268%
+
+spring:
+
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false
+    username: root
+    password: ""
+  mail:
+    host: localhost
+    port: 2525
+    username:
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: true

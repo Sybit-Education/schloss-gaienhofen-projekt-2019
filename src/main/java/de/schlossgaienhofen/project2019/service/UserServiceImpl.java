@@ -24,93 +24,40 @@ public class UserServiceImpl implements UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
   @Override
-  public void addNewUser(User user) {
+  public User addNewUser(User user) {
     LOGGER.debug("--> addNewUser");
-    User newUser = createUserObject(user);
-    userRepository.save(newUser);
+
+    userRepository.saveAndFlush(user);
+
     LOGGER.debug("<-- addNewUser");
-  }
-
-  /**
-   * Creates a new UserObject by an given firstName, name and email
-   *
-   * @param user
-   * @return user
-   */
-
-  private User createUserObject(@NotNull User user) {
-    LOGGER.debug("--> createUserObject");
-    User newUserObject = new User();
-    newUserObject.setFirstName(user.getFirstName());
-    newUserObject.setName(user.getName());
-
-    newUserObject.setEmail(emailValidator(user.getEmail()));
-
-    try {
-      newUserObject.setPassword(getSHA(user.getPassword()));
-    } catch (NoSuchAlgorithmException e) {
-      LOGGER.error("Error getSha" + e);
-    }
-    LOGGER.debug("<-- createUserObject");
-    return newUserObject;
+    return user;
   }
 
   @Override
   public User findUserByEmail(@NotEmpty String email) {
     LOGGER.debug("--> findUserByEmail");
     User user = userRepository.findByEmail(email);
-    if (user == null) throw new IllegalArgumentException("User is null");
+
     LOGGER.debug("<-- findUserByEmail");
     return user;
   }
 
   @Override
-  public String getSHA(String input) throws NoSuchAlgorithmException {
-    LOGGER.debug("--> getSHA");
-    if (input == null) {
-      throw new IllegalArgumentException("input cannot be null");
-    }
-    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-    byte[] messageDigestByteArray = messageDigest.digest(input.getBytes());
-    BigInteger bigInteger = new BigInteger(1, messageDigestByteArray);
-    StringBuilder hashText = new StringBuilder(bigInteger.toString(16));
-    while (hashText.length() < 32) {
-      hashText.insert(0, "0");
-    }
-    LOGGER.debug("<-- getSHA");
-    return hashText.toString();
+  public User update(@NotNull User loggedInUser) {
+    LOGGER.debug("--> update");
+    User user = findUserByEmail(loggedInUser.getEmail());
+    if(user != null) {
+      //maybe name has changed -> update them
+      user.setFirstName(loggedInUser.getFirstName());
+      user.setName(loggedInUser.getName());
+      user = userRepository.saveAndFlush(user);
 
-  }
-
-  @Override
-  public User findUserById(@NotEmpty long id) {
-    LOGGER.debug("--> findUserById");
-    Optional<User> ourUser = userRepository.findById(id);
-    User user;
-    if (ourUser.isPresent()) {
-      user = ourUser.get();
     } else {
-      throw new IllegalArgumentException("User is null.");
+      user = addNewUser(loggedInUser);
     }
-    LOGGER.debug("<-- findUserById");
+
+    LOGGER.debug("<-- update");
     return user;
   }
 
-  /**
-   * Validates given Email
-   *
-   * @param email
-   * @return
-   */
-
-  private String emailValidator(String email) {
-    LOGGER.debug("--> emailValidator");
-    boolean valid = EmailValidator.getInstance().isValid(email);
-    if (valid) {
-      LOGGER.debug("<-- emailValidator");
-      return email;
-    } else {
-      throw new IllegalArgumentException("Email is invalid");
-    }
-  }
 }

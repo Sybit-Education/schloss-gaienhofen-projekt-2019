@@ -16,8 +16,8 @@ spring:
     password: admin@2019!
   mail:
     host: localhost
-    port: 2525
-    username:
+    port: 25
+    username: noreply@schloss-gaienhofen.email
     password:
     properties:
       mail:

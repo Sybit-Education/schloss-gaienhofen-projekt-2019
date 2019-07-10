@@ -124,7 +124,13 @@ public class EventUser implements Serializable {
 
   @Override
   public String toString() {
-    return "EventUser{" + "id=" + id + ", email=" + email + '}';
+    return "EventUser{" +
+      "id=" + id +
+      ", firstName='" + firstName + '\'' +
+      ", name='" + name + '\'' +
+      ", email='" + email + '\'' +
+      ", gender=" + gender +
+      '}';
   }
 
 }

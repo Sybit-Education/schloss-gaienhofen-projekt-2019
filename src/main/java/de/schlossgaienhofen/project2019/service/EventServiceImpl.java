@@ -119,7 +119,7 @@ public class EventServiceImpl implements EventService {
 
   @Override
   public Event assignEventIdWithUser(Long eventId, EventUser user) {
-    LOGGER.debug("-> assignEventIdWithUser id={} user={}", eventId, user.getEmail());
+    LOGGER.debug("-> assignEventIdWithUser id={} user={}", eventId, user);
 
     Event event = getEventById(eventId);
     if (event == null) {

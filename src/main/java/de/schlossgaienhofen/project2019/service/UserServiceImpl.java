@@ -30,7 +30,8 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public EventUser findUserByEmail(@NotEmpty String email) {
-    LOGGER.debug("--> findUserByEmail");
+    LOGGER.debug("--> findUserByEmail email={}", email);
+
     EventUser user = userRepository.findByEmail(email);
 
     LOGGER.debug("<-- findUserByEmail");
@@ -39,17 +40,18 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public EventUser update(@NotNull EventUser loggedInUser) {
-    LOGGER.debug("--> update");
+    LOGGER.debug("--> update user={}", loggedInUser);
+
     EventUser user = findUserByEmail(loggedInUser.getEmail());
     if(user != null) {
       //maybe name has changed -> update them
       user.setFirstName(loggedInUser.getFirstName());
       user.setName(loggedInUser.getName());
-      user = userRepository.saveAndFlush(user);
-
     } else {
-      user = addNewUser(loggedInUser);
+      user = loggedInUser;
     }
+
+    user = userRepository.saveAndFlush(user);
 
     LOGGER.debug("<-- update");
     return user;

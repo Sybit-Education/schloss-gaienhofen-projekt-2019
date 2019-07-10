@@ -28,18 +28,21 @@ public class MailServiceImpl implements MailService {
 
   @Override
   public void sendSimpleMessage(String to, String subject, String text) {
-    LOGGER.debug("--> sendSimpleMessage");
+    LOGGER.debug("--> sendSimpleMessage to={}, subject={}", to, subject);
+
     SimpleMailMessage message = new SimpleMailMessage();
     message.setFrom(email);
     message.setTo(to);
     message.setSubject(subject);
     message.setText(text);
     emailSender.send(message);
-    LOGGER.debug("--> Message send to:" + to);
+
     LOGGER.debug("<-- sendSimpleMessage");
   }
 
   public void sendEmailByEventIdAndUser(@NotNull Long id, @NotNull EventUser user) {
+    LOGGER.debug("--> sendEmailByEventIdAndUser id={}, user={}", id, user);
+
     Event event = eventService.getEventById(id);
 
     StringBuilder stringBuilder = new StringBuilder();
@@ -53,5 +56,7 @@ public class MailServiceImpl implements MailService {
       .append(eventName).append(" angemeldet haben");
 
     sendSimpleMessage(user.getEmail(), subject, stringBuilder.toString());
+
+    LOGGER.debug("<-- sendEmailByEventIdAndUser");
   }
 }

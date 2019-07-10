@@ -7,13 +7,19 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.core.support.LdapContextSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.ldap.DefaultSpringSecurityContextSource;
 import org.springframework.security.ldap.authentication.ad.ActiveDirectoryLdapAuthenticationProvider;
 import org.springframework.security.ldap.userdetails.InetOrgPersonContextMapper;
+import org.springframework.security.ldap.userdetails.LdapUserDetailsMapper;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.annotation.PostConstruct;
 
 @Profile({"production"})
 @Configuration
@@ -38,9 +44,6 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   @Value("${ldap.managerPassword}")
   private String managerPassword;
 
-  @Value("${ldap.root:dc=schloss-gaienhofen,dc=email}")
-  private String root;
-
   @Autowired
   private AuthenticationSuccessHandler successHandler;
 
@@ -51,15 +54,19 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
 
   @Bean
   public InetOrgPersonContextMapper getUserDetailsContextMapper() {
-    return new InetOrgPersonContextMapper();
+    ExtendedInetOrgPersonContextMapper contextMapper = new ExtendedInetOrgPersonContextMapper();
+
+    return contextMapper;
   }
 
   @Bean
   public ActiveDirectoryLdapAuthenticationProvider getAuthenticationProvider() {
     ActiveDirectoryLdapAuthenticationProvider authenticationProvider =
       new ActiveDirectoryLdapAuthenticationProvider("", url + ":" + port);
-    authenticationProvider.setUserDetailsContextMapper(new InetOrgPersonContextMapper());
+    authenticationProvider.setUserDetailsContextMapper(getUserDetailsContextMapper());
     authenticationProvider.setAuthoritiesMapper(new AuthoritiesMapper());
+    authenticationProvider.setConvertSubErrorCodesToExceptions(true);
+    authenticationProvider.setUseAuthenticationRequestCredentials(true);
 
     return authenticationProvider;
   }
@@ -85,17 +92,19 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
     LOGGER.debug("url={}, port= {}, manager={}", url, port, managerDn);
 
     authManagerBuilder.ldapAuthentication()
-      //.userSearchBase(root)
-      .userSearchFilter("(mail={0})")
-      //.groupSearchBase("ou=groups")
+      .userSearchBase("CN=Users,DC=schloss-gaienhofen,DC=email")
+      .userSearchFilter("(&(objectClass=user)(sAMAccountName={0}))")
+      .groupSearchBase("CN=Users,DC=schloss-gaienhofen,DC=email")
+      .groupSearchFilter("(&(member={0})(objectclass=group))")
       .contextSource()
-      .url(url).port(port)//.root(root)
+      .url(url).port(port)
       .managerDn(managerDn).managerPassword(managerPassword)
       .and()
       .userDetailsContextMapper(getUserDetailsContextMapper())
       .authoritiesMapper(grantedAuthoritiesMapper())
       .and()
-      .authenticationProvider(getAuthenticationProvider());
+      .authenticationProvider(getAuthenticationProvider())
+      .eraseCredentials(false);
   }
 
 }

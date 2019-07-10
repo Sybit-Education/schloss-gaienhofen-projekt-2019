@@ -40,9 +40,11 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
    @Override
    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                        Authentication authentication) throws IOException, ServletException {
-     LOGGER.debug("--> onAuthenticationSuccess");
+     LOGGER.debug("--> onAuthenticationSuccess authentication={}", authentication);
 
-     EventUser currentUser = convert2User(authentication);
+     final EventUser currentUser = convert2User(authentication);
+
+     LOGGER.debug("Update current logged in user: {}", currentUser);
      userService.update(currentUser);
 
      super.onAuthenticationSuccess(request, response, authentication);
@@ -54,21 +56,25 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
       EventUser user = new EventUser();
 
       if (authentication.getPrincipal() instanceof InetOrgPerson) {
-         InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
 
-         user.setEmail(principal.getMail());
-         user.setFirstName(principal.getGivenName());
-         user.setName(principal.getSn());
+        LOGGER.debug("AD: authentication={}", authentication);
+
+        InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
+        LOGGER.debug("AD: principal={}", principal);
+
+        user.setEmail(principal.getMail());
+        user.setFirstName(principal.getGivenName());
+        user.setName(principal.getSn());
 
       } else if (authentication.getPrincipal() instanceof LdapUserDetailsImpl) {
 
-         //should be just in case of testing by using ldap-file `test-schema.ldif`
-         LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
-         user.setEmail(principal.getUsername());
-         user.setName(principal.getUsername());
+        //should be just in case of testing by using ldap-file `test-schema.ldif`
+        LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
+        user.setEmail(principal.getUsername());
+        user.setName(principal.getUsername());
 
       } else {
-         throw new IllegalArgumentException("Unhandled principal type");
+        throw new IllegalArgumentException("Unhandled principal type");
       }
 
       return user;

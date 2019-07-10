@@ -4,7 +4,6 @@ server:
 ldap:
   url: ldap://gpd-srv-dc01.schloss-gaienhofen.email
   port: 389
-  root: dc=schloss-gaienhofen,dc=email
   managerDn: event-manager@schloss-gaienhofen.email
   managerPassword: Gai-EM-9268%
 

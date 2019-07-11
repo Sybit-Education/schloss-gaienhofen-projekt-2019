@@ -19,22 +19,26 @@ public class UserServiceImpl implements UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
   @Override
-  public EventUser addNewUser(EventUser user) {
+  public EventUser addNewUser(@NotNull EventUser user) {
     LOGGER.debug("--> addNewUser");
 
-    userRepository.saveAndFlush(user);
+    if(user.getUserName() == null) {
+      throw new IllegalArgumentException("userName has to be defined: loggedInUser={}" + user);
+    }
+
+    user = userRepository.saveAndFlush(user);
 
     LOGGER.debug("<-- addNewUser");
     return user;
   }
 
   @Override
-  public EventUser findUserByEmail(@NotEmpty String email) {
-    LOGGER.debug("--> findUserByEmail email={}", email);
+  public EventUser findUserByUserName(@NotEmpty String username) {
+    LOGGER.debug("--> findUserByUserName username={}", username);
 
-    EventUser user = userRepository.findByEmail(email);
+    EventUser user = userRepository.findByUserName(username);
 
-    LOGGER.debug("<-- findUserByEmail");
+    LOGGER.debug("<-- findUserByUserName");
     return user;
   }
 
@@ -42,7 +46,12 @@ public class UserServiceImpl implements UserService {
   public EventUser update(@NotNull EventUser loggedInUser) {
     LOGGER.debug("--> update user={}", loggedInUser);
 
-    EventUser user = findUserByEmail(loggedInUser.getEmail());
+    if(loggedInUser.getUserName() == null) {
+      throw new IllegalArgumentException("userName has to be defined: loggedInUser={}" + loggedInUser);
+    }
+
+    EventUser user = findUserByUserName(loggedInUser.getUserName());
+
     if(user != null) {
       //maybe name has changed -> update them
       user.setFirstName(loggedInUser.getFirstName());

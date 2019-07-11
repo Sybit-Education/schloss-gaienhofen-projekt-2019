@@ -15,10 +15,14 @@
   </thead>
   <tbody>
   <tr th:each="oneAttendee : ${allattendeesbyAgId}">
-    <td><span th:utext="${oneAttendee.getAttendee().getName()}"></span></td>
-    <td><span th:utext="${oneAttendee.getAttendee().getFirstName()}"></span></td>
+    <td><span th:text="${oneAttendee.getAttendee().getName()}"></span></td>
+    <td><span th:text="${oneAttendee.getAttendee().getFirstName()}"></span></td>
     <td></td>
-    <td><span th:utext="${oneAttendee.getAttendee().getEmail()}"></span></td>
+    <td>
+      <a th:href="${oneAttendee.getAttendee().getEmail()}">
+        <span th:text="${oneAttendee.getAttendee().getEmail()}"></span>
+      </a>
+    </td>
     <td class="d-print-none">
       <div th:if="!${oneAttendee.id}">
         ✔️ abgemeldet
@@ -30,7 +34,7 @@
        				 <form th:action="@{/event/{eventId}/remove/{attendeeId}(eventId=${eventId}, attendeeId=${oneAttendee.id})}"
                  		   th:method="post">
                  		   <button class="btn btn-primary">Abmelden</button>
-                 	 </form>	    
+                 	 </form>
         	  </span>
         </div>
       </div>

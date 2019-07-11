@@ -16,7 +16,6 @@ public class ExtendedInetOrgPersonContextMapper extends InetOrgPersonContextMapp
 
     p.setUsername(username);
     p.setAuthorities(authorities);
-    p.setMail(username);
     p.setGivenName(ctx.getStringAttribute("givenName"));
     p.setSn(ctx.getStringAttribute("sn"));
 

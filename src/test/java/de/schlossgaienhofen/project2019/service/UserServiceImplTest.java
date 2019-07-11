@@ -28,6 +28,7 @@ public class UserServiceImplTest {
   private EventUser userObject() {
     EventUser user = new EventUser();
     user.setEmail("test@test.com");
+    user.setUserName("test");
     user.setName("testName");
     user.setFirstName("testFirstName");
     user.setPassword("testPW");
@@ -37,7 +38,7 @@ public class UserServiceImplTest {
   @Test
   public void addNewUser() {
     userService.addNewUser(userObject());
-    EventUser user = userService.findUserByEmail("test@test.com");
+    EventUser user = userService.findUserByUserName("test");
     Assert.assertEquals("testName", user.getName());
   }
 

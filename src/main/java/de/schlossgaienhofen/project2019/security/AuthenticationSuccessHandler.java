@@ -62,6 +62,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
         InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
         LOGGER.debug("AD: principal={}", principal);
 
+        user.setUserName(principal.getUsername());
         user.setEmail(principal.getMail());
         user.setFirstName(principal.getGivenName());
         user.setName(principal.getSn());
@@ -70,6 +71,7 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
 
         //should be just in case of testing by using ldap-file `test-schema.ldif`
         LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
+        user.setUserName(principal.getUsername());
         user.setEmail(principal.getUsername());
         user.setName(principal.getUsername());
 

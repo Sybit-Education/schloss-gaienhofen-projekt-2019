@@ -23,7 +23,7 @@ public abstract class UserManager {
     LOGGER.debug("--> getCurrentUser");
     SecurityContext context = SecurityContextHolder.getContext();
     Authentication authentication = context.getAuthentication();
-    EventUser user = userService.findUserByEmail(authentication.getName());
+    EventUser user = userService.findUserByUserName(authentication.getName());
     LOGGER.debug("<-- getCurrentUser: user={}", user);
     return user;
   }

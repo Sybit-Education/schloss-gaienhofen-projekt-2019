@@ -17,6 +17,7 @@ public class EventUser implements Serializable {
   @Column(name = "id", updatable = false, nullable = false)
   private Long id;
 
+  private String userName;
   private String firstName;
   private String name;
   private String email;
@@ -26,14 +27,6 @@ public class EventUser implements Serializable {
   @OneToMany(mappedBy = "id")
   private Set<Attendee> attendee;
 
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
 
   public EventUser() {
 
@@ -45,6 +38,14 @@ public class EventUser implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public String getFirstName() {
@@ -62,6 +63,15 @@ public class EventUser implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
 
   public char getGender() {
     return gender;

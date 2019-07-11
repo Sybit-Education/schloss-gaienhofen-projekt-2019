@@ -15,13 +15,12 @@ public interface UserService {
   EventUser addNewUser(EventUser user);
 
   /**
-   * Returns a userObject by given email
+   * Find EventUser by given username.
    *
-   * @param email
-   * @return user
+   * @param username
+   * @return
    */
-
-  EventUser findUserByEmail(@NotEmpty String email);
+  public EventUser findUserByUserName(@NotEmpty String username);
 
   /**
    * Update or create given user.

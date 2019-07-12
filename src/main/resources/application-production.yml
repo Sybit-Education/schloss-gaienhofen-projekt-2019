@@ -4,8 +4,8 @@ server:
 ldap:
   url: ldap://gpd-srv-dc01.schloss-gaienhofen.email
   port: 389
-  managerDn: event-manager@schloss-gaienhofen.email
-  managerPassword: Gai-EM-9268%
+#  managerDn: XXX        # defined by -D param in service
+#  managerPassword: XXX  # defined by -D param in service
 
 spring:
 
@@ -13,7 +13,7 @@ spring:
     driverClassName: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/eventapp
     username: eventapp-admin
-    password: admin@2019!
+#    password: XXX  # defined by -D param in service
   mail:
     host: localhost
     port: 25
@@ -23,5 +23,6 @@ spring:
       mail:
         smtp:
           auth: false
+          tls: false
           starttls:
-            enable: true
+            enable: false

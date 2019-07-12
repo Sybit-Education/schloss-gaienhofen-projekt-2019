@@ -28,19 +28,15 @@ public class WebSecurityConfigActiveDirectory extends WebSecurityConfigurerAdapt
   private static final Logger LOGGER = LoggerFactory.getLogger(WebSecurityConfigActiveDirectory.class);
 
 
-  //@Value("#{environment.getProperty('url')}")
   @Value("${ldap.url}")
   private String url;
 
-  //@Value("#{environment.getProperty('port')}")
   @Value("${ldap.port}")
   private int port;
 
-  //@Value("#{environment.getProperty('managerDN')}")
   @Value("${ldap.managerDn}")
   private String managerDn;
 
-  //@Value("#{environment.getProperty('managerPassword')}")
   @Value("${ldap.managerPassword}")
   private String managerPassword;
 

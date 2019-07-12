@@ -1,7 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.EventUser;
-import de.schlossgaienhofen.project2019.repository.UserRepository;
+import de.schlossgaienhofen.project2019.repository.EventUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class UserServiceImpl implements UserService {
 
   @Autowired
-  private UserRepository userRepository;
+  private EventUserRepository eventUserRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
       throw new IllegalArgumentException("userName has to be defined: loggedInUser={}" + user);
     }
 
-    user = userRepository.saveAndFlush(user);
+    user = eventUserRepository.saveAndFlush(user);
 
     LOGGER.debug("<-- addNewUser");
     return user;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
   public EventUser findUserByUserName(@NotEmpty String username) {
     LOGGER.debug("--> findUserByUserName username={}", username);
 
-    EventUser user = userRepository.findByUserName(username);
+    EventUser user = eventUserRepository.findByUserName(username);
 
     LOGGER.debug("<-- findUserByUserName");
     return user;
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
       user = loggedInUser;
     }
 
-    user = userRepository.saveAndFlush(user);
+    user = eventUserRepository.saveAndFlush(user);
 
     LOGGER.debug("<-- update");
     return user;

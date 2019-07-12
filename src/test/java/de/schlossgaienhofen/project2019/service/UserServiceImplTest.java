@@ -1,7 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.EventUser;
-import de.schlossgaienhofen.project2019.repository.UserRepository;
+import de.schlossgaienhofen.project2019.repository.EventUserRepository;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -18,11 +18,11 @@ public class UserServiceImplTest {
   UserService userService;
 
   @Autowired
-  UserRepository userRepository;
+  EventUserRepository eventUserRepository;
 
   @After
   public void afterTest() {
-    userRepository.deleteAll();
+    eventUserRepository.deleteAll();
   }
 
   private EventUser userObject() {

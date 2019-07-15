@@ -20,7 +20,7 @@ public class Attendee implements Serializable {
 
   @ManyToOne
   @JoinColumn(name = "attendee_id")
-  private User attendee;
+  private EventUser attendee;
 
   @ManyToOne
   @JoinColumn(name = "ag_id")
@@ -37,11 +37,11 @@ public class Attendee implements Serializable {
     this.id = id;
   }
 
-  public User getAttendee() {
+  public EventUser getAttendee() {
     return attendee;
   }
 
-  public void setAttendee(User attendee) {
+  public void setAttendee(EventUser attendee) {
     this.attendee = attendee;
   }
 

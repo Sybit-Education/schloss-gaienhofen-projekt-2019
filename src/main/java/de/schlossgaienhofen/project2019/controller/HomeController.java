@@ -1,7 +1,7 @@
 package de.schlossgaienhofen.project2019.controller;
 
 import de.schlossgaienhofen.project2019.entity.Event;
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.security.UserManager;
 import de.schlossgaienhofen.project2019.service.EventService;
 import org.slf4j.Logger;
@@ -39,7 +39,7 @@ public class HomeController extends UserManager {
     List<Event> allActiveEvents = eventService.getAllActiveEvents();
     model.put("allActiveEvents", allActiveEvents);
 
-    User user = getCurrentUser();
+    EventUser user = getCurrentUser();
     /*  Nur für Lehrer/Sekretateriat sichtbar **/
     List<Event> allInactiveEvents = eventService.getAllInactiveEvents();
     model.put("allInactiveEvents", allInactiveEvents);

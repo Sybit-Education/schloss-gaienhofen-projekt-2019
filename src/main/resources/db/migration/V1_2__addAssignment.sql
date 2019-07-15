@@ -3,7 +3,8 @@ CREATE TABLE attendee (
     id bigint NOT NULL AUTO_INCREMENT,
     attendee_id bigint,
     ag_id bigint,
-    assignment_date DATE
+    assignment_date DATE,
+    primary key (id)
 );
 
 

@@ -10,6 +10,7 @@ CREATE TABLE event (
     event_state varchar(10),
     location varchar(50),
     type varchar(50),
+    primary key (id)
 );
 
 INSERT INTO event (id, title, leader, summary, description, start_date, end_date, max_participants, event_state, location, type)

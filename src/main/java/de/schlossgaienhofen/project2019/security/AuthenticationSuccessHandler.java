@@ -1,13 +1,11 @@
 package de.schlossgaienhofen.project2019.security;
 
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.ldap.userdetails.InetOrgPerson;
 import org.springframework.security.ldap.userdetails.LdapUserDetailsImpl;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -19,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collection;
 
 @Component
 public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -43,9 +40,11 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
    @Override
    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                        Authentication authentication) throws IOException, ServletException {
-     LOGGER.debug("--> onAuthenticationSuccess");
+     LOGGER.debug("--> onAuthenticationSuccess authentication={}", authentication);
 
-     User currentUser = convert2User(authentication);
+     final EventUser currentUser = convert2User(authentication);
+
+     LOGGER.debug("Update current logged in user: {}", currentUser);
      userService.update(currentUser);
 
      super.onAuthenticationSuccess(request, response, authentication);
@@ -53,25 +52,31 @@ public class AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccess
      LOGGER.debug("<-- onAuthenticationSuccess");
    }
 
-   private User convert2User(Authentication authentication) {
-      User user = new User();
+   private EventUser convert2User(Authentication authentication) {
+      EventUser user = new EventUser();
 
       if (authentication.getPrincipal() instanceof InetOrgPerson) {
-         InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
 
-         user.setEmail(principal.getMail());
-         user.setFirstName(principal.getGivenName());
-         user.setName(principal.getSn());
+        LOGGER.debug("AD: authentication={}", authentication);
+
+        InetOrgPerson principal = (InetOrgPerson) authentication.getPrincipal();
+        LOGGER.debug("AD: principal={}", principal);
+
+        user.setUserName(principal.getUsername());
+        user.setEmail(principal.getMail());
+        user.setFirstName(principal.getGivenName());
+        user.setName(principal.getSn());
 
       } else if (authentication.getPrincipal() instanceof LdapUserDetailsImpl) {
 
-         //should be just in case of testing by using ldap-file `test-schema.ldif`
-         LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
-         user.setEmail(principal.getUsername());
-         user.setName(principal.getUsername());
+        //should be just in case of testing by using ldap-file `test-schema.ldif`
+        LdapUserDetailsImpl principal = (LdapUserDetailsImpl) authentication.getPrincipal();
+        user.setUserName(principal.getUsername());
+        user.setEmail(principal.getUsername());
+        user.setName(principal.getUsername());
 
       } else {
-         throw new IllegalArgumentException("Unhandled principal type");
+        throw new IllegalArgumentException("Unhandled principal type");
       }
 
       return user;

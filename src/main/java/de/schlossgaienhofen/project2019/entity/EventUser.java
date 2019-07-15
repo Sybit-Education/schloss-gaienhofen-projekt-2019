@@ -8,8 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "User")
-public class User implements Serializable {
+@Table(name = "event_user")
+public class EventUser implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -17,6 +17,7 @@ public class User implements Serializable {
   @Column(name = "id", updatable = false, nullable = false)
   private Long id;
 
+  private String userName;
   private String firstName;
   private String name;
   private String email;
@@ -27,15 +28,7 @@ public class User implements Serializable {
   private Set<Attendee> attendee;
 
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public User() {
+  public EventUser() {
 
   }
 
@@ -45,6 +38,14 @@ public class User implements Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public String getUserName() {
+    return userName;
+  }
+
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public String getFirstName() {
@@ -62,6 +63,15 @@ public class User implements Serializable {
   public void setName(String name) {
     this.name = name;
   }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
 
   public char getGender() {
     return gender;
@@ -102,7 +112,7 @@ public class User implements Serializable {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final User other = (User) obj;
+    final EventUser other = (EventUser) obj;
     if (this.gender != other.gender) {
       return false;
     }
@@ -124,7 +134,13 @@ public class User implements Serializable {
 
   @Override
   public String toString() {
-    return "User{" + "id=" + id + ", email=" + email + '}';
+    return "EventUser{" +
+      "id=" + id +
+      ", firstName='" + firstName + '\'' +
+      ", name='" + name + '\'' +
+      ", email='" + email + '\'' +
+      ", gender=" + gender +
+      '}';
   }
 
 }

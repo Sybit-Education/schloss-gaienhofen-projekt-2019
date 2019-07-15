@@ -1,6 +1,6 @@
 package de.schlossgaienhofen.project2019.service;
 
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 
 import javax.validation.constraints.NotNull;
 
@@ -21,5 +21,5 @@ public interface MailService {
    * @param user
    */
 
-  void sendEmailByEventIdAndUser(@NotNull Long id, @NotNull User user);
+  void sendEmailByEventIdAndUser(@NotNull Long id, @NotNull EventUser user);
 }

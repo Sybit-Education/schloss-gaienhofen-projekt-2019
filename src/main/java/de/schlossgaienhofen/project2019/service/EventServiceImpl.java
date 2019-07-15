@@ -2,7 +2,7 @@ package de.schlossgaienhofen.project2019.service;
 
 import de.schlossgaienhofen.project2019.entity.Attendee;
 import de.schlossgaienhofen.project2019.entity.Event;
-import de.schlossgaienhofen.project2019.entity.User;
+import de.schlossgaienhofen.project2019.entity.EventUser;
 import de.schlossgaienhofen.project2019.repository.AttendeeRepository;
 import de.schlossgaienhofen.project2019.repository.EventRepository;
 import org.slf4j.Logger;
@@ -71,7 +71,7 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public List<Event> getEventsOfUser(User user) {
+  public List<Event> getEventsOfUser(EventUser user) {
     LOGGER.debug("-> getEventsOfUser user={}", user.getEmail());
     List<Event> allEvents = eventRepository.findAll(Sort.by(Sort.Direction.DESC, "startDate"));
 
@@ -118,8 +118,8 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public Event assignEventIdWithUser(Long eventId, User user) {
-    LOGGER.debug("-> assignEventIdWithUser id={} user={}", eventId, user.getEmail());
+  public Event assignEventIdWithUser(Long eventId, EventUser user) {
+    LOGGER.debug("-> assignEventIdWithUser id={} user={}", eventId, user);
 
     Event event = getEventById(eventId);
     if (event == null) {
@@ -154,7 +154,7 @@ public class EventServiceImpl implements EventService {
   }
 
   @Override
-  public boolean isUserAssignedWithEvent(User user, Event event) {
+  public boolean isUserAssignedWithEvent(EventUser user, Event event) {
     Attendee attendee = attendeeRepository.findByEventAndAttendee(event, user);
     return attendee != null;
   }

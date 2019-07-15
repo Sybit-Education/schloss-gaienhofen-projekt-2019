@@ -1,8 +1,7 @@
 package de.schlossgaienhofen.project2019.service;
 
-import de.schlossgaienhofen.project2019.entity.User;
-import de.schlossgaienhofen.project2019.repository.UserRepository;
-import org.apache.commons.validator.routines.EmailValidator;
+import de.schlossgaienhofen.project2019.entity.EventUser;
+import de.schlossgaienhofen.project2019.repository.EventUserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,51 +9,58 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
   @Autowired
-  private UserRepository userRepository;
+  private EventUserRepository eventUserRepository;
 
   private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
   @Override
-  public User addNewUser(User user) {
+  public EventUser addNewUser(@NotNull EventUser user) {
     LOGGER.debug("--> addNewUser");
 
-    userRepository.saveAndFlush(user);
+    if(user.getUserName() == null) {
+      throw new IllegalArgumentException("userName has to be defined: loggedInUser={}" + user);
+    }
+
+    user = eventUserRepository.saveAndFlush(user);
 
     LOGGER.debug("<-- addNewUser");
     return user;
   }
 
   @Override
-  public User findUserByEmail(@NotEmpty String email) {
-    LOGGER.debug("--> findUserByEmail");
-    User user = userRepository.findByEmail(email);
+  public EventUser findUserByUserName(@NotEmpty String username) {
+    LOGGER.debug("--> findUserByUserName username={}", username);
 
-    LOGGER.debug("<-- findUserByEmail");
+    EventUser user = eventUserRepository.findByUserName(username);
+
+    LOGGER.debug("<-- findUserByUserName");
     return user;
   }
 
   @Override
-  public User update(@NotNull User loggedInUser) {
-    LOGGER.debug("--> update");
-    User user = findUserByEmail(loggedInUser.getEmail());
+  public EventUser update(@NotNull EventUser loggedInUser) {
+    LOGGER.debug("--> update user={}", loggedInUser);
+
+    if(loggedInUser.getUserName() == null) {
+      throw new IllegalArgumentException("userName has to be defined: loggedInUser={}" + loggedInUser);
+    }
+
+    EventUser user = findUserByUserName(loggedInUser.getUserName());
+
     if(user != null) {
       //maybe name has changed -> update them
       user.setFirstName(loggedInUser.getFirstName());
       user.setName(loggedInUser.getName());
-      user = userRepository.saveAndFlush(user);
-
     } else {
-      user = addNewUser(loggedInUser);
+      user = loggedInUser;
     }
+
+    user = eventUserRepository.saveAndFlush(user);
 
     LOGGER.debug("<-- update");
     return user;
